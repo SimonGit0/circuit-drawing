@@ -1,0 +1,39 @@
+﻿Drawing:
+fill_backcolor()
+polyfill(0, -rY, 0, rY, breite, 0)
+fill_forecolor()
+poly(0, -rY, 0, rY, breite, 0)
+snapOnlyLeft(0, 0)
+snapOnlyRight(breite, 0)
+select(0, -rY, breite, 2*rY)
+Drawing End
+
+Textpos:
+pos(breite/2, 0)
+vector(0, 0)
+dist(-1, 0)
+Textpos End
+
+Textpos:
+pos(breite, 0)
+vector(1, -1)
+Textpos End
+
+Textpos:
+pos(breite, 0)
+vector(1, 1)
+Textpos End
+
+Textpos:
+pos(breite/2, rY)
+vector(0, 1)
+Textpos End
+
+Textpos:
+pos(breite/2, -rY)
+vector(0, -1)
+Textpos End
+
+Info:
+origin(0, -rYPin)
+Info End 

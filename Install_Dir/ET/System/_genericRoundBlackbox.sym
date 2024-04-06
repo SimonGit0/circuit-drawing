@@ -1,0 +1,97 @@
+﻿def maxPins = 30
+
+param_int "Radius" = 200 from (0, 50, #inf]
+
+param_int "Links" = 1 from [0, maxPins]
+param_int "Rechts" = 1 from [0, maxPins]
+param_int "Oben" = 1 from [0, maxPins]
+param_int "Unten" = 1 from [0, maxPins]
+
+param_int "Pitch Links" = 100 from [0, 50, #inf]
+param_int "Pitch Rechts" = 100 from [0, 50, #inf]
+param_int "Pitch Oben" = 100 from [0, 50, #inf]
+param_int "Pitch Unten" = 100 from [0, 50, #inf]
+
+var left=get("Links")
+var pLeft=get("Pitch Links")
+var right=get("Rechts")
+var pRight=get("Pitch Rechts")
+var top=get("Oben")
+var pTop=get("Pitch Oben")
+var bottom=get("Unten")
+var pBottom=get("Pitch Unten")
+
+var rad=get("Radius")
+
+scaling skalierung_rad(x):
+set_param("Radius", get("Radius")+x)
+move(scale_x*x/2,scale_y*x/2)
+scaling end
+
+def max_Size_scaling=10000
+
+Drawing:
+fill_backcolor()
+circfill(0,0,rad,rad)
+fill_forecolor()
+circ(0, 0, rad, rad)
+select(-rad, -rad, 2*rad, 2*rad)
+
+scale_line(rad,-rad,rad,rad,1,0,50-rad,50,max_Size_scaling-rad,skalierung_rad)
+scale_line(-rad,-rad,-rad,rad,-1,0,50-rad,50,max_Size_scaling-rad,skalierung_rad)
+scale_line(-rad,rad,rad,rad,0,1,50-rad,50,max_Size_scaling-rad,skalierung_rad)
+scale_line(-rad,-rad,rad,-rad,0,-1,50-rad,50,max_Size_scaling-rad,skalierung_rad)
+
+%Snap Left
+for i=[0, left):
+  var posY=(2*i+1-left)*pLeft/2
+  if posY<rad & posY>-rad :
+    var posX=sqrt(rad*rad-posY*posY)
+	snapOnlyLeft(-posX, posY)
+  end
+end
+%Snap Right
+for i=[0, right):
+  var posY=(2*i+1-right)*pRight/2
+  if posY<rad & posY>-rad :
+    var posX=sqrt(rad*rad-posY*posY)
+	snapOnlyRight(posX, posY)
+  end
+end
+%Snap Top
+for i=[0, top):
+  var posX=(2*i+1-top)*pTop/2
+  if posX<rad & posX>-rad :
+    var posY=sqrt(rad*rad-posX*posX)
+	snapOnlyTop(posX, -posY)
+  end
+end
+%Snap Bottom
+for i=[0, bottom):
+  var posX=(2*i+1-bottom)*pBottom/2
+  if posX<rad & posX>-rad :
+    var posY=sqrt(rad*rad-posX*posX)
+	snapOnlyBottom(posX, posY)
+  end
+end
+Drawing End
+
+TextPos:
+pos(0, -rad)
+vector(0, -1)
+TextPos End
+
+TextPos:
+pos(0, rad)
+vector(0, 1)
+TextPos End
+
+TextPos:
+pos(-rad, 0)
+vector(-1, 0)
+TextPos End
+
+TextPos:
+pos(rad, 0)
+vector(1, 0)
+TextPos End

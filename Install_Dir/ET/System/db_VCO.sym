@@ -1,0 +1,39 @@
+﻿def scale_x=0
+def scale_y=-2
+param "Funktion"={"Sinus" "Rechteck" "Langes Rechteck" "Sägezahn"}
+input(_genericRoundBlackbox.sym)
+
+Drawing:
+if get("Funktion")="Sinus":
+  defvar Xmin=-rad/2
+  defvar Xmax=rad/2
+  defvar Ymin=Xmin/2
+  defvar Ymax=Xmax/2
+  input(../BasicMath/_bezierSin2Pi.sym)
+elseif get("Funktion")="Rechteck"
+  defvar Xmin=-rad*3/5
+  defvar Xmax=rad*3/5
+  defvar Ymin=Xmin/2
+  defvar Ymax=Xmax/2
+  line(Xmin, Ymax, Xmin, Ymin, (Xmin+Xmax)/2, Ymin, (Xmin+Xmax)/2, Ymax, Xmax, Ymax, Xmax, Ymin)
+elseif get("Funktion")="Langes Rechteck"
+  defvar Xmin=-rad*3/5
+  defvar Xmax=rad*3/5
+  defvar Ymin=Xmin/2
+  defvar Ymax=Xmax/2
+  line(Xmin, Ymax, Xmin, Ymin, Xmin+(Xmax-Xmin)/4, Ymin, Xmin+(Xmax-Xmin)/4, Ymax, (Xmin+Xmax)/2, Ymax, (Xmin+Xmax)/2, Ymin, Xmin+3*(Xmax-Xmin)/4, Ymin, Xmin+3*(Xmax-Xmin)/4, Ymax, Xmax, Ymax, Xmax, Ymin)
+elseif get("Funktion")="Sägezahn"
+  defvar Xmin=-rad*3/5
+  defvar Xmax=rad*3/5
+  defvar Ymin=Xmin/2
+  defvar Ymax=Xmax/2
+  line(Xmin, Ymax, (Xmin+Xmax)/2, Ymin, (Xmin+Xmax)/2, Ymax, Xmax, Ymin)
+end
+Drawing End
+
+Info:
+origin(0, -rad)
+text()
+name(Oszillator)
+namespace(System)
+Info End

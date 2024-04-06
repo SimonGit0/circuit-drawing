@@ -1,0 +1,150 @@
+﻿param "Style"={"eu" "us"}
+param "Bulk"={"Bulk connected to source" "Bulk connected to source without dot" "Bulk terminal"}
+param "Type"={"Enhancement" "Depletion"}
+
+param_arrow "Pfeil" = 2 from [-1, #inf) 
+param "Kreis"={"Mit Kreis" "Ohne Kreis"}
+param_int "Linienbreite" = 100 from [10, 1, 1000] unit "%"
+param_int "Abstand Gate" = 50 from [0, 1, 150]
+
+var abstandGS=get("Abstand Gate")
+def pfeilRadiusXBasic=54
+def pfeilRadiusY=66
+var startGateX=140+50-abstandGS
+def endeX=400
+def DistSBY=200
+
+def radC=50 %Radius vom Gate-Kreis eines PMOS
+
+defvar startSource=startGateX+abstandGS
+defvar pfeilPosX=(startSource+endeX)/2
+def pfeilMitteY=-DistSBY
+
+%Für PMOS Transistoren wird Y gespiegelt (fy=-1) und der Pfeil dreht sich auch um!
+def fy=1-2*PMOS
+def pfeilRadiusX = pfeilRadiusXBasic*fy
+
+Drawing:
+if PMOS = 0 :
+  invisible("Kreis")
+end
+if get("Style") = "eu" :
+invisible("Kreis")
+invisible("Pfeil")
+%DRAW GATE
+line(0, fy*0, startGateX, fy*0)
+lw(get("Linienbreite"))
+line(startGateX, fy*0, startGateX, fy*(-2*DistSBY))
+lw(100)
+
+%DRAW CONNECTIONS OF S,B,D TO THE RIGHT
+line(startSource, fy*0, endeX, fy*0)
+line(startSource, fy*(-DistSBY), endeX, fy*(-DistSBY))
+line(startSource, fy*(-2*DistSBY), endeX, fy*(-2*DistSBY))
+
+if get("Type")="Enhancement":
+  %DRAW DASHED CHANNEL (3 Lines)
+  line(startSource, fy*DistSBY/3, startSource, fy*-DistSBY/3)
+  line(startSource, fy*-2*DistSBY/3, startSource, fy*-4*DistSBY/3)
+  line(startSource, fy*-5*DistSBY/3, startSource, fy*-7*DistSBY/3)
+elseif get("Type")="Depletion"
+  line(startSource, fy*DistSBY/3, startSource, fy*-7*DistSBY/3)
+end
+
+%EXTEND S,D CONNECTIONS TO BOTTOM AND TOP
+line(endeX, fy*(0), endeX, fy*(100))
+line(endeX, fy*(-2*DistSBY), endeX, fy*(-2*DistSBY-100))
+
+%DRAW ARROW
+polyfill(pfeilPosX-pfeilRadiusX, fy*pfeilMitteY, pfeilPosX+pfeilRadiusX, fy*(pfeilMitteY+pfeilRadiusY), pfeilPosX+pfeilRadiusX, fy*(pfeilMitteY-pfeilRadiusY))
+
+%ANSCHLUSS
+snapLeft(0, fy*0)
+snap(endeX, fy*100, 0, fy, false)
+snap(endeX, fy*(-2*DistSBY-100), 0, -fy, false)
+
+if get("Bulk")="Bulk terminal":
+  snapOnlyRight(endeX, fy*(-DistSBY))
+elseif get("Bulk")="Bulk connected to source"
+  line(endeX, fy*0, endeX, fy*(-DistSBY))
+  dot(endeX, fy*0)
+elseif get("Bulk")="Bulk connected to source without dot"
+  line(endeX, fy*0, endeX, fy*(-DistSBY))
+end
+select(0, fy*(-2*DistSBY-100), endeX, fy*(2*DistSBY+200))
+else
+invisible("Bulk")
+invisible("Type")
+%Style us
+%DRAW GATE
+lw(get("Linienbreite"))
+line(startGateX, fy*0, startGateX, fy*(-2*DistSBY))
+lw(100)
+%DRAW CHANNEL
+line(startSource, fy*0, startSource, fy*-2*DistSBY)
+%DRAW CONNECTIONS OF S,D TO THE RIGHT
+line(startSource, fy*0, endeX, fy*0)
+line(startSource, fy*(-2*DistSBY), endeX, fy*(-2*DistSBY))
+%EXTEND S,D CONNECTIONS TO BOTTOM AND TOP
+line(endeX, fy*(0), endeX, fy*(100))
+line(endeX, fy*(-2*DistSBY), endeX, fy*(-2*DistSBY-100))
+def pfeilMitteY=(0*DistSBY)
+if PMOS = 1 :
+  if get("Kreis") = "mit Kreis" :
+    %Draw Circle
+    circ(startGateX-radC, fy*(-DistSBY),radC,radC)
+    %Connection to GATE Snappoint
+    line(startGateX-radC*2, fy*(-DistSBY), 0, fy*(-DistSBY))
+  else
+    %Connection to GATE Snappoint
+    line(startGateX, fy*(-DistSBY), 0, fy*(-DistSBY))
+  end
+  arrow(pfeilPosX,fy*pfeilMitteY,get("Pfeil"),#aligncenter,-1,0)
+else
+  %Connection to GATE Snappoint
+  line(startGateX, fy*(-DistSBY), 0, fy*(-DistSBY))
+  arrow(pfeilPosX,fy*pfeilMitteY,get("Pfeil"),#aligncenter,1,0)
+end
+%Draw Arrow:
+%polyfill(pfeilPosX-pfeilRadiusX, fy*pfeilMitteY, pfeilPosX+pfeilRadiusX, fy*(pfeilMitteY+pfeilRadiusY), pfeilPosX+pfeilRadiusX, fy*(pfeilMitteY-pfeilRadiusY))
+%ANSCHLUSS G,S,D
+snapLeft(0, fy*(-DistSBY))
+snap(endeX, fy*100, 0, fy, false)
+snap(endeX, fy*(-2*DistSBY-100), 0, -fy, false)
+select(0, fy*(-2*DistSBY-100), endeX, fy*(2*DistSBY+200))
+end
+Drawing End
+
+TextPos:
+pos(endeX, fy*(-DistSBY))
+vector(1, fy*-1)
+dist(1, 0)
+TextPos End
+
+TextPos:
+pos(endeX, fy*-2*DistSBY)
+vector(1, fy*-1)
+dist(1, 0)
+TextPos End
+
+TextPos:
+pos(endeX, fy*0)
+vector(1, fy*1)
+dist(1, 0)
+TextPos End
+
+TextPos:
+pos(50, fy*-DistSBY)
+vector(-1, fy*0)
+TextPos End
+
+TextPos:
+pos(50, fy*0)
+vector(-1, fy*1)
+dist(-1, 0)
+TextPos End
+
+TextPos:
+pos(endeX, fy*-DistSBY)
+vector(1, fy*0)
+TextPos End

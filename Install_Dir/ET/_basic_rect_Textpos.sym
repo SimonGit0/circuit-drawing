@@ -1,0 +1,33 @@
+﻿TextPos:
+pos((TPxmin+TPxmax)/2, TPymin)
+vector(0, -1)
+TextPos End
+
+TextPos:
+pos((TPxmin+TPxmax)/2, TPymax)
+vector(0, 1)
+TextPos End
+
+TextPos:
+pos(TPxmax, TPymin)
+vector(1, -1)
+dist(0, -1)
+TextPos End
+
+TextPos:
+pos(TPxmax, TPymax)
+vector(1, 1)
+dist(0, 1)
+TextPos End
+
+TextPos:
+pos(TPxmin, TPymax)
+vector(-1, 1)
+dist(0, 1)
+TextPos End
+
+TextPos:
+pos(TPxmin, TPymin)
+vector(-1, -1)
+dist(0, -1)
+TextPos End 

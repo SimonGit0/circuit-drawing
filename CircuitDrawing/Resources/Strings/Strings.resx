@@ -1,0 +1,468 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AufVerbinder" xml:space="preserve">
+    <value>Auf Verbinder</value>
+  </data>
+  <data name="Ausrichtung_Mitte" xml:space="preserve">
+    <value>Mitte</value>
+  </data>
+  <data name="Ausrichtung_Oben" xml:space="preserve">
+    <value>Oben</value>
+  </data>
+  <data name="Ausrichtung_Unten" xml:space="preserve">
+    <value>Unten</value>
+  </data>
+  <data name="Bereit" xml:space="preserve">
+    <value>Bereit</value>
+  </data>
+  <data name="Blocksatz" xml:space="preserve">
+    <value>Blocksatz</value>
+  </data>
+  <data name="Breite" xml:space="preserve">
+    <value>Breite</value>
+  </data>
+  <data name="DefaultEinstellung" xml:space="preserve">
+    <value>Standardstile</value>
+  </data>
+  <data name="DefaultEinstellung_Bauteile" xml:space="preserve">
+    <value>Bauelemente</value>
+  </data>
+  <data name="DefaultEinstellung_Font" xml:space="preserve">
+    <value>Standard-Schriftart</value>
+  </data>
+  <data name="DefaultEinstellung_Grafikelemente" xml:space="preserve">
+    <value>Sonstige Grafikelemente</value>
+  </data>
+  <data name="DefaultEinstellung_StromSpannungspfeile" xml:space="preserve">
+    <value>Strom- und Spannungspfeile</value>
+  </data>
+  <data name="DefaultEinstellung_Verbinder" xml:space="preserve">
+    <value>Verbinder</value>
+  </data>
+  <data name="Detect_Einstellungen" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Einstellungspanel_Anzeige" xml:space="preserve">
+    <value>Anzeige</value>
+  </data>
+  <data name="Einstellungspanel_Bauelemente" xml:space="preserve">
+    <value>Bauelemente Bibliothek</value>
+  </data>
+  <data name="Einstellung_Abstand" xml:space="preserve">
+    <value>Abstand:</value>
+  </data>
+  <data name="Einstellung_AbstandBeschriftung" xml:space="preserve">
+    <value>Abstand der Beschriftung</value>
+  </data>
+  <data name="Einstellung_AbstandQuer" xml:space="preserve">
+    <value>Quer:</value>
+  </data>
+  <data name="Einstellung_ArtDesStrompfeiles" xml:space="preserve">
+    <value>Art des Strompfeiles</value>
+  </data>
+  <data name="Einstellung_Beschriftung" xml:space="preserve">
+    <value>Beschriftung</value>
+  </data>
+  <data name="Einstellung_Deckkraft" xml:space="preserve">
+    <value>Deckkraft:</value>
+  </data>
+  <data name="Einstellung_Farbe" xml:space="preserve">
+    <value>Farbe:</value>
+  </data>
+  <data name="Einstellung_Farbe_Ändern" xml:space="preserve">
+    <value>Ändern</value>
+  </data>
+  <data name="Einstellung_FontArt" xml:space="preserve">
+    <value>Art:</value>
+  </data>
+  <data name="Einstellung_Fontsize" xml:space="preserve">
+    <value>Größe:</value>
+  </data>
+  <data name="Einstellung_Fontstyle" xml:space="preserve">
+    <value>Schriftart</value>
+  </data>
+  <data name="Einstellung_Füllstil" xml:space="preserve">
+    <value>Füllstil</value>
+  </data>
+  <data name="Einstellung_Größe" xml:space="preserve">
+    <value>Größe</value>
+  </data>
+  <data name="Einstellung_Krümmung" xml:space="preserve">
+    <value>Krümmung</value>
+  </data>
+  <data name="Einstellung_KrümmungAbstand" xml:space="preserve">
+    <value>Abstand:</value>
+  </data>
+  <data name="Einstellung_KrümmungRundheit" xml:space="preserve">
+    <value>Rundheit:</value>
+  </data>
+  <data name="Einstellung_Linienstil" xml:space="preserve">
+    <value>Linienstil</value>
+  </data>
+  <data name="Einstellung_Pfeilspitze" xml:space="preserve">
+    <value>Pfeilspitze</value>
+  </data>
+  <data name="Einstellung_Pfeilspitzen" xml:space="preserve">
+    <value>Pfeilspitzen</value>
+  </data>
+  <data name="Einstellung_Stil" xml:space="preserve">
+    <value>Stil:</value>
+  </data>
+  <data name="Einstellung_StrompfeilArt" xml:space="preserve">
+    <value>Art:</value>
+  </data>
+  <data name="Einstellung_Stärke" xml:space="preserve">
+    <value>Stärke:</value>
+  </data>
+  <data name="Einstellung_Textausrichtung" xml:space="preserve">
+    <value>Ausrichtung:</value>
+  </data>
+  <data name="Einstellung_Textausrichtung_Horizontal" xml:space="preserve">
+    <value>Horizontal:</value>
+  </data>
+  <data name="Einstellung_Textausrichtung_Vertikal" xml:space="preserve">
+    <value>Vertikal:</value>
+  </data>
+  <data name="Einstellung_VariousString" xml:space="preserve">
+    <value>&lt;Verschiedene Werte&gt;</value>
+  </data>
+  <data name="Ende" xml:space="preserve">
+    <value>Ende</value>
+  </data>
+  <data name="Höhe" xml:space="preserve">
+    <value>Höhe</value>
+  </data>
+  <data name="Key_Entf" xml:space="preserve">
+    <value>Entf</value>
+  </data>
+  <data name="Key_Leertaste" xml:space="preserve">
+    <value>Leertaste</value>
+  </data>
+  <data name="Key_shift" xml:space="preserve">
+    <value>UMSCHALT</value>
+  </data>
+  <data name="Links" xml:space="preserve">
+    <value>Links</value>
+  </data>
+  <data name="Linksbündig" xml:space="preserve">
+    <value>Linksbündig</value>
+  </data>
+  <data name="Mittlere_Maustaste" xml:space="preserve">
+    <value>Mittlere Maustaste</value>
+  </data>
+  <data name="NebenVerbinder" xml:space="preserve">
+    <value>Neben Verbinder</value>
+  </data>
+  <data name="Nummerierung" xml:space="preserve">
+    <value>Nummerierung</value>
+  </data>
+  <data name="Oben" xml:space="preserve">
+    <value>Oben</value>
+  </data>
+  <data name="Rechts" xml:space="preserve">
+    <value>Rechts</value>
+  </data>
+  <data name="Rechtsbündig" xml:space="preserve">
+    <value>Rechtsbündig</value>
+  </data>
+  <data name="Rotation180" xml:space="preserve">
+    <value>180° gedreht</value>
+  </data>
+  <data name="Rotation270" xml:space="preserve">
+    <value>270° gedreht</value>
+  </data>
+  <data name="Rotation90" xml:space="preserve">
+    <value>90° gedreht</value>
+  </data>
+  <data name="Rotation_Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Skill_Drehung0" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="Skill_Drehung180" xml:space="preserve">
+    <value>180 Grad gedreht</value>
+  </data>
+  <data name="Skill_Drehung270" xml:space="preserve">
+    <value>270 Grad gedreht</value>
+  </data>
+  <data name="Skill_Drehung90" xml:space="preserve">
+    <value>90 Grad gedreht</value>
+  </data>
+  <data name="Skill_Kein_Bauteil_Zuordnen" xml:space="preserve">
+    <value>Kein Bauteil zuordnen</value>
+  </data>
+  <data name="Skill_MX" xml:space="preserve">
+    <value>Gespiegelt X</value>
+  </data>
+  <data name="Skill_MX_Rot90" xml:space="preserve">
+    <value>Gespiegelt X + 90 Grad gedreht</value>
+  </data>
+  <data name="Skill_MY" xml:space="preserve">
+    <value>Gespiegelt Y</value>
+  </data>
+  <data name="Skill_MY_Rot90" xml:space="preserve">
+    <value>Gespiegelt Y + 90 Grad gedreht</value>
+  </data>
+  <data name="Skill_PostRoutingOptimierung" xml:space="preserve">
+    <value>Post-Routing Optimierungen</value>
+  </data>
+  <data name="Skill_Symbol_importieren" xml:space="preserve">
+    <value>Symbol importieren</value>
+  </data>
+  <data name="Sprache" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="Tools_BauteileKopieren" xml:space="preserve">
+    <value>Copy: Bauteile zum Kopieren anklicken und verschieben.</value>
+  </data>
+  <data name="Tools_ClickToAddStartAndEnd" xml:space="preserve">
+    <value>Klicken um Start und Endpunkt festzulegen.</value>
+  </data>
+  <data name="Tools_DrawWire" xml:space="preserve">
+    <value>Wire: Einmal klicken für Startpunkt und einmal klicken für Endpunkt.</value>
+  </data>
+  <data name="Tools_SpannungspfeilHinzufügen" xml:space="preserve">
+    <value>Spannungspfeil hinzufügen</value>
+  </data>
+  <data name="Tools_ZumDrehen" xml:space="preserve">
+    <value>zum Drehen.</value>
+  </data>
+  <data name="Tools_ZumDurchschaltenDerBeschriftung" xml:space="preserve">
+    <value>zum Durchschalten der Beschriftung.</value>
+  </data>
+  <data name="Tools_ZumDurchschaltenDerPfeilspitze" xml:space="preserve">
+    <value>zum Durchschalten der Pfeilspitze.</value>
+  </data>
+  <data name="Tools_zumHSpiegeln" xml:space="preserve">
+    <value>zum horizontal Spiegeln.</value>
+  </data>
+  <data name="Tools_ZumSnappenAmNächstenVerbinder" xml:space="preserve">
+    <value>zum Snappen an nächsten Verbinder.</value>
+  </data>
+  <data name="Tools_zumVSpiegeln" xml:space="preserve">
+    <value>zum vertikal Spiegeln.</value>
+  </data>
+  <data name="Tool_AddBus" xml:space="preserve">
+    <value>Bus: Klicken um Bus-Beschriftung hinzuzufügen.</value>
+  </data>
+  <data name="Tool_AddCurrentArrow" xml:space="preserve">
+    <value>Strom: Klicken um Strompfeil zu platzieren.</value>
+  </data>
+  <data name="Tool_AddEllipse" xml:space="preserve">
+    <value>Zeichne Ellipse: Klicke und ziehe mit gedrückter Maustaste eine Ellipse auf.</value>
+  </data>
+  <data name="Tool_AddForm" xml:space="preserve">
+    <value>Zeichne Form: Klicke und ziehe mit gedrückter Maustaste eine Form auf.</value>
+  </data>
+  <data name="Tool_AddLabel" xml:space="preserve">
+    <value>Beschriftung: Klicken um Beschriftung hinzuzufügen.</value>
+  </data>
+  <data name="Tool_AddLine" xml:space="preserve">
+    <value>Linie: Einmal klicken für Startpunkt und einmal klicken für Endpunkt.</value>
+  </data>
+  <data name="Tool_AddRect" xml:space="preserve">
+    <value>Zeichne Rechteck: Klicke und ziehe mit gedrückter Maustaste ein Rechteck auf.</value>
+  </data>
+  <data name="Tool_AddRountRect" xml:space="preserve">
+    <value>Zeichne rundes Rechteck: Klicke und ziehe mit gedrückter Maustaste ein rundes Rechteck auf.</value>
+  </data>
+  <data name="Tool_AddTextfeld" xml:space="preserve">
+    <value>Zeichne Textfeld: Klicke und ziehe mit gedrückter Maustaste ein Textfeld auf.</value>
+  </data>
+  <data name="Tool_Delete" xml:space="preserve">
+    <value>Entfernen: Wählen Sie Elemente zum Entfernen aus.</value>
+  </data>
+  <data name="Tool_Move" xml:space="preserve">
+    <value>Verschieben: Klicke auf Element zum Verschieben. Klicke ein zweites Mal um es loszulassen.</value>
+  </data>
+  <data name="Tool_Place" xml:space="preserve">
+    <value>Hinzufügen: Platzieren Sie Bauteile durch klicken.</value>
+  </data>
+  <data name="Tool_Scale" xml:space="preserve">
+    <value>Scale: Mit Maus Kante zum skalieren anklicken und dann verschieben. Ein zweites mal klicken zum loslassen der Kante.</value>
+  </data>
+  <data name="Unten" xml:space="preserve">
+    <value>Unten</value>
+  </data>
+  <data name="WR_NAME_Bauelemente" xml:space="preserve">
+    <value>Bauelemente</value>
+  </data>
+  <data name="WR_NAME_Einstellungen" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="WR_NAME_MarkierungsEinstellungen" xml:space="preserve">
+    <value>Auswahleinstellungen</value>
+  </data>
+  <data name="Zentriert" xml:space="preserve">
+    <value>Zentriert</value>
+  </data>
+  <data name="Tools_SnappointHinzufügen" xml:space="preserve">
+    <value>Snappoint hinzufügen: Klicken Sie, um einen Snappoint hinzuzufügen.</value>
+  </data>
+  <data name="Tools_SnappointLöschen" xml:space="preserve">
+    <value>Snappoint löschen: Klicke auf Snappoint um ihn zu löschen. Hinweis: Snappoints die fest an Bauteile aus der Bibliothek verknüpft sind können nicht gelöscht werden.</value>
+  </data>
+  <data name="Einstellung_Rundes_Rechteck" xml:space="preserve">
+    <value>Abgerundete Ecken</value>
+  </data>
+  <data name="Einstellung_Rundes_Rechteck_Radius" xml:space="preserve">
+    <value>Radius:</value>
+  </data>
+  <data name="LatexExport" xml:space="preserve">
+    <value>Latex-Export</value>
+  </data>
+  <data name="Einstellungspanel_ShortcutKeyBauteile" xml:space="preserve">
+    <value>Tastenkürzel - Bauelemente</value>
+  </data>
+  <data name="Bauteil_Nicht_Vorhanden" xml:space="preserve">
+    <value>Kein Bauteil ausgewählt. Das Tastenkürzel kann nicht initialisiert werden.</value>
+  </data>
+  <data name="Fehler" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="keinShortCutKeySelected" xml:space="preserve">
+    <value>Kein Tastenkürzel ausgewählt.</value>
+  </data>
+  <data name="KeySchonBenutzt" xml:space="preserve">
+    <value>Dieses Tastenkürzel wird schon verwendet und kann nicht neu zugeordnet werden.</value>
+  </data>
+  <data name="MinCutFehlerEinVerbinder" xml:space="preserve">
+    <value>Für diese Funktion muss genau ein Verbinder ausgewählt sein!</value>
+  </data>
+  <data name="Tool_AddBezier" xml:space="preserve">
+    <value>Bezierkurve: Klicken und ziehen für Startpunkt und klicken und ziehen für Endpunkt.</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="Tool_AddBezierFreihand" xml:space="preserve">
+    <value>Bezierkurve zeichnen: Klicke und ziehe mit der Maus die gewünschte Kurve nach, die anschließend als Bezierkurve approximiert wird.</value>
+  </data>
+  <data name="BerechnungAbbrechen" xml:space="preserve">
+    <value>Berechnung Abbrechen?</value>
+  </data>
+  <data name="BezierLangeZeit" xml:space="preserve">
+    <value>Die Berechnung dauert sehr lange, soll die Berechnung abgebrochen werden?</value>
+  </data>
+  <data name="ToolAddImpedanz" xml:space="preserve">
+    <value>Impedanz: Klicken um Impedanzpfeil zu platzieren.</value>
+  </data>
+</root>

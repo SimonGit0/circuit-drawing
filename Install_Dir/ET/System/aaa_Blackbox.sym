@@ -1,0 +1,23 @@
+﻿def default_Links=2
+def default_Rechts=2
+def default_Oben=2
+def default_Unten=2
+
+def default_PitchLinks=400
+def default_PitchRechts=400
+def default_PitchOben=400
+def default_PitchUnten=400
+
+def default_ExtraBreite=200
+def default_ExtraHöhe=200
+
+def scalingYFactor=0
+
+input(_genericBlackbox.sym)
+
+Info:
+origin(0, 0)
+text()
+name(Blackbox)
+namespace(System)
+Info End

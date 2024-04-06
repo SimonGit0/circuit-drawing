@@ -1,0 +1,25 @@
+﻿param "Typ"={"Eine Linie" "Drei Linien"}
+
+Drawing:
+line(0, 0, 0, 200)
+line(-150,200,150,200)
+snapTop(0,0)
+if get("Typ")="Eine Linie" :
+  select(-150,0,300,200)
+elseif get("Typ")="Drei Linien"
+  line(-100,250,100,250)
+  line(-50,300,50,300)
+  select(-150,0,300,300)
+end
+Drawing End
+
+TextPos:
+pos(0,200+100*toInt(get("Typ")="Drei Linien"))
+vector(0,1)
+TextPos End
+
+Info:
+text()
+name(GND)
+namespace(Basic)
+Info End

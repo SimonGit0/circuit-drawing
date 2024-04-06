@@ -1,0 +1,16 @@
+﻿def scale_x=-2
+def scale_y=0
+input(_genericRoundBlackbox.sym)
+
+Drawing:
+var radL=14142*rad/10000
+line(-radL/2, -radL/2, radL/2, radL/2)
+line(radL/2, -radL/2, -radL/2, radL/2)
+Drawing End
+
+Info:
+origin(-rad, 0)
+text()
+namespace(System)
+name(Mischer)
+Info End

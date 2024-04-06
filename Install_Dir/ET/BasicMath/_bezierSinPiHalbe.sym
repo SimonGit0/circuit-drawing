@@ -1,0 +1,8 @@
+﻿
+%Bezier-Kurve mit 4 Punkten
+%Start          = (0 0)
+%Kontrolpunkt 1 = (33/100 52/100) -> Hinweis 52=pi/2*33
+%Kontrolpunkt 2 = (64/100 1)
+%Ende           = (1 1)
+
+bezier(xMin, yMax, xMin+33*(xMax-xMin)/100, yMax+52*(yMin-yMax)/100, xMin+64*(xMax-xMin)/100, yMin, xMax, yMin)

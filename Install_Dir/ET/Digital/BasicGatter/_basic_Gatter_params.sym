@@ -1,0 +1,11 @@
+﻿param_int "Breite" = 800 from (0,100,10000]
+param_int "Höhe" = 800 from (0,100,10000]
+param_int "Eingänge" = 2 from [2,10)
+param_int "Pitch" = 400 from (0,50,10000]
+
+var int breite = get("Breite")
+var int hoehe = get("Höhe")
+var int inputs = get("Eingänge")
+var int pitch = get("Pitch")
+
+var int xStart = 0

@@ -1,0 +1,41 @@
+﻿param "Typ"={"Simpel" "Schottky" "Zener"}
+
+def dreieckLaenge = 200
+def dreieckHoehe = 120
+def zenerLaenge = dreieckHoehe/2
+Drawing:
+%Dreieck
+fill_backcolor()
+polyfill(0,-dreieckHoehe,0,dreieckHoehe,dreieckLaenge,0)
+fill_forecolor()
+poly(0, -dreieckHoehe, 0, dreieckHoehe, dreieckLaenge, 0)
+
+%Wire
+line(-200, 0, dreieckLaenge+200, 0)
+
+%Kante
+line(dreieckLaenge, -dreieckHoehe, dreieckLaenge, dreieckHoehe)
+
+snapLeft(-200, 0)
+snapRight(dreieckLaenge+200, 0)
+select(-200, -dreieckHoehe, dreieckLaenge+400, 2*dreieckHoehe)
+if get("Typ")="Schottky":
+  line(dreieckLaenge, -dreieckHoehe, dreieckLaenge+zenerLaenge, -dreieckHoehe)
+  line(dreieckLaenge, dreieckHoehe, dreieckLaenge-zenerLaenge, dreieckHoehe)
+elseif get("Typ")="Zener"
+  line(dreieckLaenge, dreieckHoehe, dreieckLaenge-zenerLaenge, dreieckHoehe)
+end
+Drawing End
+
+def TPxmin=0
+def TPxmax=dreieckLaenge
+def TPymin=-dreieckHoehe
+def TPymax=dreieckHoehe
+input(../_basic_rect_Textpos.sym)
+
+Info:
+origin(-200, 0)
+text(N)
+name(Diode)
+namespace(Basic)
+Info End

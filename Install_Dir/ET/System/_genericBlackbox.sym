@@ -1,0 +1,117 @@
+﻿def maxPins = 30
+
+def default_Breite=2*default_ExtraBreite+max(0, max((default_Links-1)*default_PitchLinks,(default_Rechts-1)*default_PitchRechts))
+def default_Hoehe=2*default_ExtraHöhe+max(0, max((default_Oben-1)*default_PitchOben,(default_Unten-1)*default_PitchUnten))
+
+param_int "Links"=default_Links from [0, maxPins]
+param_int "Rechts"=default_Rechts from [0, maxPins]
+param_int "Oben"=default_Oben from [0, maxPins]
+param_int "Unten"=default_Unten from [0, maxPins]
+
+var left=get("Links")
+var right=get("Rechts")
+var top=get("Oben")
+var bottom=get("Unten")
+
+param_int "Pitch Links"=default_PitchLinks from (0,100,10000]
+param_int "Pitch Rechts"=default_PitchRechts from (0,100,10000]
+param_int "Pitch Oben"=default_PitchOben from (0,100,10000]
+param_int "Pitch Unten"=default_PitchUnten from (0,100,10000]
+
+var pLeft=get("Pitch Links")
+var pRight=get("Pitch Rechts")
+var pTop=get("Pitch Oben")
+var pBottom=get("Pitch Unten")
+
+param "Größe" = {"Größe definieren" "Größe aus Pins berechnen"} old "Größe aus Pins berechnen"
+
+param_int "Breite"=default_Breite from (0,100,#inf)
+param_int "Höhe"=default_Hoehe from (0,100,#inf)
+
+param_int "Extra Breite"=default_ExtraBreite from (0,100,10000]
+param_int "Extra Höhe"=default_ExtraHöhe from (0,100,10000]
+
+var breite = 0 %Globale Variablen definieren
+var hoehe = 0 %Globale Variablen definieren
+
+def max_Size_scaling = 10000
+
+scaling links(scale):
+set_param("Breite", get("Breite")+scale)
+move(-scale,0)
+scaling end
+
+scaling oben(scale):
+set_param("Höhe", get("Höhe")+scale)
+move(0,-scale*(2-scalingYFactor)/2)
+scaling end
+
+scaling rechts(scale):
+set_param("Breite", get("Breite")+scale)
+scaling end
+
+scaling unten(scale):
+set_param("Höhe", get("Höhe")+scale)
+move(0,scale*scalingYFactor/2)
+scaling end
+
+Drawing:
+var hoehe = 0
+var breite = 0
+if get("Größe")="Größe definieren":
+  invisible("Extra Breite")
+  invisible("Extra Höhe")
+  var breite=get("Breite")
+  var hoehe=get("Höhe")
+  %Scaling
+  scale_line(breite,0,breite,hoehe,1,0,100-breite,100,max_Size_scaling-breite,rechts)
+  scale_line(0,hoehe,breite,hoehe,0,1,100-hoehe,100,max_Size_scaling-hoehe,unten)
+  scale_line(0,0,0,hoehe,-1,0,100-breite,100,max_Size_scaling-breite,links)
+  scale_line(0,0,breite,0,0,-1,100-hoehe,100,max_Size_scaling-hoehe,oben)
+else
+  invisible("Breite")
+  invisible("Höhe")
+  %Hoehe berechnen
+  var hoehe = max((left-1)*pLeft, (right-1)*pRight, 0)+get("Extra Höhe")*2
+  %Breite berechnen
+  var breite = max((top-1)*pTop, (bottom-1)*pBottom, 0)+get("Extra Breite")*2
+end
+%Rechteck zeichnen
+fill_backcolor()
+rectfill(0, 0, breite, hoehe)
+fill_forecolor()
+rect(0, 0, breite, hoehe)
+select(0, 0, breite, hoehe)
+%Pins links
+for i=[0, left):
+  var posY=(hoehe+(2*i+1-left)*pLeft)/2
+  snapOnlyLeft(0, posY)
+end
+%Pins rechts
+for i=[0, right):
+  var posY=(hoehe+(2*i+1-right)*pRight)/2
+  snapOnlyRight(breite, posY)
+end
+%Pins oben
+for i=[0, top):
+  var posX=(breite+(2*i+1-top)*pTop)/2
+  snapOnlyTop(posX, 0)
+end
+%Pins unten
+for i=[0, bottom):
+  var posX=(breite+(2*i+1-bottom)*pBottom)/2
+  snapOnlyBottom(posX, hoehe)
+end
+Drawing End
+
+TextPos:
+pos(breite/2, hoehe/2)
+vector(0, 0)
+dist(0, 1)
+TextPos End
+
+defvar TPxmin=0
+defvar TPxmax=breite
+defvar TPymin=0
+defvar TPymax=hoehe
+input(../_basic_rect_Textpos.sym)

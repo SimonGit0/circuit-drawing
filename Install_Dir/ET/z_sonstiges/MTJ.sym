@@ -1,0 +1,39 @@
+﻿param_int "Breite" = 300 from (0, 50, #inf)
+param_int "Höhe" = 1000 from (200, 50, #inf)
+var w=get("Breite")
+var h=get("Höhe")
+def pfeilDist=50
+defvar r=10*h/100
+param_arrow "Pfeilspitze" = 0 from [0, #inf)
+
+Drawing:
+  fill_backcolor()
+  rectfill(0, 0, w, h)
+  fill_forecolor()
+  rect(0, 0, w, h)
+  %line(0, h/2, w, h/2)
+  rectfill(0,h/2-r/2,w,r)
+  linearrow(w/2, pfeilDist, w/2, h/2-r/2-pfeilDist, get("Pfeilspitze"), get("Pfeilspitze"))
+  linearrow(w/2, h/2+r/2+pfeilDist, w/2, h-pfeilDist, -1, get("Pfeilspitze"))
+  snapOnlyTop(w/2, 0)
+  snapOnlyBottom(w/2, h)
+
+  select(0, 0, w, h)
+Drawing End
+
+defvar TPxmin=0
+defvar TPxmax=w
+defvar TPymin=0
+defvar TPymax=h
+input(../_basic_rect_Textpos_v.sym)
+
+Info:
+text()
+name(MTJ)
+namespace(Sonstiges)
+Info End
+
+Compatibility:
+name(MTJ)
+namespace(Miscellaneous)
+Compatibility End

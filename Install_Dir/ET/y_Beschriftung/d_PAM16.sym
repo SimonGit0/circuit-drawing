@@ -1,0 +1,83 @@
+﻿param_string "Daten" = "0f84783" from "0123456789ABCDEFabcdef"
+param_int "Breite" = 100 from (0, 100000]
+param_int "Höhe" = 25   from (0, 100000]
+var p=length(get("Daten"))
+var w=get("Breite")
+var h=-get("Höhe")
+
+param_int "Risetime" = 0 from [0, 10000]
+param_int "Falltime" = 0 from [0, 10000]
+var risetime=get("Risetime")
+var falltime=get("Falltime")
+
+def max_scaling_breite=10000
+def max_scaling_hoehe =10000
+Scaling rechts(x):
+set_param("Breite", get("Breite")+x)
+scaling end
+
+Scaling links(x, xnom):
+set_param("Breite", get("Breite")+x)
+move(-xnom, 0)
+scaling end
+
+scaling oben(x):
+set_param("Höhe", get("Höhe")+x)
+scaling end
+
+scaling unten(x, xnom):
+set_param("Höhe", get("Höhe")+x)
+move(0,xnom)
+scaling end
+
+Drawing:
+var x=0
+var lastY=0
+var y=h*toIntHex(substr(get("Daten"),0,1))
+snapOnlyLeft(0,y)
+var lastY=y
+var maxVal=1
+for i=[1,p) :
+  var y = h*toIntHex(substr(get("Daten"),i,1))
+  if y < maxVal :
+    var maxVal = y
+  end
+  if y < lastY :
+    var xneu=w*i+risetime/2
+	line(x,lastY,xneu-risetime,lastY,xneu,y)
+	var lastY=y
+	var x=xneu
+  elseif y > lastY
+    var xneu=w*i+falltime/2
+	line(x,lastY,xneu-falltime,lastY,xneu,y)
+	var lastY=y
+	var x=xneu
+  end
+end
+
+if maxVal>=0:
+var maxVal=h
+end
+
+line(x,lastY,w*p,lastY)
+snapOnlyRight(w*p,lastY)
+select(0,0,p*w,maxVal)
+
+scale_line(w*p,0,w*p,maxVal,p,0,1-w,1,max_scaling_breite-w,rechts)
+scale_line(0,0,0,maxVal,-p,0,1-w,1,max_scaling_breite-w,links)
+scale_line(0,maxVal,w*p,maxVal,0,-maxVal/h,1+h,1,max_scaling_hoehe+h,oben)
+scale_line(0,0,w*p,0,0,maxVal/h,1+h,1,max_scaling_hoehe+h,unten)
+Drawing End
+
+defvar TPxmin=0
+defvar TPxmax=w*p
+defvar TPymin=0
+defvar TPymax=h
+input(../_basic_rect_Textpos.sym)
+
+Info:
+origin(0,0)
+text()
+name(PAM 16)
+namespace(Erweiterung & Beschriftung)
+Info End

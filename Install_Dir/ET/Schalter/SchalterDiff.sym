@@ -1,0 +1,49 @@
+﻿param_int "Radius Kontakt"=20 from [0,#inf)
+
+param_int "Abstand"=400 from (0, 50, #inf)
+param_int "Breite"=300 from (0, 50, #inf)
+param_int "Öffnung"=150
+param_int "Anschlüsse" = 100 from [0,50,#inf)
+
+var AbstandDiff = get("Abstand")
+
+var Stubs = get("Anschlüsse")
+var rad = get("Radius Kontakt")
+
+Drawing:
+line(0, 0, Stubs, 0, Stubs+get("Breite"), -get("Öffnung"))
+line(Stubs+get("Breite"), 0, 2*Stubs+get("Breite"), 0)
+snapLeft(0, 0)
+snapRight(2*Stubs+get("Breite"), 0)
+snap(Stubs+get("Breite")/2,-get("Öffnung")/2, #Penalty2, #Penalty0, #Penalty2, #Penalty0)
+
+line(0, AbstandDiff, Stubs, AbstandDiff, Stubs+get("Breite"), AbstandDiff-get("Öffnung"))
+line(Stubs+get("Breite"), AbstandDiff, 2*Stubs+get("Breite"), AbstandDiff)
+snapLeft(0, AbstandDiff)
+snapRight(2*Stubs+get("Breite"), AbstandDiff)
+snap(Stubs+get("Breite")/2,AbstandDiff-get("Öffnung")/2, #Penalty2, #Penalty0, #Penalty2, #Penalty0)
+
+if rad > 0:
+  circfill(Stubs,0,rad,rad)
+  circfill(Stubs+get("Breite"),0,rad,rad)
+  circfill(Stubs,AbstandDiff,rad,rad)
+  circfill(Stubs+get("Breite"),AbstandDiff,rad,rad)
+end
+
+%line(Stubs+get("Breite")/2,-get("Öffnung")/2,Stubs+get("Breite")/2,AbstandDiff-get("Öffnung")/2)
+%snap(Stubs+get("Breite")/2, AbstandDiff/2, #Penalty0, #Penalty2, #Penalty0, #Penalty2)
+
+select(0, min(0,-get("Öffnung")), 2*Stubs+get("Breite"), max(AbstandDiff,AbstandDiff-get("Öffnung"))-min(0,-get("Öffnung")))
+Drawing End
+
+def TPxmin=0
+var TPxmax=2*Stubs+get("Breite")
+var TPymin=min(0,-get("Öffnung"))
+var TPymax=max(AbstandDiff,AbstandDiff-get("Öffnung"))-min(0,-get("Öffnung"))
+input(../_basic_rect_Textpos.sym)
+
+Info:
+text()
+name(Diff. Schalter)
+namespace(Schalter)
+Info End

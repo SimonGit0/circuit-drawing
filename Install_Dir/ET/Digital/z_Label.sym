@@ -1,0 +1,31 @@
+﻿TextPos:
+pos(0, 0)
+vector(1, 0)
+TextPos End
+
+TextPos:
+pos(0, 0)
+vector(-1, 0)
+TextPos End
+
+TextPos:
+pos(0, 0)
+vector(0, 1)
+TextPos End
+
+TextPos:
+pos(0, 0)
+vector(0, -1)
+TextPos End
+
+Drawing:
+snap(0, 0, 0, 0, 0, 0, true)
+select(-50, -50, 100, 100)
+Drawing End
+
+Info:
+text(0)
+nonumber()
+name(Beschriftung)
+namespace(Digital)
+Info End

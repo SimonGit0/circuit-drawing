@@ -1,0 +1,9 @@
+﻿def PMOS=0
+
+Info:
+text(M)
+name(NMOS)
+namespace(Transistor)
+Info End 
+
+input(_MOS_basic.sym)

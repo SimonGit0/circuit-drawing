@@ -1,0 +1,50 @@
+﻿use_as_child
+
+var rady = get("parent.select.height")/2
+var radx = get("parent.select.width")/2
+var x = get("parent.select.x")+get("parent.select.width")/2
+var y = get("parent.select.y")+get("parent.select.height")/2
+
+param_string "Text" = "abc"
+param "Position" = {"Mitte" "Oben" "Unten" "Links" "Rechts" "Links Oben" "Rechts Oben" "Links Unten" "Rechts Unten"}
+param "Ausrichtung" = {"Normal" "90° gedreht" "180° gedreht" "270° gedreht"}
+param_int "Abstand" = 0
+param_int "Quer" = 0
+
+var abstand = get("Abstand")
+var quer = get("Quer")
+
+Drawing:
+var rot = 0
+if get("Ausrichtung") = "90° gedreht" :
+  var rot = 90
+elseif get("Ausrichtung") = "180° gedreht"
+  var rot = 180
+elseif get("Ausrichtung") = "270° gedreht"
+  var rot = 270
+end
+if get("Position") = "Mitte" :
+  text(x+quer,y-abstand,0,0,get("Text"),rot)
+elseif get("Position") = "Oben"
+  text(x-quer,y-radY+abstand,0,1,get("Text"),rot)
+elseif get("Position") = "Unten" 
+  text(x+quer,y+radY-abstand,0,-1,get("Text"),rot)
+elseif get("Position") = "Links" 
+  text(x-radX+abstand,y-quer,1,0,get("Text"),rot)
+elseif get("Position") = "Rechts"
+  text(x+radX-abstand,y+quer,-1,0,get("Text"),rot)
+elseif get("Position") = "Rechts Oben"
+  text(x+radX-quer,y-radY+abstand,-1,1,get("Text"),rot)
+elseif get("Position") = "Links Oben"
+  text(x-radX-quer,y-radY+abstand,1,1,get("Text"),rot)
+elseif get("Position") = "Links Unten"
+  text(x-radX+quer,y+radY-abstand,1,-1,get("Text"),rot)
+elseif get("Position") = "Rechts Unten"
+  text(x+radX+quer,y+radY-abstand,-1,-1,get("Text"),rot)
+end
+Drawing End
+
+Info:
+name(Text Innen)
+namespace(Erweiterung & Beschriftung)
+Info End

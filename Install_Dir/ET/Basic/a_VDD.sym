@@ -1,0 +1,17 @@
+﻿Drawing:
+line(0, 0, 0, -200)
+line(-150, -150, 150, -250)
+snapBottom(0, 0)
+select(-150, -200, 300, 200)
+Drawing End
+
+TextPos:
+pos(0, -250)
+vector(0, -1)
+TextPos End
+
+Info:
+text()
+name(VDD)
+namespace(Basic)
+Info End

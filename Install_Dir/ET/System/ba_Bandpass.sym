@@ -1,0 +1,29 @@
+﻿def default_Links=3
+def default_Rechts=3
+def default_Oben=3
+def default_Unten=3
+
+def default_PitchLinks=300
+def default_PitchRechts=300
+def default_PitchOben=300
+def default_PitchUnten=300
+
+def default_ExtraBreite=200
+def default_ExtraHöhe=200
+
+def scalingYFactor=1
+input(_genericBlackbox.sym)
+
+Drawing:
+def strichUnten = 1
+def strichOben = 1
+def strichMitte = 0
+input(_DrawDreiSinBasicFilter.sym)
+Drawing End
+
+Info:
+origin(0, hoehe/2)
+text()
+name(Bandpass)
+namespace(System)
+Info End

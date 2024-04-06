@@ -1,0 +1,23 @@
+﻿use_as_child
+
+param_int "Breite" = 100 from [0, 100000]
+param_int "Höhe" = 200 from [-100000, 100000]
+
+param_int "Offset X" = -50
+param_int "Offset Y" = 0
+
+var rx = get("Breite")/2
+var ry = get("Höhe")/2
+
+var mx = get("parent.select.x")+get("parent.select.width")/2
+var my = get("parent.select.y")+get("parent.select.height")/2
+
+Drawing:
+line(-rx,ry,0,ry,0,-ry,rx,-ry)
+Drawing End
+
+Info:
+origin(-mx-get("Offset X"),-my-get("Offset Y"))
+name(Komparator)
+namespace(Verstärker)
+Info End 

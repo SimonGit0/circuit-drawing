@@ -1,0 +1,23 @@
+﻿var breiteWave = breite*4/5
+if hoehe < breite :
+  var breiteWave = hoehe*4/5
+end
+var hoeheWave = breiteWave/3
+var radY=hoeheWave/3
+var radX=radY
+
+defvar Xmin=(breite-breiteWave)/2
+defvar Xmax=Xmin+breiteWave
+defvar Ymin=(hoehe-2*hoeheWave)/2
+defvar Ymax=Ymin+hoeheWave
+input(../BasicMath/_bezierSin2Pi.sym)
+if strichOben!=0 :
+  line(breite/2-radX, (Ymin+Ymax)/2+radY, breite/2+radX, (Ymin+Ymax)/2-radY)
+end
+
+defvar Ymin=Ymax
+defvar Ymax=Ymin+hoeheWave
+input(../BasicMath/_bezierSin2Pi.sym)
+if strichUnten!=0 :
+  line(breite/2-radX, (Ymin+Ymax)/2+radY, breite/2+radX, (Ymin+Ymax)/2-radY)
+end

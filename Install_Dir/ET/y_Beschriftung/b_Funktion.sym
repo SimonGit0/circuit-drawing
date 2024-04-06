@@ -1,0 +1,89 @@
+﻿param "Funktion"={"Sinus" "Rechteck" "Sägezahn" "Sinus-Halbwelle"}
+
+param_int "Perioden" = 2 from [1, 10]
+param_int "Breite" = 400 from (0, 100000]
+param_int "Höhe" = 400   from (0, 100000]
+var p=get("Perioden")
+var w=get("Breite")
+var h=get("Höhe")
+
+def max_scaling_breite=10000
+def max_scaling_hoehe =10000
+Scaling rechts(x):
+set_param("Breite", get("Breite")+x)
+scaling end
+Scaling links(x):
+set_param("Breite", get("Breite")+x)
+move(-x*get("Perioden"), 0)
+scaling end
+scaling unten(x):
+set_param("Höhe", get("Höhe")+x)
+move(0,x/2)
+scaling end
+scaling oben(x):
+set_param("Höhe", get("Höhe")+x)
+move(0,-x/2)
+scaling end
+
+Drawing:
+if get("Funktion")="Sinus":
+  defvar Ymin=0
+  defvar Ymax=h
+  for i=[0,p) :
+    defvar Xmin=i*w
+    defvar Xmax=(i+1)*w
+    input(../BasicMath/_bezierSin2Pi.sym)
+  end
+  snapOnlyLeft(0,h/2)
+  snapOnlyRight(w*p,h/2)
+elseif get("Funktion")="Sinus-Halbwelle"
+  defvar Ymin=0
+  defvar Ymax=h
+  for i=[0,p) :
+    defvar Xmin=i*w
+    defvar Xmax=(i+1)*w
+    input(../BasicMath/_bezierSinPi.sym)
+  end
+  snapOnlyLeft(0,h)
+  snapOnlyRight(w*p,h)
+elseif get("Funktion")="Rechteck"
+  defvar Ymin=0
+  defvar Ymax=h
+  for i=[0,p) :
+    defvar Xmin=i*w
+    defvar Xmax=(i+1)*w
+    line(Xmin, Ymax, Xmin, Ymin, (Xmin+Xmax)/2, Ymin, (Xmin+Xmax)/2, Ymax, Xmax, Ymax)
+  end
+  line(w*p,0,w*p,h)
+  snapOnlyLeft(0,h)
+  snapOnlyRight(w*p,0)
+elseif get("Funktion")="Sägezahn"
+  defvar Ymin=0
+  defvar Ymax=h
+  for i=[0,p) :
+    defvar Xmin=i*w
+    defvar Xmax=(i+1)*w
+    line(Xmin, Ymax, (Xmin+Xmax)/2, Ymin, (Xmin+Xmax)/2, Ymax, Xmax, Ymin, Xmax, Ymax)
+  end
+  snapOnlyLeft(0,h)
+  snapOnlyRight(w*p,h)
+end
+select(0,0,p*w,h)
+scale_line(w*p,0,w*p,h,p,0,1-w,1,max_scaling_breite-w,rechts)
+scale_line(0,0,0,h,-p,0,1-w,1,max_scaling_breite-w,links)
+scale_line(0,h,w*p,h,0,1,2-h,2,max_scaling_hoehe-h,unten)
+scale_line(0,0,w*p,0,0,-1,2-h,2,max_scaling_hoehe-h,oben)
+Drawing End
+
+defvar TPxmin=0
+defvar TPxmax=w*p
+defvar TPymin=0
+defvar TPymax=h
+input(../_basic_rect_Textpos.sym)
+
+Info:
+origin(0,h/2)
+text()
+name(Funktion)
+namespace(Erweiterung & Beschriftung)
+Info End

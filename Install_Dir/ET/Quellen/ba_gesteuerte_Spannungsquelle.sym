@@ -1,0 +1,16 @@
+﻿input(_basicQuelle.sym)
+
+Drawing:
+fill_backcolor()
+polyfill(-rad, 0, 0, rad, rad, 0, 0, -rad)
+fill_forecolor()
+poly(-rad, 0, 0, rad, rad, 0, 0, -rad)
+line(0, -rad, 0, rad)
+Drawing End
+
+Info:
+origin(0, -rad)
+text(U)
+name(gesteuerte Spannungsquelle)
+namespace(Ideale Quellen)
+Info End

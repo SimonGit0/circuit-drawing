@@ -1,0 +1,19 @@
+﻿param_int "Größe"=200 from (0, 50, 10000)
+var size=get("Größe")
+Drawing:
+line(0, 0, -size, -size)
+line(0, 0, size, -size)
+snapOnlyBottom(0, 0)
+select(-size, -size, size*2, size)
+Drawing End
+
+TextPos:
+pos(0, -size)
+vector(0, -1)
+TextPos End
+
+Info:
+text()
+name(Antenne)
+namespace(Basic)
+Info End

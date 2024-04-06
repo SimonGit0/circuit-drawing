@@ -1,0 +1,11 @@
+﻿def rYPin=200
+def rY=400
+def breite=700
+
+input(_amp_generic.sym)
+
+Info:
+text()
+name(Einfacher Verstärker (Klein))
+namespace(Verstärker)
+Info End 

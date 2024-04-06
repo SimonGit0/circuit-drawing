@@ -1,0 +1,30 @@
+﻿param "Style"={"eu" "us"}
+
+Drawing:
+if get("style")="us" :
+  line(0, 0, 50, 100, 150, -100, 250, 100, 350, -100, 450, 100, 550, -100, 600, 0)
+elseif get("Style")="eu"
+  fill_backcolor()
+  rectfill(0, -100, 600, 200)
+  fill_forecolor()
+  rect(0, -100, 600, 200)
+end
+snapOnlyLeft(0, 0)
+snapOnlyRight(600, 0)
+select(0, -100, 600, 200)
+Drawing End
+
+def TPxmin=0
+def TPxmax=600
+def TPymin=-100
+def TPymax=100
+%input(_basic_rect_Textpos.sym)
+input(../_basic_rect_Textpos.sym)
+
+Info:
+%select(-200 -100 1000 200)
+%origin(-200 0)
+text(R)
+name(Widerstand)
+namespace(Basic)
+Info End

@@ -1,0 +1,10 @@
+﻿def scale_x=0
+def scale_y=0
+input(_genericRoundBlackbox.sym)
+
+Info:
+origin(0, 0)
+text()
+name(Runde Blackbox)
+namespace(System)
+Info End

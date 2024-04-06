@@ -1,0 +1,19 @@
+﻿if negOut :
+	input(../_Negation_Size.sym)
+	circ(-NradX, 0, NradX, NradY)
+	snapOnlyRight(0, 0)
+	var int xStart = -breite-2*NradX
+	select(xStart, -hoehe/2, breite+2*NradX, hoehe)
+else
+	snapOnlyRight(0,0)
+	var int xStart = -breite
+	select(xStart, -hoehe/2, breite, hoehe)
+end
+line(xStart, -hoehe/2, xStart, hoehe/2)
+line(xStart, hoehe/2, xStart+breite-hoehe/2, hoehe/2)
+line(xStart, -hoehe/2, xStart+breite-hoehe/2, -hoehe/2)
+arc(xStart+breite-hoehe/2,0,hoehe/2,-90,180)
+for i=[0,inputs) :
+	var posY=((2*i+1-inputs)*pitch)/2
+	snapOnlyLeft(xStart, posY)
+end

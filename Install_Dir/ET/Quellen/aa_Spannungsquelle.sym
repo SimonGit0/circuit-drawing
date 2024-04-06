@@ -1,0 +1,16 @@
+﻿input(_basicQuelle.sym)
+
+Drawing:
+fill_backcolor()
+circfill(0, 0, rad, rad)
+fill_forecolor()
+circ(0, 0, rad, rad)
+line(0, -rad, 0, rad)
+Drawing End
+
+Info:
+origin(0, -rad)
+text(U)
+name(Spannungsquelle)
+namespace(Ideale Quellen)
+Info End

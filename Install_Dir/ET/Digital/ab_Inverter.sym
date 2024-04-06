@@ -1,0 +1,50 @@
+﻿param_int "Breite" = 700 from (0,50,#inf)
+param_int "Höhe" = 800 from (0,100,#inf)
+
+var rY=get("Höhe")/2
+var breite=get("Breite")
+input(_Negation_Size.sym)
+Drawing:
+fill_backcolor()
+polyfill(0, -rY, 0, rY, breite, 0)
+circfill(breite+NradX, 0, NradX, NradY)
+fill_forecolor()
+poly(0, -rY, 0, rY, breite, 0)
+circ(breite+NradX, 0, NradX, NradY)
+snapOnlyLeft(0, 0)
+snapOnlyRight(breite+2*NradX, 0)
+select(0, -rY, breite+2*NradX, 2*rY)
+Drawing End
+
+Textpos:
+pos(breite/2, 0)
+vector(0, 0)
+dist(-1, 0)
+Textpos End
+
+Textpos:
+pos(breite, 0)
+vector(1, -1)
+Textpos End
+
+Textpos:
+pos(breite, 0)
+vector(1, 1)
+Textpos End
+
+Textpos:
+pos(breite/2, rY)
+vector(0, 1)
+Textpos End
+
+Textpos:
+pos(breite/2, -rY)
+vector(0, -1)
+Textpos End
+
+Info:
+origin(0, -rY/2)
+text()
+name(Inverter)
+namespace(Digital)
+Info End 

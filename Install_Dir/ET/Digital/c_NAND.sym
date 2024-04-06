@@ -1,0 +1,26 @@
+﻿param "Style"={"eu" "us"}
+
+input(BasicGatter/_basic_Gatter_params.sym)
+Drawing:
+	var boolean negOut = true
+	if get("Style") = "eu" :
+		var string mytext = "\&"
+		input(BasicGatter/_basic_Gatter_eu.sym)
+	else 
+		input(BasicGatter/_And_us.sym)
+	end
+Drawing End
+input(BasicGatter/_basic_Gatter_scaling.sym)
+
+var TPxmin=xStart
+var TPxmax=xStart+breite
+var TPymin=-hoehe/2
+var TPymax=hoehe/2
+input(../_basic_rect_Textpos.sym)
+
+Info:
+text()
+name(NAND-Gatter)
+namespace(Digital)
+Info End
+

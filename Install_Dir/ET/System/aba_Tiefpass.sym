@@ -1,0 +1,43 @@
+﻿param "Art" = {"2 Frequenzen" "3 Frequenzen"} old "2 Frequenzen"
+
+def default_Links=3
+def default_Rechts=3
+def default_Oben=3
+def default_Unten=3
+
+def default_PitchLinks=300
+def default_PitchRechts=300
+def default_PitchOben=300
+def default_PitchUnten=300
+
+def default_ExtraBreite=200
+def default_ExtraHöhe=200
+
+def scalingYFactor=1
+input(_genericBlackbox.sym)
+
+Drawing:
+if get("Art")="2 Frequenzen":
+  def strichUnten = 0
+  def strichOben  = 1
+  input(_DrawZweiSinBasicFilter.sym)
+else
+  def strichUnten = 0
+  def strichMitte = 1
+  def strichOben = 1
+  input(_DrawDreiSinBasicFilter.sym)
+end
+Drawing End
+
+Info:
+origin(0, hoehe/2)
+text()
+name(Tiefpass)
+namespace(System)
+Info End
+
+Compatibility:
+name(Tiefpass3)
+namespace(System)
+setparam("Art", 3 Frequenzen)
+Compatibility End

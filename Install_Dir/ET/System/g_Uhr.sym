@@ -1,0 +1,69 @@
+﻿param_int "Radius" = 400 from (0,50,100000] clip
+param_int "Stunden" = 7 from [0,11] mod
+param_int "Minuten" = 0 from [0,59] mod
+var int rad = get("Radius")
+var int centerRad = 30*rad/400
+
+param_int "Stundenzeiger" = 40 unit "%" clip from [0,100] 
+var int lenStunden = get("Stundenzeiger")*rad/100
+param_int "Minutenzeiger" = 70 clip unit "%" from [0,100]
+var int lenMinuten = get("Minutenzeiger")*rad/100
+
+param_int "Große Striche" = 15 from [0,100] clip unit "%"
+param_int "Kleine Striche" = 7 from [0,100] unit "%" clip
+var int largeTickLen = get("Große Striche")*rad/100
+var int smallTickLen = get("Kleine Striche")*rad/100
+var int largeTicks = 3
+var int smallTicks = 1
+
+Drawing:
+select(-rad,-rad,2*rad,2*rad)
+fill_backcolor()
+circfill(0,0,rad,rad)
+fill_forecolor()
+circ(0,0,rad,rad)
+circFill(0,0,centerRad,centerRad)
+var int xZeiger = cos(360*get("Stunden")/12+30*get("Minuten")/60-90,lenStunden)
+var int yZeiger = sin(360*get("Stunden")/12+30*get("Minuten")/60-90,lenStunden)
+line(0,0,xZeiger,yZeiger)
+var int xZeiger = cos(360*get("Minuten")/60-90,lenMinuten)
+var int yZeiger = sin(360*get("Minuten")/60-90,lenMinuten)
+line(0,0,xZeiger,yZeiger)
+var cntLarge = 0
+var cntSmall = 0
+for i=[0,12) :
+	var int xZeiger = cos(360*i/12-90,rad)
+	var int yZeiger = sin(360*i/12-90,rad)
+	if cntLarge = 0 :
+		if largeTickLen > 0 :
+			var int x2 = cos(360*i/12-90,rad-largeTickLen)
+			var int y2 = sin(360*i/12-90,rad-largeTickLen)
+			line(x2,y2,xZeiger,yZeiger)
+		end
+	elseif cntSmall = 0 & smallTickLen > 0 :
+		var int x2 = cos(360*i/12-90,rad-smallTickLen)
+		var int y2 = sin(360*i/12-90,rad-smallTickLen)
+		line(x2,y2,xZeiger,yZeiger)
+	end
+	var int cntLarge = cntLarge + 1
+	var int cntSmall = cntSmall + 1
+	if cntLarge >= largeTicks :
+		var int cntLarge = 0
+	end
+	if cntSmall >= smallTicks :
+		var int cntSmall = 0
+	end
+end
+Drawing End
+
+var TPxmin=-rad
+var TPxmax=-rad
+var TPymin=rad
+var TPymax=rad
+input(../_basic_rect_Textpos.sym)
+
+Info:
+text()
+name(Uhr)
+namespace(System)
+Info End

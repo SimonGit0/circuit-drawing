@@ -1,0 +1,51 @@
+﻿param_int "Anzahl" = 2 from [0, 20]
+param_int "Breite" = 600 from (0, 100000]
+param_int "Höhe" = 800   from (0, 100000]
+var p=get("Anzahl")
+var w=get("Breite")
+var h=get("Höhe")
+
+Drawing:
+var Ymin=0
+var Ymax=h/2
+var Xmin=w/2
+var Xmax=0
+input(../BasicMath/_bezierSinPiHalbe.sym)
+var Ymin=h
+input(../BasicMath/_bezierSinPiHalbe.sym)
+for i=[0,p) :
+  var Ymin=0
+  var Ymax=h/2
+  var Xmin=i*w+w/2
+  var Xmax=Xmin+w
+  input(../BasicMath/_bezierSinPi.sym)
+  var Ymin=h
+  var Ymax=h/2
+  input(../BasicMath/_bezierSinPi.sym)
+end
+var Ymin=0
+var Ymax=h/2
+var Xmin=w/2+w*p
+var Xmax=w+w*p
+input(../BasicMath/_bezierSinPiHalbe.sym)
+var Ymin=h
+input(../BasicMath/_bezierSinPiHalbe.sym)
+
+select(0,0,w*p+w,h)
+snapOnlyLeft(0,0)
+snapOnlyLeft(0,h)
+snapOnlyRight(w*p+w,0)
+snapOnlyRight(w*p+w,h)
+Drawing End
+
+defvar TPxmin=0
+defvar TPxmax=w*(p+1)
+defvar TPymin=0
+defvar TPymax=h
+input(../_basic_rect_Textpos.sym)
+
+Info:
+text()
+name(Zweidrahtleitung)
+namespace(System)
+Info End

@@ -1,0 +1,43 @@
+﻿param_int "Abstand"=50 from (0,2,400]
+var mydist=get("Abstand")/2
+param_int "Länge"=150 from (0, 10000]
+var mylen=get("Länge")
+
+scaling abstand(x):
+set_param("Abstand", get("Abstand")+x*2)
+scaling end
+scaling länge(x):
+set_param("Länge", get("Länge")+x)
+scaling end
+
+Drawing:
+line(-mydist, -mylen, -mydist, mylen)
+line(mydist, -mylen, mydist, mylen)
+line(-200, 0, -mydist, 0)
+line(200, 0, mydist, 0)
+snapLeft(-200, 0)
+snapRight(200, 0)
+select(-200, -mylen, 400, 2*mylen)
+
+scale_line(-mydist,-mylen,-mydist,mylen,-1,0,1-mydist,1,200-mydist,abstand)
+scale_line(mydist,-mylen,mydist,mylen,1,0,1-mydist,1,200-mydist,abstand)
+scale_line(-200,-mylen,200,-mylen,0,-1,1-mylen,1,10000-mylen,länge)
+scale_line(-200,mylen,200,mylen,0,1,1-mylen,1,10000-mylen,länge)
+Drawing End
+
+TextPos:
+pos(0, -mylen)
+vector(0, -1)
+TextPos End
+
+TextPos:
+pos(0, mylen)
+vector(0, 1)
+TextPos End
+
+Info:
+origin(-200, 0)
+text(C)
+name(Kapazität)
+namespace(Basic)
+Info End

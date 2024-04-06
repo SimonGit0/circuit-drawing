@@ -1,0 +1,34 @@
+﻿param "Type"={"Plain" "Dot at start" "Dot at end"}
+param_int "Dot"=25 from (0, #inf)
+def rad=75
+var radDot=get("Dot")
+Drawing:
+arc(rad, 0, rad, 180, 180)
+arc(3*rad, 0, rad, 180, 180)
+arc(5*rad, 0, rad, 180, 180)
+arc(7*rad, 0, rad, 180, 180)
+snapOnlyLeft(0, 0)
+snapOnlyRight(8*rad, 0)
+select(0, -rad, 8*rad, rad)
+if get("Type")="Dot at start" :
+  circFill(-2*rad, -rad, radDot, radDot)
+  %circ(-2*rad, -rad, radDot, radDot)
+elseif get("Type")="Dot at end"
+  circFill(10*rad, -rad, radDot, radDot)
+  %circ(-2*rad, -rad, radDot, radDot)
+else
+  invisible("Dot")
+end
+Drawing End
+
+def TPxmin=0
+def TPxmax=8*rad
+def TPymin=-rad
+def TPymax=0
+input(../_basic_rect_Textpos.sym)
+
+Info:
+text(L)
+name(Induktivität)
+namespace(Basic)
+Info End 

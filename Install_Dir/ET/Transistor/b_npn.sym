@@ -1,0 +1,69 @@
+﻿param_int "Linienbreite" = 200 from [10, 1, 1000] unit "%"
+param_int "Pfeil Position" = 100 from [0, 1, 100] unit "%"
+param_int "Kontaktposition" = 50 from [0,1,200]
+
+def endeX=300
+var verschiebungY=get("Kontaktposition")
+def endeY=250
+
+def startX=100+(endeX-100)*2/3
+var startY=verschiebungY+(endeY-verschiebungY)*2/3
+var vectorX=(endeY-verschiebungY)*1/5
+def vectorY=-(endeX-100)*1/5
+
+var pfeil_dx = -(100-get("Pfeil Position"))*(startX-100)/100
+var pfeil_dy = -(100-get("Pfeil Position"))*(startX-100)*(endeY-verschiebungY)/(endeX-100)/100
+
+Drawing:
+line(0, 0, 100, 0)
+
+lw(get("Linienbreite"))
+line(100, -200, 100, 200)
+lw(100)
+
+line(100, -verschiebungY, endeX, -endeY)
+line(100, verschiebungY, endeX, endeY)
+
+line(endeX, endeY, endeX, 300)
+line(endeX, -endeY, endeX, -300)
+
+polyfill(endeX+pfeil_dx, endeY+pfeil_dy, startX+vectorX+pfeil_dx, startY+vectorY+pfeil_dy, startX-vectorX+pfeil_dx, startY-vectorY+pfeil_dy)
+
+snapLeft(0, 0)
+snapBottom(endeX, 300)
+snapTop(endeX, -300)
+select(0, -300, endeX, 600)
+Drawing End
+
+Textpos:
+pos(endeX, 0)
+vector(1, 0)
+Textpos End
+
+Textpos:
+pos(50, 0)
+vector(-1, -1)
+Textpos End
+
+Textpos:
+pos(50, 0)
+vector(-1, 1)
+Textpos End
+
+Textpos:
+pos(endeX, endeY)
+vector(1, 1)
+dist(1, 0)
+Textpos End
+
+Textpos:
+pos(endeX, -endeY)
+vector(1, -1)
+dist(1, 0)
+Textpos End
+
+Info:
+text(Q)
+name(npn)
+namespace(Transistor)
+Info End

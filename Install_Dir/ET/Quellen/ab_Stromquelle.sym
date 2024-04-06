@@ -1,0 +1,16 @@
+﻿input(_basicQuelle.sym)
+
+Drawing:
+fill_backcolor()
+circfill(0, 0, rad, rad)
+fill_forecolor()
+circ(0, 0, rad, rad)
+line(-rad, 0, rad, 0)
+Drawing End
+
+Info:
+origin(0, -rad)
+text(I)
+name(Stromquelle)
+namespace(Ideale Quellen)
+Info End

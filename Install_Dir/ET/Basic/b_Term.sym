@@ -1,0 +1,56 @@
+﻿param "Form" = {"Kreis" "Quadrat mit X" "Quadrat"}
+param_int "Größe" = 50 from (0,50,10000]
+
+var radX=get("Größe")
+var radY=get("Größe")
+
+Drawing:
+fill_backcolor()
+if (get("Form") = "Kreis"):
+	circfill(0, 0, radX, radY)
+else
+	rectfill(-radX,-radY,2*radX,2*radY)
+end
+fill_forecolor()
+if (get("Form") = "Kreis"):
+	circ(0, 0, radX, radY)
+else
+	rect(-radX,-radY,2*radX,2*radY)
+end
+if (get("Form") = "Quadrat mit X"):
+	line(-radX,-radY,radX,radY)
+	line(-radX,radY,radX,-radY)
+end
+snapLeft(-radX, 0)
+snapRight(radX, 0)
+snapTop(0, -radY)
+snapBottom(0, radY)
+select(-radX, -radY, 2*radX, 2*radY)
+Drawing End
+
+TextPos:
+pos(0, -radY)
+vector(0, -1)
+TextPos End
+
+TextPos:
+pos(0, radY)
+vector(0, 1)
+TextPos End
+
+TextPos:
+pos(-radX, 0)
+vector(-1, 0)
+TextPos End
+
+TextPos:
+pos(radX, 0)
+vector(1, 0)
+TextPos End
+
+Info:
+origin(-radX, 0)
+text(U)
+name(Terminal)
+namespace(Basic)
+Info End 

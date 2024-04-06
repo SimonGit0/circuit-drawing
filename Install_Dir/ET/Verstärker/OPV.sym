@@ -1,0 +1,134 @@
+﻿param "Eingang"={"Differential" "Single Ended" "Differential without text"}
+param "Ausgang"={"Single Ended" "Differential" "Differential flipped output" "Differential without text"}
+
+param "Größe" = {"Groß" "Klein" "Benutzerdefiniert"}
+param_int "Breite" = 1100 from (0, 50, 100000]
+param_int "Höhe" = 600 from (0, 100000]
+param_int "Pin-Höhe" = 300 from (0, 50, 100000]
+param "VDD/GND"={"Ohne" "Mit"}
+param_int "Pos. VDD"=400 from [0, 50, 100000]
+param_int "Pos. GND"=400 from [0, 50, 100000]
+
+var posvdd=get("Pos. VDD")
+var posgnd=get("Pos. GND")
+var rYPin = get("Pin-Höhe")
+var breite = get("Breite")
+var rY = get("Höhe")
+def pmGroesse=130
+
+Drawing:
+if get("Größe")="Groß" :
+  invisible("Breite")
+  invisible("Höhe")
+  invisible("Pin-Höhe")
+  var breite = 1100
+  var rY = 600
+  var rYPin = 300
+elseif get("Größe")="Klein"
+  invisible("Breite")
+  invisible("Höhe")
+  invisible("Pin-Höhe")
+  var breite = 700
+  var rY = 400
+  var rYPin = 200
+end
+fill_backcolor()
+polyfill(0, -rY, 0, rY, breite, 0)
+fill_forecolor()
+poly(0, -rY, 0, rY, breite, 0)
+if get("VDD/GND")="Mit" :
+  snapOnlyTop(posvdd, -rY*(breite-posvdd)/breite)
+  snapOnlyBottom(posgnd, rY*(breite-posgnd)/breite)
+else
+  invisible("Pos. VDD")
+  invisible("Pos. GND")
+end
+if get("Eingang")="Differential" :
+  %Minus
+  line(50, rYPin, 50+pmGroesse, rYPin)
+  %Plus
+  line(50, -rYPin, 50+pmGroesse, -rYPin)
+  line(50+pmGroesse/2, -rYPin+pmGroesse/2, 50+pmGroesse/2, -rYPin-pmGroesse/2)
+  snapOnlyLeft(0, -rYPin)
+  snapOnlyLeft(0, rYPin)
+elseif get("Eingang")="Differential without text"
+  snapOnlyLeft(0, -rYPin)
+  snapOnlyLeft(0, rYPin)
+else
+  snapOnlyLeft(0, 0)
+end
+select(0, -rY, breite, 2*rY)
+var posXPin = breite-breite*rYPin/rY
+if get("Ausgang")="Differential":
+  %Plus
+  line(posXPin, rYPin-50, posXPin, rYPin-50-pmGroesse)
+  line(posXPin-pmGroesse/2, rYPin-50-pmGroesse/2, posXPin+pmGroesse/2, rYPin-50-pmGroesse/2)
+  %Minus
+  line(posXPin-pmGroesse/2, -rYPin+25+pmGroesse/2, posXPin+pmGroesse/2, -rYPin+25+pmGroesse/2)
+elseif get("Ausgang")="Differential flipped output"
+  %Plus
+  line(posXPin, -rYPin+50, posXPin, -rYPin+50+pmGroesse)
+  line(posXPin-pmGroesse/2, -rYPin+50+pmGroesse/2, posXPin+pmGroesse/2, -rYPin+50+pmGroesse/2)
+  %Minus
+  line(posXPin-pmGroesse/2, rYPin-25-pmGroesse/2, posXPin+pmGroesse/2, rYPin-25-pmGroesse/2)
+end
+if get("Ausgang")="Single Ended":
+  snapOnlyRight(breite, 0)
+else
+  snapOnlyRight(posXPin, rYPin)
+  snapOnlyRight(posXPin, -rYPin)
+end
+Drawing End
+
+Textpos:
+pos(breite/2, 0)
+vector(0, 0)
+dist(-1, 0)
+Textpos End
+
+Textpos:
+pos(breite, 0)
+vector(1, -1)
+Textpos End
+
+Textpos:
+pos(breite, 0)
+vector(1, 1)
+Textpos End
+
+Textpos:
+pos(breite/2, rY)
+vector(0, 1)
+Textpos End
+
+Textpos:
+pos(breite/2, -rY)
+vector(0, -1)
+Textpos End
+
+Info:
+origin(0, 0)
+text()
+name(OPV)
+namespace(Verstärker)
+Info End 
+
+Compatibility:
+namespace(Verstärker)
+name(OPV (Groß))
+offset(0, 300)
+%setparam("Breite", 1100)
+%setparam("Höhe", 600)
+%setparam("Pin-Höhe", 300)
+setparam("Größe", Groß)
+Compatibility End
+
+Compatibility:
+namespace(Verstärker)
+name(OPV (Klein))
+offset(0, 200)
+%setparam("Breite", 700)
+%setparam("Höhe", 400)
+%setparam("Pin-Höhe", 200)
+setparam("Größe", Klein)
+Compatibility End

@@ -1,0 +1,48 @@
+﻿param_int "Radius"=200 from (0, 50, 10000]
+var rad=get("Radius")
+def overshootPfeil=25
+
+param "Pfeil"={"Mit Pfeil" "Ohne Pfeil" "Nur +/-"}
+
+param_arrow "Pfeilspitze" = 0 from [0, #inf)
+
+param_int "Pfeilabstand" = 75 from [0, #inf]
+
+def pmGroesse=130
+var overshootPM=-rad*2/5
+var extraTextabstand = 0
+Drawing:
+snapOnlyTop(0, -rad)
+snapOnlyBottom(0, rad)
+select(-rad, -rad, 2*rad, 2*rad)
+if get("Pfeil")="Mit Pfeil":
+  if get("#textpos")=1:
+    linearrow(-rad-get("Pfeilabstand"), -rad-overshootPfeil, -rad-get("Pfeilabstand"), rad+overshootPfeil, -1, get("Pfeilspitze"))
+  elseif get("#textpos")=2
+    linearrow(rad+get("Pfeilabstand"), -rad-overshootPfeil, rad+get("Pfeilabstand"), rad+overshootPfeil, -1, get("Pfeilspitze"))
+  end
+elseif get("Pfeil")="Nur +/-"
+  var extraTextabstand = 25
+  if get("#textpos")=1:
+    line(-rad-get("Pfeilabstand")-pmGroesse/2,-rad-overshootPM,-rad-get("Pfeilabstand")+pmGroesse/2,-rad-overshootPM)
+	line(-rad-get("Pfeilabstand"),-rad-pmGroesse/2-overshootPM,-rad-get("Pfeilabstand"),-rad-overshootPM+pmGroesse/2)
+	line(-rad-get("Pfeilabstand")-pmGroesse/2,rad+overshootPM,-rad-get("Pfeilabstand")+pmGroesse/2,rad+overshootPM)
+  elseif get("#textpos")=2
+    line(rad+get("Pfeilabstand")-pmGroesse/2,-rad-overshootPM,rad+get("Pfeilabstand")+pmGroesse/2,-rad-overshootPM)
+	line(rad+get("Pfeilabstand"),-rad-overshootPM-pmGroesse/2,rad+get("Pfeilabstand"),-rad-overshootPM+pmGroesse/2)
+	line(rad+get("Pfeilabstand")-pmGroesse/2,rad+overshootPM,rad+get("Pfeilabstand")+pmGroesse/2,rad+overshootPM)
+  end
+end
+Drawing End
+
+TextPos:
+pos(-rad-get("Pfeilabstand")-extraTextabstand, 0)
+vector(-1, 0)
+type(1)
+TextPos End
+
+TextPos:
+pos(rad+get("Pfeilabstand")+extraTextabstand, 0)
+vector(1, 0)
+type(2)
+TextPos End

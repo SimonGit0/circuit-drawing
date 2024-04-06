@@ -1,0 +1,39 @@
+﻿param "Eingänge"={"2" "3" "4"}
+
+Drawing:
+fill_backcolor()
+polyfill(0, -MuxY, 0, MuxY, MuxX, MuxY/2, MuxX, -MuxY/2)
+fill_forecolor()
+poly(0, -MuxY, 0, MuxY, MuxX, MuxY/2, MuxX, -MuxY/2)
+snapOnlyRight(MuxX, 0)
+select(0, -MuxY, MuxX, 2*MuxY)
+if get("Eingänge")="4":
+  snapOnlyLeft(0, -3*MuxY/4)
+  snapOnlyLeft(0, -MuxY/4)
+  snapOnlyLeft(0, MuxY/4)
+  snapOnlyLeft(0, 3*MuxY/4)
+else
+  snapOnlyLeft(0, MuxY/2)
+  snapOnlyLeft(0, -MuxY/2)
+end
+if get("Eingänge")="3":
+  snapOnlyLeft(0, 0)
+end
+Drawing End
+
+TextPos:
+pos(MuxX/2, 0)
+vector(0, 0)
+dist(1, 0)
+TextPos End
+
+def TPxmin=0
+def TPxmax=MuxX
+def TPymin=-MuxY
+def TPymax=MuxY
+input(../_basic_rect_Textpos.sym)
+
+Info:
+origin(0, -MuxY/2)
+text()
+Info End

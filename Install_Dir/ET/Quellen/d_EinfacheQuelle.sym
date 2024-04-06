@@ -1,0 +1,29 @@
+﻿TextPos:
+pos(0, 0)
+vector(0, 0)
+dist(1, 0)
+type(1)
+TextPos End
+
+TextPos:
+pos(0, 0)
+vector(0, 0)
+dist(1, 0)
+type(2)
+TextPos End
+
+input(_basicQuelle.sym)
+
+Drawing:
+fill_backcolor()
+circfill(0, 0, rad, rad)
+fill_forecolor()
+circ(0, 0, rad, rad)
+Drawing End
+
+Info:
+origin(0, -rad)
+text(U)
+name(Einfache Quelle)
+namespace(Ideale Quellen)
+Info End

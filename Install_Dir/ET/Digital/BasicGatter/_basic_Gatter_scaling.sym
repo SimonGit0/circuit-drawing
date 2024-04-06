@@ -1,0 +1,22 @@
+﻿scaling links(x):
+set_param("Breite", get("Breite")+x)
+scaling end
+scaling rechts(x):
+set_param("Breite", get("Breite")+x)
+move(x,0)
+scaling end
+scaling oben(x):
+set_param("Höhe", get("Höhe")+x)
+move(0,-x/2)
+scaling end
+scaling unten(x):
+set_param("Höhe", get("Höhe")+x)
+move(0,x/2)
+scaling end
+
+Drawing:
+scale_line(xstart,-hoehe/2,xstart,hoehe/2,-1,0,100-breite,100,10000-breite,links)
+scale_line(0,-hoehe/2,0,hoehe/2,1,0,100-breite,100,10000-breite,rechts)
+scale_line(xstart,-hoehe/2,0,-hoehe/2,0,-1,100-hoehe,100,10000-hoehe,oben)
+scale_line(xstart,hoehe/2,0,hoehe/2,0,1,100-hoehe,100,10000-hoehe,unten)
+Drawing end

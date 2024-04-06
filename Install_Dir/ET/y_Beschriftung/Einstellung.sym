@@ -1,0 +1,42 @@
+﻿use_as_child
+
+var hoehe = get("parent.select.height")
+var breite = get("parent.select.width")
+var mitteX = get("parent.select.x")+get("parent.select.width")/2
+var mitteY = get("parent.select.y")+get("parent.select.height")/2
+
+param "Art" = {"Durchgezogen" "Überspringen"} 
+param_int "Größe" = 150 from [-100000, 100000]
+param_int "Winkel" = 70 from [0, 359] unit "°" mod
+param_int "Offset X" = 0 from [-100000, 100000]
+param_int "Offset Y" = 0 from [-100000, 100000]
+param_arrow "Pfeilspitze" = 0 from [0, #inf]
+
+%var dy = hoehe/2+get("Größe")
+%var dx = dy*36/100
+
+var ox = mitteX+get("Offset X")
+var oy = mitteY+get("Offset Y")
+
+Drawing:
+var l = get("Größe")
+if abs(cos(get("Winkel"),hoehe)) < abs(sin(get("Winkel"), breite)) :
+  var l=l+abs(csc(get("Winkel"),hoehe/2))
+else
+  var l=l+abs(sec(get("Winkel"),breite/2))
+end
+
+var dy = sin(get("Winkel"),l)
+var dx = cos(get("Winkel"),l)
+
+if get("Art")="Überspringen" :
+linearrow(-dx+ox, dy+oy, dx+ox, -dy+oy, -1, get("Pfeilspitze"), 1)
+else
+linearrow(-dx+ox, dy+oy, dx+ox, -dy+oy, -1, get("Pfeilspitze"))
+end
+Drawing End
+
+Info:
+name(Einstellung)
+namespace(Basic)
+Info End

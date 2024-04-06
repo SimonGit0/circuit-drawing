@@ -1,0 +1,28 @@
+﻿if negOut :
+	input(../_Negation_Size.sym)
+	circ(-NradX, 0, NradX, NradY)
+	snapOnlyRight(0, 0)
+	var int xStart = -breite-2*NradX
+	select(xStart, -hoehe/2, breite+2*NradX, hoehe)
+else
+	snapOnlyRight(0,0)
+	var int xStart = -breite
+	select(xStart, -hoehe/2, breite, hoehe)
+end
+var int deltaLinks = hoehe/4
+bezier(xStart, -hoehe/2, xStart + deltaLinks, -hoehe/2 + deltaLinks, xStart + deltaLinks, hoehe/2 - deltaLinks, xStart, hoehe/2)
+if is_xor:
+	var int offsetX = breite/8
+	bezier(xStart-offsetX, -hoehe/2, xStart-offsetX + deltaLinks, -hoehe/2 + deltaLinks, xStart-offsetX + deltaLinks, hoehe/2 - deltaLinks, xStart-offsetX, hoehe/2)
+end
+
+bezier(xStart, hoehe/2, xStart+breite/2, hoehe/2, xStart+breite-hoehe/8, hoehe/3, xStart+breite, 0)
+bezier(xStart, -hoehe/2, xStart+breite/2, -hoehe/2, xStart+breite-hoehe/8, -hoehe/3, xStart+breite, 0)
+for i=[0,inputs) :
+	var posY=((2*i+1-inputs)*pitch)/2
+	snapOnlyLeft(xStart, posY)
+	var xPin = findBezierX(posY, xStart, -hoehe/2, xStart + deltaLinks, -hoehe/2 + deltaLinks, xStart + deltaLinks, hoehe/2 - deltaLinks, xStart, hoehe/2)
+	if xStart != xPin :
+		line(xPin, posY, xStart, posY)
+	end
+end

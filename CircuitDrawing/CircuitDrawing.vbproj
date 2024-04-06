@@ -1,0 +1,742 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E2686040-012F-429D-A46A-9387426DD2BE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>CircuitDrawing.My.MyApplication</StartupObject>
+    <RootNamespace>CircuitDrawing</RootNamespace>
+    <AssemblyName>CircuitDrawing</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CircuitDrawing.xml</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>CircuitDrawing.xml</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Bilder\iconAlle.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PdfSharp, Version=1.50.4740.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\PDFsharp\PDFsharp\src\PdfSharp\bin\Release\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdvancedTextRenderer.vb" />
+    <Compile Include="Allgemeine_Settings\Einstellungen.Designer.vb">
+      <DependentUpon>Einstellungen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\Einstellungen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\Einstellungspanel_Anzeige.Designer.vb">
+      <DependentUpon>Einstellungspanel_Anzeige.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\Einstellungspanel_Anzeige.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\Einstellungspanel_LatexExport.Designer.vb">
+      <DependentUpon>Einstellungspanel_LatexExport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\Einstellungspanel_LatexExport.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\Einstellungspanel_ShortcutKeysSelectBauteil.Designer.vb">
+      <DependentUpon>Einstellungspanel_ShortcutKeysSelectBauteil.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\Einstellungspanel_ShortcutKeysSelectBauteil.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\Einstellungspanel_Sprache.Designer.vb">
+      <DependentUpon>Einstellungspanel_Sprache.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\Einstellungspanel_Sprache.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\Einstellungspanel_Tools.Designer.vb">
+      <DependentUpon>Einstellungspanel_Tools.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\Einstellungspanel_Tools.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\IEinstellungspanel.vb" />
+    <Compile Include="Allgemeine_Settings\Key Settings\Key_Settings.vb" />
+    <Compile Include="Allgemeine_Settings\Key Settings\ShortcutKey.vb" />
+    <Compile Include="Allgemeine_Settings\Key Settings\ShortcutKeySelectInstance.vb" />
+    <Compile Include="Allgemeine_Settings\Settings.vb" />
+    <Compile Include="Anzeige\Gravity\GravityDrawState.vb" />
+    <Compile Include="Anzeige\Gravity\GravityPoint.vb" />
+    <Compile Include="Anzeige\Gravity\GravityResult.vb" />
+    <Compile Include="Anzeige\Tools\Tool.vb" />
+    <Compile Include="Anzeige\Tools\ToolAddSnappoint.vb" />
+    <Compile Include="Anzeige\Tools\ToolDeleteSnappoint.vb" />
+    <Compile Include="Anzeige\Tools\ToolHelper_PreviewMarkierung.vb" />
+    <Compile Include="Anzeige\Tools\Tool_AddSnapableElement\ToolAddBusTap.vb" />
+    <Compile Include="Anzeige\Tools\Tool_AddSnapableElement\ToolAddLabel.vb" />
+    <Compile Include="Anzeige\Tools\Tool_AddSnapableElement\ToolAddCurrentArrow.vb" />
+    <Compile Include="Anzeige\Tools\Tool_AddSnapableElement\ToolAddSnapableElement.vb" />
+    <Compile Include="Anzeige\Tools\ToolAddVoltageArrow.vb" />
+    <Compile Include="Anzeige\Tools\ToolCopy.vb" />
+    <Compile Include="Anzeige\Tools\ToolDrawWire.vb" />
+    <Compile Include="Anzeige\Tools\ToolEntfernen.vb" />
+    <Compile Include="Anzeige\Tools\ToolMove.vb" />
+    <Compile Include="Anzeige\Tools\ToolPlace.vb" />
+    <Compile Include="Anzeige\Tools\ToolRechteckMarkierung.vb" />
+    <Compile Include="Anzeige\Tools\ToolScale.vb" />
+    <Compile Include="Anzeige\Tools\Tool_AddSnapableElement\ToolAddSnapableImpedanceArrow.vb" />
+    <Compile Include="Anzeige\Tools\Zeichentools\ToolDrawBezier.vb" />
+    <Compile Include="Anzeige\Tools\Zeichentools\ToolDrawBezierFreihand.vb" />
+    <Compile Include="Anzeige\Tools\Zeichentools\ToolDrawLine.vb" />
+    <Compile Include="Anzeige\Tools\Zeichentools\ToolDrawRect.vb" />
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Allgemeine_Settings\Einstellungspanel_Bauelemente.Designer.vb">
+      <DependentUpon>Einstellungspanel_Bauelemente.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Allgemeine_Settings\Einstellungspanel_Bauelemente.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Ausdruck\Ausdruck.vb" />
+    <Compile Include="Ausdruck\AusdruckParam.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Boolean\AusdruckBoolean_Variable.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Boolean\Ausdruck_GleichString.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Int\Ausdruck_ToInt.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Int\Ausdruck_findBezierX.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Int\Ausdruck_StringLength.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Int\Ausdruck_ToIntHex.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Int\Ausdruck_Trigonometry.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Pfeil\Ausdruck_Pfeil.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Pfeil\Ausdruck_Pfeil_Variable.vb" />
+    <Compile Include="Ausdruck\Ausdruck_String\AusdruckString.vb" />
+    <Compile Include="Ausdruck\Ausdruck_String\AusdruckString_Konstante.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Boolean\Ausdruck_Boolean_Konstante.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Boolean\Ausdruck_GleichBool.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Boolean\Ausdruck_KleinerGrößer.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Boolean\Ausdruck_KleinerGrößerGleich.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Boolean\Ausdruck_ODER.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Boolean\Ausdruck_UND.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Int\Ausdruck_Int.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Boolean\Ausdruck_Boolean.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Boolean\Ausdruck_Gleich.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Int\Ausdruck_Konstante.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Int\Ausdruck_MaxMin.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Int\Ausdruck_Produkt.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Int\Ausdruck_SqrtAbs.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Int\Ausdruck_Summe.vb" />
+    <Compile Include="Ausdruck\Ausdruck_Int\Ausdruck_Variable.vb" />
+    <Compile Include="Ausdruck\Ausdruck_String\AusdruckString_Variable.vb" />
+    <Compile Include="Ausdruck\Ausdruck_String\Ausdruck_StringCat.vb" />
+    <Compile Include="Ausdruck\Ausdruck_String\Ausdruck_Substring.vb" />
+    <Compile Include="AutoGen\AutoGenDate.vb" />
+    <Compile Include="BauelementeBibliothek\Bibliothek_Lokal\LokaleBibliothek.vb" />
+    <Compile Include="Elemente\CircuitElemente\ElementLinestyle.vb" />
+    <Compile Include="Elemente\ElementGruppe.vb" />
+    <Compile Include="SkillDetect\Netz_Wires.vb" />
+    <Compile Include="SkillDetect\Ctr_BauelementeAuswahl_Skill.Designer.vb">
+      <DependentUpon>Ctr_BauelementeAuswahl_Skill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SkillDetect\Ctr_BauelementeAuswahl_Skill.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SkillDetect\FRM_WeitereEinstellungen_Skill.Designer.vb">
+      <DependentUpon>FRM_WeitereEinstellungen_Skill.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SkillDetect\FRM_WeitereEinstellungen_Skill.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SkillDetect\Routing_v2.vb" />
+    <Compile Include="SkillDetect\SkillDetectSchematic.vb" />
+    <Compile Include="SkillDetect\SkillDetektionForm.Designer.vb">
+      <DependentUpon>SkillDetektionForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SkillDetect\SkillDetektionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SkillDetect\Skill_BauelementeAuswählen.Designer.vb">
+      <DependentUpon>Skill_BauelementeAuswählen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SkillDetect\Skill_BauelementeAuswählen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SkillDetect\Skill_Einstellungen_frm.Designer.vb">
+      <DependentUpon>Skill_Einstellungen_frm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SkillDetect\Skill_Einstellungen_frm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Einstellungen\EinstellungStrompfeilArt.vb" />
+    <Compile Include="Einstellungen\Einstellung_Fontstyle.vb" />
+    <Compile Include="Einstellungen\TemplateParameter\Einstellung_TemplateParameterString.vb" />
+    <Compile Include="Einstellungen\TemplateParameter\Einstellung_TemplateParameter_Arrow.vb" />
+    <Compile Include="Einstellungen\TemplateParameter\Einstellung_TemplateParam.vb" />
+    <Compile Include="Einstellungen\TemplateParameter\Einstellung_TemplateParameter_Int.vb" />
+    <Compile Include="Einstellungen\TemplateParameter\Einstellung_TemplateParamter_Double.vb" />
+    <Compile Include="Elemente\BasicGrafikElemente\BasicRectBased\Element_Ellipse.vb" />
+    <Compile Include="Elemente\BasicGrafikElemente\BasicRectBased\Element_Graph.vb" />
+    <Compile Include="Elemente\BasicGrafikElemente\BasicRectBased\Element_RoundRect.vb" />
+    <Compile Include="Elemente\BasicGrafikElemente\BasicRectBased\Element_Textfeld.vb" />
+    <Compile Include="Elemente\BasicGrafikElemente\Basic_Bezier.vb" />
+    <Compile Include="Elemente\BasicGrafikElemente\Basic_Linie.vb" />
+    <Compile Include="Elemente\BasicGrafikElemente\Basic_Spannungspfeil.vb" />
+    <Compile Include="Elemente\BasicGrafikElemente\ElementWithStrokeFill.vb" />
+    <Compile Include="Elemente\BasicGrafikElemente\BasicRectBased\Element_BasicRectBased.vb" />
+    <Compile Include="BauelementeBibliothek\BauteilCell.vb" />
+    <Compile Include="BauelementeBibliothek\BauteileNamespace.vb" />
+    <Compile Include="BauelementeBibliothek\BauteilView.vb" />
+    <Compile Include="BauelementeBibliothek\Bibliothek.vb" />
+    <Compile Include="Elemente\BasicGrafikElemente\BasicRectBased\Element_Rect.vb" />
+    <Compile Include="Einstellungen\EinstellungBeschriftung.vb" />
+    <Compile Include="Einstellungen\EinstellungTextMultiLine.vb" />
+    <Compile Include="Einstellungen\Einstellung_Fillstil.vb" />
+    <Compile Include="Einstellungen\Einstellung_Int.vb" />
+    <Compile Include="Einstellungen\Einstellung_Linienstil.vb" />
+    <Compile Include="Einstellungen\TemplateParameter\Einstellung_Multi.vb" />
+    <Compile Include="Einstellungen\Einstellung_SinglePfeilspitze.vb" />
+    <Compile Include="Einstellungen\Einstellung_Pfeilspitze.vb" />
+    <Compile Include="Einstellungen\TemplateParameter\Einstellung_TemplateParameter.vb" />
+    <Compile Include="Einstellungen\Einstellung_Textausrichtung.vb" />
+    <Compile Include="Elemente\CircuitElemente\Bauteil.vb" />
+    <Compile Include="Elemente\CircuitElemente\Blackbox.vb" />
+    <Compile Include="Elemente\CircuitElemente\Deko_Bauteil.vb" />
+    <Compile Include="TemplateAusDatei\ParamValue.vb" />
+    <Compile Include="Elemente\CommonInterfaces\IElementWithLinestyle.vb" />
+    <Compile Include="Elemente\CommonInterfaces\IWire.vb" />
+    <Compile Include="Elemente\CommonInterfaces\IElementWithFill.vb" />
+    <Compile Include="Elemente\CommonInterfaces\IElementWithFont.vb" />
+    <Compile Include="Elemente\ElementMaster.vb" />
+    <Compile Include="Anzeige\CopyClipboard.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\PrecompiledSetOrigin.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\PrecompiledTextpos.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_Arc.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_ArrowHead.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_Bezier.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_Dot.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_Ellipse.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_Grafik.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_LineArrow.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_Linie.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_MultiGrafik.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_MultiLinie.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_ParamInvisible.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_Poly.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_Rect.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_ScaleLine.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_SetFillColor.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_SetLineScaling.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_SetVarGrafik.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Scaling\Precompiled_Scaling.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Scaling\Precompiled_ScalingBefehl.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Scaling\precompiled_Scaling_Move.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Scaling\Precompiled_Scaling_SetParamInt.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_SetVar.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Template.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_Text.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Verzweigung\Precompiled_ELSE.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Verzweigung\Precompiled_ELSE_IF.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Verzweigung\Precompiled_FOR.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Verzweigung\Precompiled_IF.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_Selection.vb" />
+    <Compile Include="TemplateAusDatei\Precompiled\Precompiled_Grafik\Precompiled_Snappoint.vb" />
+    <Compile Include="TemplateAusDatei\ScalingLinie.vb" />
+    <Compile Include="TemplateAusDatei\TemplateCompatibility.vb" />
+    <Compile Include="TemplateAusDatei\Template_Compiled.vb" />
+    <Compile Include="TemplateAusDatei\VariablenWert.vb" />
+    <Compile Include="Elemente\SnapableElemente\SnapableBusTap.vb" />
+    <Compile Include="Elemente\SnapableElemente\SnapableCurrentArrow.vb" />
+    <Compile Include="Elemente\SnapableElement.vb" />
+    <Compile Include="Elemente\SnapableElemente\SnapableImpedanceArrow.vb" />
+    <Compile Include="Elemente\SnapableElemente\SnapableLabel.vb" />
+    <Compile Include="Export_Einstellungen.Designer.vb">
+      <DependentUpon>Export_Einstellungen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Export_Einstellungen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRM_BauteilShortcutkeyAuswählen.Designer.vb">
+      <DependentUpon>FRM_BauteilShortcutkeyAuswählen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FRM_BauteilShortcutkeyAuswählen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRM_Einlesefehler.Designer.vb">
+      <DependentUpon>FRM_Einlesefehler.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FRM_Einlesefehler.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRM_ElementEinstellungen.Designer.vb">
+      <DependentUpon>FRM_ElementEinstellungen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FRM_ElementEinstellungen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Elemente\CircuitElemente\BauteilAusDatei.vb" />
+    <Compile Include="Elemente\CircuitElemente\Dot.vb" />
+    <Compile Include="Einstellungen\Einstellung_Pos.vb" />
+    <Compile Include="Einstellungen\ElementEinstellung.vb" />
+    <Compile Include="TemplateAusDatei\TemplateAusDatei.vb" />
+    <Compile Include="Elemente\Element.vb" />
+    <Compile Include="TemplateAusDatei\Snappoint.vb" />
+    <Compile Include="Elemente\CircuitElemente\Wire.vb" />
+    <Compile Include="Elemente\CircuitElemente\WireLuftlinie.vb" />
+    <Compile Include="EMF_Speicherer.vb" />
+    <Compile Include="Form_Vektorgrafik.Designer.vb">
+      <DependentUpon>Form_Vektorgrafik.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Vektorgrafik.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Grafikelemente\DO_Arc.vb" />
+    <Compile Include="Grafikelemente\DO_Bezier.vb" />
+    <Compile Include="Grafikelemente\DO_Ellipse.vb" />
+    <Compile Include="Grafikelemente\DO_MultiLinie.vb" />
+    <Compile Include="Grafikelemente\DO_MultiLinie_pointf.vb" />
+    <Compile Include="Grafikelemente\DO_Polygon.vb" />
+    <Compile Include="Grafikelemente\DO_RoundRect.vb" />
+    <Compile Include="Grafikelemente\DO_Text.vb" />
+    <Compile Include="Grafikelemente\DO_Textfeld.vb" />
+    <Compile Include="Grafikelemente\ExportDrawArgs\FillStyleList.vb" />
+    <Compile Include="Grafikelemente\ExportDrawArgs\FontList.vb" />
+    <Compile Include="Grafikelemente\ExportDrawArgs\GrafikEPS_DrawArgs.vb" />
+    <Compile Include="Grafikelemente\ExportDrawArgs\GrafikPDFSharp_DrawArgs.vb" />
+    <Compile Include="Grafikelemente\DO_Grafik.vb" />
+    <Compile Include="Grafikelemente\ExportDrawArgs\GrafikDrawArgs.vb" />
+    <Compile Include="Grafikelemente\DO_Dot.vb" />
+    <Compile Include="Grafikelemente\DO_Linie.vb" />
+    <Compile Include="Grafikelemente\DO_MultiGrafik.vb" />
+    <Compile Include="Grafikelemente\DO_Rechteck.vb" />
+    <Compile Include="Grafikelemente\ExportDrawArgs\GrafikTEX_DrawArgs.vb" />
+    <Compile Include="Grafikelemente\ExportDrawArgs\LineStyleList.vb" />
+    <Compile Include="Grafikelemente\ExportDrawArgs\Zorder_DO_Grafik.vb" />
+    <Compile Include="Grafikelemente\Transform\Transform.vb" />
+    <Compile Include="Grafikelemente\XTextFormatterEx2.vb" />
+    <Compile Include="Information.Designer.vb">
+      <DependentUpon>Information.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Information.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MarginEinstellen.Designer.vb">
+      <DependentUpon>MarginEinstellen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MarginEinstellen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mathe.vb" />
+    <Compile Include="MatheAusrechnen.vb" />
+    <Compile Include="Matrix.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Anzeige\Vektor_Picturebox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pfeile\Pfeil3.vb" />
+    <Compile Include="Pfeile\Pfeilspitze.vb" />
+    <Compile Include="Pfeile\Pfeil_Basic.vb" />
+    <Compile Include="Pfeile\Pfeil_Line.vb" />
+    <Compile Include="Pfeile\Pfeil_Verwaltung.vb" />
+    <Compile Include="Resources\Strings\Strings.en.Designer.vb">
+      <DependentUpon>Strings.en.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Strings\Strings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Rückgängig\Rückgängig.vb" />
+    <Compile Include="Rückgängig\RückgängigFillStyles.vb" />
+    <Compile Include="Rückgängig\RückgängigFontStyle.vb" />
+    <Compile Include="Rückgängig\RückgängigGrafik.vb" />
+    <Compile Include="Rückgängig\RückgängigLineStyle.vb" />
+    <Compile Include="Rückgängig\RückgängigMulti.vb" />
+    <Compile Include="Rückgängig\RückgängigVerwaltung.vb" />
+    <Compile Include="Steuerelemente\Button_X.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Steuerelemente\Combobox_Sortieren.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Steuerelemente\DashStyleCombobox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Steuerelemente\FontCombobox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Steuerelemente\Intelisense.vb" />
+    <Compile Include="Steuerelemente\JoSiCombobox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Steuerelemente\PfeilCombobox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Steuerelemente\PopUpWindow.vb" />
+    <Compile Include="Steuerelemente\Textbox_Einstellungen.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Steuerelemente\Textbox_mitUnit.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Steuerelemente\UserDrawListbox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WR_Fenster\BauelementeAuswahl.Designer.vb">
+      <DependentUpon>BauelementeAuswahl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="WR_Fenster\BauelementeAuswahl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WR_Fenster\WR_BauelementeAuswahl.Designer.vb">
+      <DependentUpon>WR_BauelementeAuswahl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="WR_Fenster\WR_BauelementeAuswahl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WR_Fenster\WR_Einstellungsform.Designer.vb">
+      <DependentUpon>WR_Einstellungsform.vb</DependentUpon>
+    </Compile>
+    <Compile Include="WR_Fenster\WR_Einstellungsform.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WR_Fenster\WR_MarkierungsArt.Designer.vb">
+      <DependentUpon>WR_MarkierungsArt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="WR_Fenster\WR_MarkierungsArt.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungen.en.resx">
+      <DependentUpon>Einstellungen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungen.resx">
+      <DependentUpon>Einstellungen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_Anzeige.en.resx">
+      <DependentUpon>Einstellungspanel_Anzeige.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_Anzeige.resx">
+      <DependentUpon>Einstellungspanel_Anzeige.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_Bauelemente.en.resx">
+      <DependentUpon>Einstellungspanel_Bauelemente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_Bauelemente.resx">
+      <DependentUpon>Einstellungspanel_Bauelemente.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_LatexExport.en.resx">
+      <DependentUpon>Einstellungspanel_LatexExport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_LatexExport.resx">
+      <DependentUpon>Einstellungspanel_LatexExport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_ShortcutKeysSelectBauteil.en.resx">
+      <DependentUpon>Einstellungspanel_ShortcutKeysSelectBauteil.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_ShortcutKeysSelectBauteil.resx">
+      <DependentUpon>Einstellungspanel_ShortcutKeysSelectBauteil.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_Sprache.en.resx">
+      <DependentUpon>Einstellungspanel_Sprache.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_Sprache.resx">
+      <DependentUpon>Einstellungspanel_Sprache.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_Tools.en.resx">
+      <DependentUpon>Einstellungspanel_Tools.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_Tools.resx">
+      <DependentUpon>Einstellungspanel_Tools.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkillDetect\Ctr_BauelementeAuswahl_Skill.en.resx">
+      <DependentUpon>Ctr_BauelementeAuswahl_Skill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkillDetect\Ctr_BauelementeAuswahl_Skill.resx">
+      <DependentUpon>Ctr_BauelementeAuswahl_Skill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkillDetect\FRM_WeitereEinstellungen_Skill.en.resx">
+      <DependentUpon>FRM_WeitereEinstellungen_Skill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkillDetect\FRM_WeitereEinstellungen_Skill.resx">
+      <DependentUpon>FRM_WeitereEinstellungen_Skill.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkillDetect\SkillDetektionForm.en.resx">
+      <DependentUpon>SkillDetektionForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkillDetect\SkillDetektionForm.resx">
+      <DependentUpon>SkillDetektionForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkillDetect\Skill_BauelementeAuswählen.en.resx">
+      <DependentUpon>Skill_BauelementeAuswählen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkillDetect\Skill_BauelementeAuswählen.resx">
+      <DependentUpon>Skill_BauelementeAuswählen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SkillDetect\Skill_Einstellungen_frm.resx">
+      <DependentUpon>Skill_Einstellungen_frm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Export_Einstellungen.en.resx">
+      <DependentUpon>Export_Einstellungen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Export_Einstellungen.resx">
+      <DependentUpon>Export_Einstellungen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Vektorgrafik.en.resx">
+      <DependentUpon>Form_Vektorgrafik.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRM_BauteilShortcutkeyAuswählen.en.resx">
+      <DependentUpon>FRM_BauteilShortcutkeyAuswählen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRM_BauteilShortcutkeyAuswählen.resx">
+      <DependentUpon>FRM_BauteilShortcutkeyAuswählen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRM_Einlesefehler.resx">
+      <DependentUpon>FRM_Einlesefehler.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRM_ElementEinstellungen.en.resx">
+      <DependentUpon>FRM_ElementEinstellungen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRM_ElementEinstellungen.resx">
+      <DependentUpon>FRM_ElementEinstellungen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Vektorgrafik.resx">
+      <DependentUpon>Form_Vektorgrafik.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Information.en.resx">
+      <DependentUpon>Information.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Information.resx">
+      <DependentUpon>Information.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MarginEinstellen.en.resx">
+      <DependentUpon>MarginEinstellen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MarginEinstellen.resx">
+      <DependentUpon>MarginEinstellen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\Strings.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.en.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings\Strings.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WR_Fenster\BauelementeAuswahl.en.resx">
+      <DependentUpon>BauelementeAuswahl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WR_Fenster\BauelementeAuswahl.resx">
+      <DependentUpon>BauelementeAuswahl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WR_Fenster\WR_BauelementeAuswahl.resx">
+      <DependentUpon>WR_BauelementeAuswahl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WR_Fenster\WR_Einstellungsform.en.resx">
+      <DependentUpon>WR_Einstellungsform.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WR_Fenster\WR_Einstellungsform.resx">
+      <DependentUpon>WR_Einstellungsform.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WR_Fenster\WR_MarkierungsArt.en.resx">
+      <DependentUpon>WR_MarkierungsArt.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WR_Fenster\WR_MarkierungsArt.resx">
+      <DependentUpon>WR_MarkierungsArt.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WindowRenderer\WindowRenderer.vbproj">
+      <Project>{7ca40ca6-01f2-4875-83c9-542e18d6530d}</Project>
+      <Name>WindowRenderer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bilder\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bilder\forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bilder\Öffnen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bilder\Speichern.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bilder\NoColor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bilder\Zeilensprünge.png" />
+    <None Include="Resources\Bilder\X_hover.png" />
+    <None Include="Resources\Bilder\X_focus.png" />
+    <None Include="Resources\Bilder\X.png" />
+    <None Include="Resources\Bilder\AlleRichtungen.png" />
+    <None Include="Resources\Bilder\AlleRichtungen2.png" />
+    <None Include="Resources\Bilder\crossCursor.png" />
+    <Content Include="Resources\Bilder\drehenGegenUhr.PNG" />
+    <Content Include="Resources\Bilder\DrehenUhr.PNG" />
+    <Content Include="Resources\Bilder\Elemente.png" />
+    <None Include="Resources\Bilder\Rechtwinklig2.png" />
+    <None Include="Resources\Bilder\NoColor24.png" />
+    <None Include="Resources\Bilder\icon256.png" />
+    <None Include="Resources\Bilder\Sortieren_LO.png" />
+    <None Include="Resources\Bilder\Sortieren_LU.png" />
+    <None Include="Resources\Bilder\Sortieren_OL.png" />
+    <None Include="Resources\Bilder\Sortieren_OR.png" />
+    <None Include="Resources\Bilder\Sortieren_RO.png" />
+    <None Include="Resources\Bilder\Sortieren_RU.png" />
+    <None Include="Resources\Bilder\Sortieren_UL.png" />
+    <None Include="Resources\Bilder\Sortieren_UR.png" />
+    <None Include="Resources\Bilder\Punkt.png" />
+    <Content Include="Resources\Bilder\gravity.png" />
+    <None Include="Resources\Bilder\Snappoints.png" />
+    <None Include="Resources\Bilder\RandAnzeigen.png" />
+    <None Include="Resources\Bilder\MultiSelect.png" />
+    <Content Include="Resources\Bilder\icon32_256.ico" />
+    <Content Include="Resources\Bilder\iconAlle.ico" />
+    <Content Include="Resources\Bilder\spiegelnLinksRechts.PNG" />
+    <Content Include="Resources\Bilder\spiegelnObenUnten.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="BeforeBuild">
+    <!--Property zum definieren des Aktuellen Datums (Build-Zeit)-->
+    <PropertyGroup>
+      <AktuellesDatum>$([System.DateTime]::Now.ToString("(yyyy, MM, dd)"))</AktuellesDatum>
+    </PropertyGroup>
+    <!--Schreiben der Datei AutoGen/AutoGenDate.vb-->
+    <WriteLinesToFile File="AutoGen/AutoGenDate.vb" Lines="'''&lt;summary&gt;" Overwrite="true" />
+    <WriteLinesToFile File="AutoGen/AutoGenDate.vb" Lines="'''Diese Datei wird automatisch bei jedem Build neu generiert." Overwrite="false" />
+    <WriteLinesToFile File="AutoGen/AutoGenDate.vb" Lines="'''Änderungen nur in 'CircuitDrawing.vbproj'." Overwrite="false" />
+    <WriteLinesToFile File="AutoGen/AutoGenDate.vb" Lines="'''&lt;/summary&gt;" Overwrite="false" />
+    <WriteLinesToFile File="AutoGen/AutoGenDate.vb" Lines="Public Class AutoGenDate" Overwrite="false" />
+    <WriteLinesToFile File="AutoGen/AutoGenDate.vb" Lines="Public Shared LastBuildData As Date = New Date$(AktuellesDatum)" Overwrite="false" />
+    <WriteLinesToFile File="AutoGen/AutoGenDate.vb" Lines="End Class" Overwrite="false" />
+  </Target>
+</Project>

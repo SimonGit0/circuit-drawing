@@ -1,0 +1,8 @@
+﻿def MuxX=600
+def MuxY=600
+input(_generic_MUX.sym)
+
+Info:
+name(MUX)
+namespace(Digital)
+Info End

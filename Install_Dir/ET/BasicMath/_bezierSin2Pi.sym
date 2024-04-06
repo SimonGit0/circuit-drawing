@@ -1,0 +1,21 @@
+﻿defvar sin2PiXMin=Xmin
+defvar sin2PiYMin=Ymin
+defvar sin2PiXMax=Xmax
+defvar sin2PiYMax=Ymax
+
+defvar Xmin=sin2PiXMin
+defvar Xmax=(sin2PiXmax+sin2PiXmin)/2
+defvar Ymax=(sin2PiYmin+sin2PiYmax)/2
+defvar Ymin=sin2PiYmin
+input(_bezierSinPi.sym)
+
+defvar Xmin=sin2PiXMax
+defvar Xmax=(sin2PiXmax+sin2PiXmin)/2
+defvar Ymin=sin2PiYmax
+defvar Ymax=(sin2PiYmin+sin2PiYmax)/2
+input(_bezierSinPi.sym)
+
+defvar Xmin=sin2PiXMin
+defvar Ymin=sin2PiYMin
+defvar Xmax=sin2PiXMax
+defvar Ymax=sin2PiYMax

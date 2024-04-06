@@ -1,0 +1,15 @@
+﻿def scale_x=-2
+def scale_y=0
+input(_genericRoundBlackbox.sym)
+
+Drawing:
+line(-rad/2, 0, rad/2, 0)
+line(0, -rad/2, 0, rad/2)
+Drawing End
+
+Info:
+origin(-rad, 0)
+text()
+namespace(System)
+name(Addierer)
+Info End

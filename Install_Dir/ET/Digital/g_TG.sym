@@ -1,0 +1,33 @@
+﻿def rx=500
+def ry=250
+def rad=75
+def offCirc=10
+Drawing:
+  fill_backcolor()
+  polyfill(-rx,-ry,-rx,ry,0,0)
+  polyfill(0,0,rx,ry,rx,-ry)
+  circfill(0,-rad-offCirc,rad,rad)
+  fill_forecolor()
+  poly(-rx,-ry,-rx,ry,0,0)
+  poly(0,0,rx,ry,rx,-ry)
+  circ(0,-rad-offCirc,rad,rad)
+
+  snapOnlyLeft(-rx,0)
+  snapOnlyRight(rx,0)
+  snapOnlyTop(0,-2*rad-offCirc)
+  snapOnlyBottom(0,0)
+
+  select(-rx, -ry, 2*rx, 2*ry)
+Drawing End
+
+defvar TPxmin=-rx
+defvar TPxmax=rx
+defvar TPymin=-ry
+defvar TPymax=ry
+input(../_basic_rect_Textpos.sym)
+
+Info:
+text()
+name(Transmission Gate)
+namespace(Digital)
+Info End

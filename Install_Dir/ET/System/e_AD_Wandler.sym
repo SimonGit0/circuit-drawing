@@ -1,0 +1,37 @@
+﻿param "Type"={"AD-Wandler" "DA-Wandler"}
+
+def default_Links=3
+def default_Rechts=3
+def default_Oben=3
+def default_Unten=3
+
+def default_PitchLinks=300
+def default_PitchRechts=300
+def default_PitchOben=300
+def default_PitchUnten=300
+
+def default_ExtraBreite=200
+def default_ExtraHöhe=200
+
+def scalingYFactor=0
+input(_genericBlackbox.sym)
+
+def distTextProzent=50
+var distTextX = breite*distTextProzent/200
+var distTextY = hoehe*distTextProzent/200
+Drawing:
+line(0, hoehe, breite, 0)
+if get("Type")="AD-Wandler" :
+  text(breite/2-distTextX, hoehe/2-distTextY, 0, 0, "A")
+  text(breite/2+distTextX, hoehe/2+distTextY, 0, 0, "D")
+elseif get("Type")="DA-Wandler"
+  text(breite/2-distTextX, hoehe/2-distTextY, 0, 0, "D")
+  text(breite/2+distTextX, hoehe/2+distTextY, 0, 0, "A")
+end
+Drawing End
+
+Info:
+text()
+name(Wandler)
+namespace(System)
+Info End

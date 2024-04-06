@@ -1,0 +1,39 @@
+﻿input(_Negation_Size.sym)
+Drawing:
+fill_backcolor()
+circfill(0,0,NradX,NradY)
+fill_forecolor()
+circ(0, 0, NradX, NradY)
+snapOnlyLeft(-NradX, 0)
+snapOnlyRight(NradX, 0)
+snapOnlyTop(0, -NradY)
+snapOnlyBottom(0, NradY)
+select(-NradX, -NradY, 2*NradX, 2*NradY)
+Drawing End
+
+TextPos:
+pos(0, -NradY)
+vector(0, -1)
+TextPos End
+
+TextPos:
+pos(0, NradY)
+vector(0, 1)
+TextPos End
+
+TextPos:
+pos(-NradX, 0)
+vector(-1, 0)
+TextPos End
+
+TextPos:
+pos(NradX, 0)
+vector(1, 0)
+TextPos End
+
+Info:
+origin(-NradX, 0)
+text()
+name(Negation)
+namespace(Digital)
+Info End 

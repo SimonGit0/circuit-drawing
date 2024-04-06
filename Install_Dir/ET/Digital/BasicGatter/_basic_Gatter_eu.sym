@@ -1,0 +1,24 @@
+﻿if negOut :
+	input(../_Negation_Size.sym)
+	fill_backcolor()
+	circfill(-NradX, 0, NradX, NradY)
+	fill_forecolor()
+	circ(-NradX, 0, NradX, NradY)
+	snapOnlyRight(0, 0)
+	var int xStart = -breite-2*NradX
+	select(xStart, -hoehe/2, breite+2*NradX, hoehe)
+else
+	snapOnlyRight(0,0)
+	var int xStart = -breite
+	select(xStart, -hoehe/2, breite, hoehe)
+end
+fill_backcolor()
+rectfill(xStart, -hoehe/2, breite, hoehe)
+fill_forecolor()
+
+rect(xStart, -hoehe/2, breite, hoehe)
+text(xStart+breite/2, 0, 0, 0, mytext)
+for i=[0,inputs) :
+	var posY=((2*i+1-inputs)*pitch)/2
+	snapOnlyLeft(xStart, posY)
+end

@@ -1,0 +1,18 @@
+﻿use_as_child
+
+var hoehe = get("parent.select.height")
+var breite = get("parent.select.width")
+var mitteX = get("parent.select.x")+get("parent.select.width")/2
+var mitteY = get("parent.select.y")+get("parent.select.height")/2
+
+param_int "Größe" = 100 from [-100000, 100000]
+var rad = max(breite,hoehe)/2+get("Größe")
+
+Drawing:
+circ(mitteX,mitteY,rad,rad)
+Drawing End
+
+Info:
+name(Einkreisen)
+namespace(Erweiterung & Beschriftung)
+Info End
