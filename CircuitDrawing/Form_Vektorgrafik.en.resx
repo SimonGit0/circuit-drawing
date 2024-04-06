@@ -118,68 +118,89 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ÖffnenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
+  <data name="DateiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="DateiToolStripMenuItem.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="BearbeitenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 20</value>
+  </data>
+  <data name="BearbeitenToolStripMenuItem.Text" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="MarkierungToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 20</value>
+  </data>
+  <data name="MarkierungToolStripMenuItem.Text" xml:space="preserve">
+    <value>Selection</value>
+  </data>
+  <data name="VerwaltungToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 20</value>
+  </data>
+  <data name="VerwaltungToolStripMenuItem.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="FensterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 20</value>
+  </data>
+  <data name="FensterToolStripMenuItem.Text" xml:space="preserve">
+    <value>Windows</value>
   </data>
   <data name="ÖffnenToolStripMenuItem.Text" xml:space="preserve">
     <value>Open</value>
   </data>
-  <data name="SpeichernToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
   <data name="SpeichernToolStripMenuItem1.Text" xml:space="preserve">
     <value>Save</value>
-  </data>
-  <data name="SpeichernToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
   </data>
   <data name="SpeichernToolStripMenuItem.Text" xml:space="preserve">
     <value>Save As</value>
   </data>
-  <data name="ToolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 6</value>
+  <data name="ExportierenToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export</value>
   </data>
   <data name="AlsPDFTEXToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>204, 22</value>
   </data>
   <data name="AlsPDFTEXToolStripMenuItem.Text" xml:space="preserve">
     <value>As TEX + PDF</value>
   </data>
   <data name="AlsEPSToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>204, 22</value>
   </data>
   <data name="AlsEPSToolStripMenuItem.Text" xml:space="preserve">
     <value>As TEX + EPS</value>
   </data>
   <data name="AlsPDFToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>204, 22</value>
   </data>
   <data name="AlsPDFToolStripMenuItem.Text" xml:space="preserve">
     <value>As PDF</value>
   </data>
   <data name="AlsEMFToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>204, 22</value>
   </data>
   <data name="AlsEMFToolStripMenuItem.Text" xml:space="preserve">
     <value>As EMF</value>
   </data>
+  <data name="AlsBildPNGJPEGToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 22</value>
+  </data>
+  <data name="AlsBildPNGJPEGToolStripMenuItem.Text" xml:space="preserve">
+    <value>As Image (PNG, JPEG, ...)</value>
+  </data>
   <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
-    <value>150, 6</value>
+    <value>201, 6</value>
   </data>
   <data name="ExportEinstellungenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>204, 22</value>
   </data>
   <data name="ExportEinstellungenToolStripMenuItem.Text" xml:space="preserve">
     <value>Export Settings</value>
   </data>
-  <data name="ExportierenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="ExportierenToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export</value>
-  </data>
-  <data name="ToolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 6</value>
+  <data name="SkillImportierenToolStripMenuItem.Text" xml:space="preserve">
+    <value>Import Text</value>
   </data>
   <data name="AusDateiToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 22</value>
@@ -193,11 +214,8 @@
   <data name="AusZwischenablageToolStripMenuItem1.Text" xml:space="preserve">
     <value>From Clipboard</value>
   </data>
-  <data name="SkillImportierenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="SkillImportierenToolStripMenuItem.Text" xml:space="preserve">
-    <value>Import Text</value>
+  <data name="ImportierenToolStripMenuItem.Text" xml:space="preserve">
+    <value>Import Image</value>
   </data>
   <data name="AusDateiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 22</value>
@@ -211,32 +229,14 @@
   <data name="AusZwischenablageToolStripMenuItem.Text" xml:space="preserve">
     <value>From Clipboard</value>
   </data>
-  <data name="ImportierenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="ImportierenToolStripMenuItem.Text" xml:space="preserve">
-    <value>Import Image</value>
-  </data>
-  <data name="ToolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 6</value>
+  <data name="KompatibilitätToolStripMenuItem.Text" xml:space="preserve">
+    <value>Compatibility</value>
   </data>
   <data name="DateiImKompatibilitätsmodusÖffnenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
   </data>
   <data name="DateiImKompatibilitätsmodusÖffnenToolStripMenuItem.Text" xml:space="preserve">
     <value>Open file in compatibility mode</value>
-  </data>
-  <data name="KompatibilitätToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 22</value>
-  </data>
-  <data name="KompatibilitätToolStripMenuItem.Text" xml:space="preserve">
-    <value>Compatibility</value>
-  </data>
-  <data name="DateiToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="DateiToolStripMenuItem.Text" xml:space="preserve">
-    <value>File</value>
   </data>
   <data name="MoveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
@@ -268,6 +268,12 @@
   <data name="ElementLöschenToolStripMenuItem.Text" xml:space="preserve">
     <value>Delete Element</value>
   </data>
+  <data name="BeschriftungToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
+  <data name="BeschriftungToolStripMenuItem.Text" xml:space="preserve">
+    <value>Add Label</value>
+  </data>
   <data name="StromToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 22</value>
   </data>
@@ -295,14 +301,14 @@
   <data name="LabelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 22</value>
   </data>
-  <data name="BeschriftungToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="BeschriftungToolStripMenuItem.Text" xml:space="preserve">
-    <value>Add Label</value>
-  </data>
   <data name="ToolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 6</value>
+  </data>
+  <data name="HinzufügenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
+  <data name="HinzufügenToolStripMenuItem.Text" xml:space="preserve">
+    <value>Add Drawing</value>
   </data>
   <data name="LinieToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>169, 22</value>
@@ -361,14 +367,14 @@
   <data name="SnappointLöschenToolStripMenuItem.Text" xml:space="preserve">
     <value>Delete Snappoint</value>
   </data>
-  <data name="HinzufügenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="HinzufügenToolStripMenuItem.Text" xml:space="preserve">
-    <value>Add Drawing</value>
-  </data>
   <data name="ToolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 6</value>
+  </data>
+  <data name="DrehenUndSpiegelnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
+  <data name="DrehenUndSpiegelnToolStripMenuItem.Text" xml:space="preserve">
+    <value>Rotate and Mirror</value>
   </data>
   <data name="ImUhrzeigersinnDrehenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>203, 22</value>
@@ -393,12 +399,6 @@
   </data>
   <data name="VertikalSpiegelnToolStripMenuItem.Text" xml:space="preserve">
     <value>Mirror vertical</value>
-  </data>
-  <data name="DrehenUndSpiegelnToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="DrehenUndSpiegelnToolStripMenuItem.Text" xml:space="preserve">
-    <value>Rotate and Mirror</value>
   </data>
   <data name="ToolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 6</value>
@@ -427,6 +427,12 @@
   <data name="ToolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 6</value>
   </data>
+  <data name="ReihenfolgeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 22</value>
+  </data>
+  <data name="ReihenfolgeToolStripMenuItem.Text" xml:space="preserve">
+    <value>Order</value>
+  </data>
   <data name="InDenVordergrundToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>185, 22</value>
   </data>
@@ -454,12 +460,6 @@
   <data name="EineEbeneNachHintenToolStripMenuItem.Text" xml:space="preserve">
     <value>Send Backward</value>
   </data>
-  <data name="ReihenfolgeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 22</value>
-  </data>
-  <data name="ReihenfolgeToolStripMenuItem.Text" xml:space="preserve">
-    <value>Order</value>
-  </data>
   <data name="ToolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
     <value>183, 6</value>
   </data>
@@ -475,12 +475,6 @@
   <data name="GruppeAuflösenToolStripMenuItem.Text" xml:space="preserve">
     <value>Ungroup</value>
   </data>
-  <data name="BearbeitenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 20</value>
-  </data>
-  <data name="BearbeitenToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edit</value>
-  </data>
   <data name="MarkierungAufhebenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
@@ -492,12 +486,6 @@
   </data>
   <data name="AllesMarkierenToolStripMenuItem.Text" xml:space="preserve">
     <value>Select All</value>
-  </data>
-  <data name="MarkierungToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 20</value>
-  </data>
-  <data name="MarkierungToolStripMenuItem.Text" xml:space="preserve">
-    <value>Selection</value>
   </data>
   <data name="StandardstileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 22</value>
@@ -526,12 +514,6 @@
   <data name="InformationToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>162, 22</value>
   </data>
-  <data name="VerwaltungToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 20</value>
-  </data>
-  <data name="VerwaltungToolStripMenuItem.Text" xml:space="preserve">
-    <value>Options</value>
-  </data>
   <data name="VerbinderOptimierenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>304, 22</value>
   </data>
@@ -546,12 +528,6 @@
   </data>
   <data name="LatexBeschriftungstexttextEinfügenToolStripMenuItem.Text" xml:space="preserve">
     <value>Add \text{} for Labels in Math Mode for TEX</value>
-  </data>
-  <data name="FensterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 20</value>
-  </data>
-  <data name="FensterToolStripMenuItem.Text" xml:space="preserve">
-    <value>Windows</value>
   </data>
   <data name="TsBTN_Öffnen.Text" xml:space="preserve">
     <value>Open</value>

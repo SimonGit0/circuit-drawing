@@ -4393,6 +4393,51 @@ Public Class Vektor_Picturebox
 
     End Sub
 
+    Public Sub exportierenAlsIMG(pfad As String, format As Imaging.ImageFormat, transparent As Boolean, exportSize As Size)
+        Dim box As Rectangle = getBoundingBoxWithMarginExport()
+
+        Dim f_w As Double = exportSize.Width / box.Width
+        Dim f_h As Double = exportSize.Height / box.Height
+
+        Dim f As Single = CSng(Math.Min(f_w, f_h))
+
+        Dim pixelPerMM As Single = f / MM_PER_INT
+
+        Dim ox As Single = -box.X * f
+        Dim oy As Single = -box.Y * f
+
+        Dim args As New GrafikDrawArgs(myLineStyles, myFillStyles, myFonts, pixelPerMM, False)
+        args.faktorX = f
+        args.faktorY = f
+        args.offsetX = ox
+        args.offsetY = oy
+
+        Try
+            Dim size As New Size(exportSize.Width, exportSize.Height)
+            Dim bmp As New Bitmap(size.Width, size.Height)
+
+            Using g As Graphics = Graphics.FromImage(bmp)
+                If Not transparent Then
+                    g.Clear(Color.White)
+                End If
+
+                g.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+                g.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
+                g.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+
+                Dim myElementeKomplett As List(Of DO_Grafik) = getExportElemente()
+
+                For Each element As DO_Grafik In myElementeKomplett
+                    element.drawGraphics(g, args)
+                Next
+            End Using
+
+            bmp.Save(pfad, format)
+        Catch ex As Exception
+            MessageBox.Show("Export als Bild fehlgeschlagen: " + ex.Message)
+        End Try
+    End Sub
+
     Public Sub exportierenAlsPDF(pfad As String)
         exportiereAlsPdf_PDFSharp(pfad, False)
     End Sub
@@ -4600,7 +4645,7 @@ Public Class Vektor_Picturebox
         Return args
     End Function
 
-    Private Function getBoundingBoxWithMarginExport() As Rectangle
+    Public Function getBoundingBoxWithMarginExport() As Rectangle
         Dim box As Rectangle
         'If myCircuitElemente.Count > 0 Then
         '    box = myCircuitElemente(0).getGrafik.getBoundingBox()

@@ -209,6 +209,12 @@
     <Compile Include="BauelementeBibliothek\Bibliothek_Lokal\LokaleBibliothek.vb" />
     <Compile Include="Elemente\CircuitElemente\ElementLinestyle.vb" />
     <Compile Include="Elemente\ElementGruppe.vb" />
+    <Compile Include="FRM_ImgSizeSelection.Designer.vb">
+      <DependentUpon>FRM_ImgSizeSelection.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FRM_ImgSizeSelection.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="SkillDetect\Netz_Wires.vb" />
     <Compile Include="SkillDetect\Ctr_BauelementeAuswahl_Skill.Designer.vb">
       <DependentUpon>Ctr_BauelementeAuswahl_Skill.vb</DependentUpon>
@@ -540,6 +546,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Allgemeine_Settings\Einstellungspanel_Tools.resx">
       <DependentUpon>Einstellungspanel_Tools.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRM_ImgSizeSelection.en.resx">
+      <DependentUpon>FRM_ImgSizeSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRM_ImgSizeSelection.resx">
+      <DependentUpon>FRM_ImgSizeSelection.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SkillDetect\Ctr_BauelementeAuswahl_Skill.en.resx">
       <DependentUpon>Ctr_BauelementeAuswahl_Skill.vb</DependentUpon>

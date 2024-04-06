@@ -496,6 +496,37 @@ Public Class Form_Vektorgrafik
         End If
     End Sub
 
+    Private Sub AlsBildPNGJPEGToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlsBildPNGJPEGToolStripMenuItem.Click
+        Dim bbox As Size = Vektor_Picturebox1.getBoundingBoxWithMarginExport().Size
+        Dim size_selector As New FRM_ImgSizeSelection(bbox, 0.1)
+        If size_selector.ShowDialog = DialogResult.OK Then
+            Dim exportSize As Size = New Size(size_selector.W, size_selector.H)
+
+            Dim s As New SaveFileDialog()
+            s.Filter = "*.png|*.png|*.tiff|*.tiff|*.jpg|*.jpg|*.gif|*.gif"
+            preset_FileName_SaveFileDialog(s, False)
+            If s.ShowDialog = DialogResult.OK Then
+                Dim pfad As String = s.FileName
+                Dim ext As String = New FileInfo(s.FileName).Extension
+                Dim format As Imaging.ImageFormat = Imaging.ImageFormat.Png
+                Dim transparent As Boolean = size_selector.transparent
+                Select Case ext
+                    Case ".png"
+                        format = Imaging.ImageFormat.Png
+                    Case ".tiff"
+                        format = Imaging.ImageFormat.Tiff
+                    Case ".jpg"
+                        format = Imaging.ImageFormat.Jpeg
+                        transparent = False
+                    Case ".gif"
+                        format = Imaging.ImageFormat.Gif
+                        transparent = False
+                End Select
+                Vektor_Picturebox1.exportierenAlsIMG(pfad, format, transparent, exportSize)
+            End If
+        End If
+    End Sub
+
     Private Sub preset_FileName_SaveFileDialog(s As SaveFileDialog, use_aktuellerExportPfadTex As Boolean)
         If use_aktuellerExportPfadTex AndAlso _aktuellerExportPfad_TEX <> "" AndAlso (New FileInfo(_aktuellerExportPfad_TEX).Exists) Then
             Dim name As String = New FileInfo(_aktuellerExportPfad_TEX).Name

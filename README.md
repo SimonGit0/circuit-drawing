@@ -15,7 +15,7 @@ From there on you have many more possibilities to edit and modify your schematic
 Labels are very important for any schematic diagram to make them easily readable. Thus, lots of different labels can be created.
 
 ### Automatic labels of each component
-Each component has a default label attached directly next to it after placing it. Doing so, all the labels are nicely attached in a consistent manner in you whole schematic. The label itself can be edited in the properties of the component ("Text"). Also you can cycle through multiple default positions for this label by pressing the space bar while the element is selected. If none of the defaut positions fits your needs, you can also fine-tune the position by the "Distance" setting the properties of the component. It will just add a vector to the current position.
+Each component has a default label attached directly next to it after placing it. Doing so, all the labels are nicely attached in a consistent manner in your whole schematic. The label itself can be edited in the properties of the component ("Text"). Also you can cycle through multiple default positions for this label by pressing the space bar while the element is selected. If none of the defaut positions fits your needs, you can also fine-tune the position by the "Distance" setting the properties of the component. It will just add a vector to the current position.
 
 ### Additional labels
 Many additional labels can be attatched to your circuit diagram. You can place them via the menu Edit -> Add label -> select your needed label. There are labels for voltages or currents, for impedances, for buses, or just generic labels. 
@@ -23,10 +23,10 @@ All of these labels are then attached to one of your wires and they will automat
 
 ## Save, Open and Export
 Of course, you can save the schematic and reopen it later to continue. The schematic is saved in a custom binary format with all the information needed to open it later. Just use the "Save" and "Open" buttons.
-To export you finished graphics you can use the different options in the menu File -> Export ->.
+To export you finished graphics you can use the different options in the menu File -> Export ->. Ideally, the schematic is exported as vector graphics (PDF, EMF, ...). But as a backup you can also export it to a simple bitmap (png, jpg, ...) and specify any image size you like.
 
 ### Export as EMF
-The simplest way is to export your schematic to an .emf. This way you can open it with most image tools and it can also be included in Office programs as a vector graphics.
+The simplest way is to export your schematic to an .emf. This way you can open it with most image tools and it can also be included in Office programs as a nice-looking vector graphics.
 
 ### Export for LaTeX
 If you use LaTeX to create documents you can export directly as a PDF + LaTeX (TEX + PDF). This will create two output files. One .tex file that contains all the text and annotations and one underlaying pdf with the basic drawings. To include it in your LaTeX document just include the .tex file. It will automatically include the pdf and place it at the right position. See below for an example LaTeX code to include the created figure:

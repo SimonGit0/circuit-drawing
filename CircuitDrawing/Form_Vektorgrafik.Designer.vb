@@ -34,6 +34,7 @@ Partial Class Form_Vektorgrafik
         Me.AlsEPSToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlsPDFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AlsEMFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AlsBildPNGJPEGToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.ExportEinstellungenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator()
@@ -175,7 +176,7 @@ Partial Class Form_Vektorgrafik
         'ExportierenToolStripMenuItem
         '
         resources.ApplyResources(Me.ExportierenToolStripMenuItem, "ExportierenToolStripMenuItem")
-        Me.ExportierenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AlsPDFTEXToolStripMenuItem, Me.AlsEPSToolStripMenuItem, Me.AlsPDFToolStripMenuItem, Me.AlsEMFToolStripMenuItem, Me.ToolStripSeparator18, Me.ExportEinstellungenToolStripMenuItem})
+        Me.ExportierenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AlsPDFTEXToolStripMenuItem, Me.AlsEPSToolStripMenuItem, Me.AlsPDFToolStripMenuItem, Me.AlsEMFToolStripMenuItem, Me.AlsBildPNGJPEGToolStripMenuItem, Me.ToolStripSeparator18, Me.ExportEinstellungenToolStripMenuItem})
         Me.ExportierenToolStripMenuItem.Name = "ExportierenToolStripMenuItem"
         '
         'AlsPDFTEXToolStripMenuItem
@@ -197,6 +198,11 @@ Partial Class Form_Vektorgrafik
         '
         resources.ApplyResources(Me.AlsEMFToolStripMenuItem, "AlsEMFToolStripMenuItem")
         Me.AlsEMFToolStripMenuItem.Name = "AlsEMFToolStripMenuItem"
+        '
+        'AlsBildPNGJPEGToolStripMenuItem
+        '
+        resources.ApplyResources(Me.AlsBildPNGJPEGToolStripMenuItem, "AlsBildPNGJPEGToolStripMenuItem")
+        Me.AlsBildPNGJPEGToolStripMenuItem.Name = "AlsBildPNGJPEGToolStripMenuItem"
         '
         'ToolStripSeparator18
         '
@@ -850,4 +856,5 @@ Partial Class Form_Vektorgrafik
     Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
     Friend WithEvents GruppeErstellenToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents GruppeAuflösenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AlsBildPNGJPEGToolStripMenuItem As ToolStripMenuItem
 End Class
