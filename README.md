@@ -1,4 +1,4 @@
-# CircuitDrawing
+# Circuit Drawing
 This is a small tool that allows you to create vector graphics for electrical circuit diagrams in an easy-to-use way. I have created this program with visual basic .NET during my time at university to create nice-looking circuit diagrams for various papers and scientific presentations. Please see the small Demo here, it contains two simple demo schematics created using this tool and displayed in a LaTeX pdf: https://github.com/SimonGit0/circuit-drawing/blob/master/Demo/Demo.pdf
 
 ## Getting Started – Install
