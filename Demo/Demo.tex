@@ -1,0 +1,22 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\def\pathSchematic{Img/} %All schematics are in the subfolder Img/
+
+\begin{document}
+\section*{Demo schematics drawn with Circuit Drawing}
+
+\begin{figure}[htbp]
+\centering
+\input{Img/smallSignalMOS}
+\caption{Example schematic.}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\def\scaleSchematic{1.1} %make this drawing 10% larger
+\input{Img/mosfetCascode}
+\caption{Example schematic.}
+\end{figure}
+\end{document}
