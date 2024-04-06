@@ -30,22 +30,35 @@ The simplest way is to export your schematic to an .emf. This way you can open i
 
 ### Export for LaTeX
 If you use LaTeX to create documents you can export directly as a PDF + LaTeX (TEX + PDF). This will create two output files. One .tex file that contains all the text and annotations and one underlaying pdf with the basic drawings. To include it in your LaTeX document just include the .tex file. It will automatically include the pdf and place it at the right position. See below for an example LaTeX code to include the created figure:
+
 \begin{figure}
+
 \centering
+
 \input{MyExportedCircuit.tex}
+
 \caption{Exported schematic drawn with Circuit Drawing}
+
 \end{figure}
+
 
 If you need more advanced options you can set a few optional parameters in your LaTeX source code to modify the schematic import. You can set \def\scaleSchematic{0.8} before importing your schematic to scale the picture (e.g. to make it a little smaller to squeeze it into the page). The parameter 0.8 would mean the schematic is scaled to 80% of its original size. To scale the font size use any LaTeX font changing command before importing the schematic.
 
 Sometimes you also place your pictures in a different subfolder if you have a large LaTeX document. Doing so, the import of the pdf inside the .tex document does not work and you will see an error. To fix this, you can set the parameter \def\pathSchematic{subfolder/} to your desired subfolder. This way you can tell LaTeX to look for the pdf in this folder. If you place all pictures in the same subfolder you can also add this command once at the beginning of your LaTeX document. Below is an LaTeX import example using more advanced import settings:
 \def\pathSchematic{subfolder/} % all my figures are stored in the subfolder "subfolder/"
+
 \begin{figure}
+
 \centering
+
 \def\scaleSchematic{0.9} % I want this figure scaled to 90% its original size
+
 \footnotesize % I also want smaller text size (footnotesize) in my schematic drawing
+
 \input{subfolder/MyExportedCircuit.tex}
+
 \caption{Exported schematic drawn with Circuit Drawing}
+
 \end{figure}
 
 ## Custom Symbols
