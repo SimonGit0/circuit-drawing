@@ -3,5 +3,5 @@
 '''Änderungen nur in 'CircuitDrawing.vbproj'.
 '''</summary>
 Public Class AutoGenDate
-Public Shared LastBuildData As Date = New Date(2024, 04, 06)
+Public Shared LastBuildData As Date = New Date(2024, 04, 11)
 End Class

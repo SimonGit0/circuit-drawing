@@ -83,7 +83,7 @@ Public Class WR_BauelementeAuswahl
         ComboBox1.SuspendLayout()
         keinComboboxSelectedIndexChanged = True
         ComboBox1.Items.Clear()
-        Dim selectNachher As Integer = 0
+        Dim selectNachher As Integer = -1
         For Each _namespace As KeyValuePair(Of String, BauteileNamespace) In myBib
             ComboBox1.Items.Add(_namespace.Key)
             If _namespace.Key = selectedString Then

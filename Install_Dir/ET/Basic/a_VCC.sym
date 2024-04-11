@@ -11,7 +11,7 @@ line(0, -200, 100, -100)
 snapBottom(0, 0)
 
 % Bounding Box
-select(-150, -200, 300, 200)
+select(-100, -200, 200, 200)
 
 Drawing End
 
