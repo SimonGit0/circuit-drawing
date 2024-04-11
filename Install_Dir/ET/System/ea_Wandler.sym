@@ -1,0 +1,35 @@
+﻿param_string "Type 1" = "="
+param_string "Type 2" = "~"
+
+def default_Links=2
+def default_Rechts=2
+def default_Oben=2
+def default_Unten=2
+
+def default_PitchLinks=300
+def default_PitchRechts=300
+def default_PitchOben=300
+def default_PitchUnten=300
+
+def default_ExtraBreite=200
+def default_ExtraHöhe=200
+
+def scalingYFactor=0
+input(_genericBlackbox.sym)
+
+def distTextProzent=50
+var distTextX = breite*distTextProzent/200
+var distTextY = hoehe*distTextProzent/200
+Drawing:
+line(0, hoehe, breite, 0)
+
+text(breite/2-distTextX, hoehe/2-distTextY, 0, 0, get("Type 1"))
+text(breite/2+distTextX, hoehe/2+distTextY, 0, 0, get("Type 2"))
+
+Drawing End
+
+Info:
+text()
+name(Wandler)
+namespace(System)
+Info End

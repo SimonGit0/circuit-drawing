@@ -1,0 +1,113 @@
+﻿param_int "Breite"=1400 from [800, 100, 10000]
+param_int "Höhe"=1500 from [800, 100, 10000]
+var breiteFF=get("Breite")
+var hoeheFF=get("Höhe")
+
+param "Ausgang"={"Q und Nicht Q" "Nicht Q und Q" "Nur Q" "Nur Nicht Q"}
+param "Set und Reset Eingang"={"Ja" "Ja Invertiert" "Nein"}
+
+scaling rechts(x):
+set_param("Breite", get("Breite")+x)
+scaling end
+
+scaling links(x):
+set_param("Breite", get("Breite")+x)
+move(-x,0)
+scaling end
+
+scaling unten(x):
+set_param("Höhe",get("Höhe")+x)
+scaling end
+
+scaling oben(x):
+set_param("Höhe",get("Höhe")+x)
+move(0,-x)
+scaling end
+
+var PitchConInput = get("Höhe") / 2
+var PitchConOutput = get("Höhe") / 2
+
+
+Drawing:
+
+% Box
+fill_backcolor()
+rectfill(0, 0, breiteFF, hoeheFF)
+fill_forecolor()
+rect(0, 0, breiteFF, hoeheFF)
+
+% Draw Reset Input
+if get("Set und Reset Eingang")="Ja":
+	var PitchConInput = get("Höhe") / 4
+	text(0, 1*PitchConInput + PitchConInput/2, 1, 0, "R")
+	snapOnlyLeft(0, 1*PitchConInput + PitchConInput/2)
+	
+	text(0, 2*PitchConInput + PitchConInput/2, 1, 0, "S")
+	snapOnlyLeft(0, 2*PitchConInput + PitchConInput/2)
+end
+
+% Draw Reset Input
+if get("Set und Reset Eingang")="Ja invertiert":
+	var PitchConInput = get("Höhe") / 4
+	text(0, 1*PitchConInput + PitchConInput/2, 1, 0, "$\overline{\text{R}}$")
+	snapOnlyLeft(0, 1*PitchConInput + PitchConInput/2)
+	
+	text(0, 2*PitchConInput + PitchConInput/2, 1, 0, "$\overline{\text{S}}$")
+	snapOnlyLeft(0, 2*PitchConInput + PitchConInput/2)
+end
+
+% Clock and Data Input
+line(0, hoeheFF-PitchConInput/2-100, 100, hoeheFF-PitchConInput/2, 0, hoeheFF-PitchConInput/2+100)
+text(150, hoeheFF-PitchConInput/2, 1, 0, "CLK")
+snapOnlyLeft(0, hoeheFF-PitchConInput/2)
+
+text(0, PitchConInput/2, 1, 0, "D")
+snapOnlyLeft(0, PitchConInput/2)
+
+% Ausgang
+if get("Ausgang")="Q und Nicht Q":
+  text(breiteFF, PitchConOutput/2, -1, 0, "Q")
+  text(breiteFF, hoeheFF-PitchConOutput/2, -1, 0, "$\overline{\text{Q}}$")
+  snapOnlyRight(breiteFF, hoeheFF-PitchConOutput/2)
+elseif get("Ausgang")="Nicht Q und Q"
+  text(breiteFF, PitchConOutput/2, -1, 0, "$\overline{\text{Q}}$")
+  text(breiteFF, hoeheFF-PitchConOutput/2, -1, 0, "Q")
+  snapOnlyRight(breiteFF, hoeheFF-PitchConOutput/2)
+elseif get("Ausgang")="Nur Q"
+  text(breiteFF, PitchConOutput/2, -1, 0, "Q")
+elseif get("Ausgang")="Nur Nicht Q"
+  text(breiteFF, PitchConOutput/2, -1, 0, "$\overline{\text{Q}}$")
+end
+
+snapOnlyRight(breiteFF, PitchConOutput/2)
+select(0, 0, breiteFF, hoeheFF)
+
+scale_line(breiteFF,0,breiteFF,hoeheFF,1,0,800-breiteFF,100,10000-breiteFF,rechts)
+scale_line(0,0,0,hoeheFF,-1,0,800-breiteFF,100,10000-breiteFF,links)
+scale_line(0,hoeheFF,breiteFF,hoeheFF,0,1,800-hoeheFF,100,10000-hoeheFF,unten)
+scale_line(0,0,breiteFF,0,0,-1,800-hoeheFF,100,10000-hoeheFF,oben)
+
+Drawing End
+
+TextPos:
+pos(breiteFF/2, hoeheFF/2)
+vector(0, 0)
+dist(1, 0)
+TextPos End
+
+def TPxmin=0
+var TPxmax=breiteFF
+def TPymin=0
+var TPymax=hoeheFF
+input(../_basic_rect_Textpos.sym)
+
+Info:
+origin(0, 200)
+Info End
+
+Info:
+text(FF)
+nonumber()
+name(FlipFlop)
+namespace(Digital)
+Info End

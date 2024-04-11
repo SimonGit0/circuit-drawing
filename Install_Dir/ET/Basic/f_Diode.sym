@@ -1,8 +1,15 @@
-﻿param "Typ"={"Simpel" "Schottky" "Zener"}
+﻿param "Typ"={"Simpel" "Schottky" "Zener" "LED"}
 
 def dreieckLaenge = 200
 def dreieckHoehe = 120
 def zenerLaenge = dreieckHoehe/2
+
+def LEDArrowStart_X = 150
+def LEDArrowStart_Y = 150
+def LEDArrowLaenge = 100
+def LEDArrowPointer = LEDArrowLaenge/3
+def LEDShift = 100
+
 Drawing:
 %Dreieck
 fill_backcolor()
@@ -24,6 +31,15 @@ if get("Typ")="Schottky":
   line(dreieckLaenge, dreieckHoehe, dreieckLaenge-zenerLaenge, dreieckHoehe)
 elseif get("Typ")="Zener"
   line(dreieckLaenge, dreieckHoehe, dreieckLaenge-zenerLaenge, dreieckHoehe)
+elseif get("Typ")="LED"
+  %Erster Pfeil
+  line(LEDArrowStart_X, LEDArrowStart_Y, LEDArrowStart_X+LEDArrowLaenge, LEDArrowStart_Y+LEDArrowLaenge)
+  line(LEDArrowStart_X+LEDArrowLaenge, LEDArrowStart_Y+LEDArrowLaenge,LEDArrowStart_X+LEDArrowLaenge, LEDArrowStart_Y+LEDArrowLaenge-LEDArrowPointer)
+  line(LEDArrowStart_X+LEDArrowLaenge, LEDArrowStart_Y+LEDArrowLaenge,LEDArrowStart_X+LEDArrowLaenge-LEDArrowPointer, LEDArrowStart_Y+LEDArrowLaenge)
+  %Zweiter Pfeil
+  line(LEDArrowStart_X-LEDShift, LEDArrowStart_Y, LEDArrowStart_X+LEDArrowLaenge-LEDShift, LEDArrowStart_Y+LEDArrowLaenge)
+  line(LEDArrowStart_X+LEDArrowLaenge-LEDShift, LEDArrowStart_Y+LEDArrowLaenge,LEDArrowStart_X+LEDArrowLaenge-LEDShift, LEDArrowStart_Y+LEDArrowLaenge-LEDArrowPointer)
+  line(LEDArrowStart_X+LEDArrowLaenge-LEDShift, LEDArrowStart_Y+LEDArrowLaenge,LEDArrowStart_X+LEDArrowLaenge-LEDArrowPointer-LEDShift, LEDArrowStart_Y+LEDArrowLaenge)
 end
 Drawing End
 
@@ -35,7 +51,7 @@ input(../_basic_rect_Textpos.sym)
 
 Info:
 origin(-200, 0)
-text(N)
+text(D)
 name(Diode)
 namespace(Basic)
 Info End
