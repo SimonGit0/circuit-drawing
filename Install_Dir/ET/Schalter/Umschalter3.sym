@@ -1,0 +1,40 @@
+﻿param_int "Radius Kontakt"=20 from [0,#inf)
+
+param_int "Breite"=300 from (0, 50, #inf)
+param_int "Öffnung"=150
+param_int "Schalter Position" = 100 from [-100,100] unit "%"
+param_int "Anschlüsse" = 100 from [0,50,#inf)
+var Stubs = get("Anschlüsse")
+var posS = get("Schalter Position")
+var rad = get("Radius Kontakt")
+
+Drawing:
+line(0, 0, Stubs, 0, Stubs+get("Breite"), -get("Öffnung")*posS/100)
+line(Stubs+get("Breite"), -get("Öffnung"), 2*Stubs+get("Breite"), -get("Öffnung"))
+line(Stubs+get("Breite"), get("Öffnung"), 2*Stubs+get("Breite"), get("Öffnung"))
+line(Stubs+get("Breite"), 0, 2*Stubs+get("Breite"),0)
+snapLeft(0, 0)
+snapRight(2*Stubs+get("Breite"), -get("Öffnung"))
+snapRight(2*Stubs+get("Breite"), get("Öffnung"))
+snapRight(2*Stubs+get("Breite"),0)
+if rad > 0:
+  circfill(Stubs,0,rad,rad)
+  circfill(Stubs+get("Breite"),get("Öffnung"),rad,rad)
+  circfill(Stubs+get("Breite"),-get("Öffnung"),rad,rad)
+  circfill(Stubs+get("Breite"),0,rad,rad)
+end
+
+select(0, -abs(get("Öffnung")), 2*Stubs+get("Breite"), 2*abs(get("Öffnung")))
+Drawing End
+
+def TPxmin=0
+var TPxmax=2*Stubs+get("Breite")
+var TPymin=-abs(get("Öffnung"))
+var TPymax=abs(get("Öffnung"))
+input(../_basic_rect_Textpos.sym)
+
+Info:
+text()
+name(Umschalter 3fach)
+namespace(Schalter)
+Info End

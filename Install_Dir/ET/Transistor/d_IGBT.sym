@@ -1,0 +1,105 @@
+﻿param_int "Linienbreite" = 200 from [10, 1, 1000] unit "%"
+param_int "Pfeil Position" = 100 from [0, 1, 100] unit "%"
+param_int "Kontaktposition" = 100 from [0,1,200]
+param_int "Gate Abstand" = 50 from [0,1,200]
+param "Diode"={"Ja" "Nein"}
+
+
+def dreieckLaenge = 50
+def dreieckHoehe = 60
+
+def endeX=300
+def diodeX =  endeX + 75
+var verschiebungY=get("Kontaktposition")
+def endeY=200
+def Connections=150
+def DiodeConnection=Connections/2
+
+def startX=100+(endeX-100)*2/3
+var startY=verschiebungY+(endeY-verschiebungY)*2/3
+var vectorX=(endeY-verschiebungY)*1/5
+def vectorY=-(endeX-100)*1/5
+
+var pfeil_dx = -(100-get("Pfeil Position"))*(startX-100)/100
+var pfeil_dy = -(100-get("Pfeil Position"))*(startX-100)*(endeY-verschiebungY)/(endeX-100)/100
+
+Drawing:
+
+% Gate
+line(-get("Gate Abstand"), 0, 100-get("Gate Abstand"), 0)
+line(100-get("Gate Abstand"), -verschiebungY, 100-get("Gate Abstand"), verschiebungY)
+
+lw(get("Linienbreite"))
+line(100, -200, 100, 200)
+lw(100)
+
+line(100, -verschiebungY, endeX, -endeY)
+line(100, verschiebungY, endeX, endeY)
+
+line(endeX, endeY, endeX, endeY+Connections)
+line(endeX, -endeY, endeX, -endeY-Connections)
+
+polyfill(endeX+pfeil_dx, endeY+pfeil_dy, startX+vectorX+pfeil_dx, startY+vectorY+pfeil_dy, startX-vectorX+pfeil_dx, startY-vectorY+pfeil_dy)
+
+% Diode
+if get("Diode")="Ja":
+	fill_backcolor()
+	polyfill(diodeX-dreieckHoehe, dreieckLaenge, diodeX+dreieckHoehe, dreieckLaenge, diodeX, -dreieckLaenge)
+	fill_forecolor()
+	poly(diodeX-dreieckHoehe, dreieckLaenge, diodeX+dreieckHoehe, dreieckLaenge, diodeX, -dreieckLaenge)
+	
+	line(diodeX-dreieckHoehe, -dreieckLaenge, diodeX+dreieckHoehe, -dreieckLaenge)
+	
+	line(diodeX, -endeY-DiodeConnection, diodeX, endeY+DiodeConnection)
+	line(endeX, -endeY-DiodeConnection, diodeX, -endeY-DiodeConnection)
+	line(endeX, endeY+DiodeConnection, diodeX, endeY+DiodeConnection)
+	
+	dot(endeX, endeY+DiodeConnection)
+	dot(endeX, -endeY-DiodeConnection)
+end
+
+% Snap
+snapLeft(-get("Gate Abstand"), 0)
+snapBottom(endeX, endeY+Connections)
+snapTop(endeX, -endeY-Connections)
+
+if get("Diode")="Ja":
+	select(-get("Gate Abstand"), -endeY-Connections, endeX + get("Gate Abstand")+2*dreieckLaenge, 2*(endeY+Connections))
+else
+	select(-get("Gate Abstand"), -endeY-Connections, endeX + get("Gate Abstand"), 2*(endeY+Connections))
+end
+
+Drawing End
+
+Textpos:
+pos(endeX + get("Gate Abstand")+2*dreieckLaenge, 0)
+vector(1, 0)
+Textpos End
+
+Textpos:
+pos(50, 0)
+vector(-1, -1)
+Textpos End
+
+Textpos:
+pos(50, 0)
+vector(-1, 1)
+Textpos End
+
+Textpos:
+pos(endeX + get("Gate Abstand")+2*dreieckLaenge, endeY)
+vector(1, 1)
+dist(1, 0)
+Textpos End
+
+Textpos:
+pos(endeX + get("Gate Abstand")+2*dreieckLaenge, -endeY)
+vector(1, -1)
+dist(1, 0)
+Textpos End
+
+Info:
+text(Q)
+name(IGBT)
+namespace(Transistor)
+Info End

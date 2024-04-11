@@ -1,0 +1,59 @@
+﻿
+def SchalterBreite = 300
+def SchalterKontakt = 150
+def SchalterAnschluss = 200
+def SchalterDot = 20
+
+def IndukHeight = 75
+def IndukHoriz = 300
+
+def dY_Ind = 50
+
+Drawing:
+
+% Schalter
+line(0, 0, SchalterAnschluss, 0, SchalterAnschluss+SchalterBreite, -SchalterKontakt)
+line(SchalterAnschluss+SchalterBreite, 0, 2*SchalterAnschluss+SchalterBreite, 0)
+
+% Dots
+circfill(SchalterAnschluss,0,SchalterDot,SchalterDot)
+circfill(SchalterAnschluss+SchalterBreite,0,SchalterDot,SchalterDot)
+  
+% Spule
+fill_backcolor()
+rectfill(SchalterAnschluss, IndukHoriz-IndukHeight, SchalterBreite, 2*IndukHeight)
+fill_forecolor()
+rect(SchalterAnschluss, IndukHoriz-IndukHeight, SchalterBreite, 2*IndukHeight)
+line(SchalterAnschluss, IndukHoriz-IndukHeight, SchalterAnschluss+SchalterBreite, IndukHoriz+IndukHeight)
+
+% Anschluss Spule
+line(0, IndukHoriz, SchalterAnschluss, IndukHoriz)
+line(SchalterAnschluss+SchalterBreite, IndukHoriz, 2*SchalterAnschluss+SchalterBreite, IndukHoriz)
+
+% Mechanische Verbindung Spule
+line(SchalterAnschluss+SchalterBreite/2, IndukHoriz-IndukHeight, SchalterAnschluss+SchalterBreite/2, IndukHoriz-IndukHeight - dY_Ind)
+line(SchalterAnschluss+SchalterBreite/2, IndukHoriz-IndukHeight - 2*dY_Ind , SchalterAnschluss+SchalterBreite/2, IndukHoriz-IndukHeight - 3*dY_Ind)
+line(SchalterAnschluss+SchalterBreite/2, IndukHoriz-IndukHeight - 4*dY_Ind , SchalterAnschluss+SchalterBreite/2, IndukHoriz-IndukHeight - 5*dY_Ind)
+
+% Snapping Points
+snapLeft(0, 0)
+snapLeft(0, IndukHoriz)
+snapRight(2*SchalterAnschluss+SchalterBreite, 0)
+snapRight(2*SchalterAnschluss+SchalterBreite, IndukHoriz)
+
+% Selecting Box
+select(0, -SchalterKontakt, 2*SchalterAnschluss+SchalterBreite, SchalterKontakt + IndukHoriz + IndukHeight)
+
+Drawing End
+
+def TPxmin=0
+def TPxmax=500
+def TPymin=-150
+def TPymax=0
+input(../_basic_rect_Textpos.sym)
+
+Info:
+text()
+name(Relais)
+namespace(Schalter)
+Info End

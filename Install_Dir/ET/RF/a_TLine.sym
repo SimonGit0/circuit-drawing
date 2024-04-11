@@ -1,0 +1,83 @@
+﻿param "Start" = {"GND" "Terminal"}
+param "Ende" = {"GND" "Terminal"}
+param_int "Breite" = 50 from (0,#inf)
+param_int "Abstand" = 150 from (0,#inf)
+param_int "Länge" = 500 from (0,50,10000)
+param_int "Überhang TLine" = 0 from [0,50,#inf)
+var b=get("Breite")
+var a=get("Abstand")
+var l=get("Länge")
+var überhang=get("Überhang TLine")
+
+param_int "X Abstand GND" = 50 from (0,#inf)
+param_int "Y Abstand GND" = 100 from (0,#inf)
+param_int "Größe GND" = 150 from (0,#inf)
+
+var XAbstandGND = get("X Abstand GND")
+var YAbstandGND = get("Y Abstand GND")
+var wGND = get("Größe GND")
+
+var TPxmin=0
+var TPxmax=0
+var TPymin=0
+var TPymax=0
+
+Drawing:
+rectfill(-überhang, -b/2, l+2*überhang, b)
+rectfill(0, a-b/2, l, b)
+snapOnlyLeft(-überhang, 0)
+snapOnlyRight(l+überhang, 0)
+
+if get("Start")="GND" & get("Ende")="GND":
+  line(0,a,-XAbstandGND,a,-XAbstandGND,a+YAbstandGND)
+  line(-XAbstandGND-wGND/2,a+YAbstandGND,-XAbstandGND-wGND/2+wGND,a+YAbstandGND)
+  line(l,a,l+XAbstandGND,a,l+XAbstandGND,a+YAbstandGND)
+  line(l+XAbstandGND+wGND/2,a+YAbstandGND,l+XAbstandGND+wGND/2-wGND,a+YAbstandGND)
+  
+  var TPxmin=min(-überhang,-XAbstandGND-wGND/2)
+  var TPxmax=max(l+überhang,l+XAbstandGND+wGND/2)
+  var TPymin=-b/2
+  var TPymax=max(a-b/2+b, a+YAbstandGND)
+elseif get("Start")="GND"
+  line(0,a,-XAbstandGND,a,-XAbstandGND,a+YAbstandGND)
+  line(-XAbstandGND-wGND/2,a+YAbstandGND,-XAbstandGND-wGND/2+wGND,a+YAbstandGND)
+  snapOnlyRight(l, a)
+  var TPxmin=min(-überhang,-XAbstandGND-wGND/2)
+  var TPxmax=l+überhang
+  var TPymin=-b/2
+  var TPymax=max(a-b/2+b, a+YAbstandGND)
+elseif get("Ende")="GND"
+  line(l,a,l+XAbstandGND,a,l+XAbstandGND,a+YAbstandGND)
+  line(l+XAbstandGND+wGND/2,a+YAbstandGND,l+XAbstandGND+wGND/2-wGND,a+YAbstandGND)
+  snapOnlyLeft(0, a)
+  var TPxmin=-überhang
+  var TPxmax=max(l+überhang,l+XAbstandGND+wGND/2)
+  var TPymin=-b/2
+  var TPymax=max(a-b/2+b, a+YAbstandGND)
+else
+  invisible("X Abstand GND")
+  invisible("Y Abstand GND")
+  invisible("Größe GND")
+  snapOnlyLeft(0, a)
+  snapOnlyRight(l, a)
+  
+  var TPxmin=-überhang
+  var TPxmax=l+überhang
+  var TPymin=-b/2
+  var TPymax=a-b/2+b
+end
+select(TPxmin, TPymin, TPxmax-TPxmin, TPymax-TPymin)
+var TPxmin=0
+var TPxmax=l
+Drawing End
+
+%input(_basic_rect_Textpos.sym)
+input(../_basic_rect_Textpos.sym)
+
+Info:
+%select(-200 -100 1000 200)
+%origin(-200 0)
+text(TL)
+name(TLine)
+namespace(RF)
+Info End

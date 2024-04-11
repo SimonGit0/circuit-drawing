@@ -1,0 +1,51 @@
+﻿Info:
+text(M)
+name(n-type JFET)
+namespace(Transistor)
+Info End 
+
+param_arrow "Pfeil" = 2 from [-1, #inf) 
+param_int "Linienbreite Kanal" = 200 from [10, 1, 1000] unit "%"
+
+% Defaults
+def l_channel = 400
+def l_pin = 150
+def x_vertical = 50
+def x_pin_SD = 200
+def x_pin_G = -x_pin_SD
+
+Drawing:
+
+% DRAW VERTICAL LINE FOR CHANNEL
+lw(get("Linienbreite Kanal"))
+line(0, -l_channel/2-x_vertical, 0, l_channel/2+x_vertical)
+
+lw(100)
+
+% DRAW CONNECTION OF SOURCE
+line(0, -l_channel/2, x_pin_SD, -l_channel/2)
+line(x_pin_SD, -l_channel/2, x_pin_SD, -(l_channel/2+l_pin))
+
+% DRAW CONNECTIONS OF DRAIN
+line(0, l_channel/2, x_pin_SD, l_channel/2)
+line(x_pin_SD, l_channel/2, x_pin_SD, l_channel/2+l_pin)
+
+% DRAW CONNECTION OF GATE
+line(0, l_channel/2, x_pin_G, l_channel/2)
+arrow(-l_pin/2, l_channel/2, get("Pfeil"), #aligncenter, 1, 0)
+
+% CONNECTIONS GATE, SOURCE, DRAIN
+snapLeft(x_pin_G, l_channel/2)
+snapTop(x_pin_SD, -(l_channel/2+l_pin))
+snapBottom(x_pin_SD, l_channel/2+l_pin)
+
+% BOUNDING BOX
+select(x_pin_G, l_channel/2+l_pin, 2*x_pin_SD, -l_channel-2*l_pin)
+
+Drawing End
+
+TextPos:
+pos(l_channel/2, x_pin_SD)
+vector(1, -1)
+dist(1, 0)
+TextPos End

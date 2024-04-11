@@ -1,0 +1,139 @@
+﻿def PMOS=0
+
+param "Type"={"Enhancement" "Depletion"}
+param "Source"={"Normal" "Kelvin"}
+param "Diode"={"Ja" "Nein"}
+
+param_int "Linienbreite" = 100 from [10, 1, 1000] unit "%"
+param_int "Abstand Gate" = 50 from [0, 1, 150]
+
+var abstandGS=get("Abstand Gate")
+def pfeilRadiusXBasic=54
+def pfeilRadiusY=66
+var startGateX=140+50-abstandGS
+def endeX=400
+def DistSBY=200
+
+defvar startSource=startGateX+abstandGS
+defvar pfeilPosX=(startSource+endeX)/2
+def pfeilMitteY=-DistSBY
+
+def dreieckLaenge = 50
+def dreieckHoehe = 60
+
+%Diode X Pos
+def diodeX =  endeX + 125
+
+%Für PMOS Transistoren wird Y gespiegelt (fy=-1) und der Pfeil dreht sich auch um!
+def fy=1-2*PMOS
+def pfeilRadiusX = pfeilRadiusXBasic*fy
+
+Drawing:
+
+%DRAW GATE
+line(0, fy*0, startGateX, fy*0)
+lw(get("Linienbreite"))
+line(startGateX, fy*0, startGateX, fy*(-2*DistSBY))
+lw(100)
+
+%DRAW CONNECTIONS OF S,B,D TO THE RIGHT
+line(startSource, fy*0, endeX, fy*0)
+line(startSource, fy*(-DistSBY), endeX, fy*(-DistSBY))
+line(startSource, fy*(-2*DistSBY), endeX, fy*(-2*DistSBY))
+
+if get("Type")="Enhancement":
+  %DRAW DASHED CHANNEL (3 Lines)
+  line(startSource, fy*DistSBY/3, startSource, fy*-DistSBY/3)
+  line(startSource, fy*-2*DistSBY/3, startSource, fy*-4*DistSBY/3)
+  line(startSource, fy*-5*DistSBY/3, startSource, fy*-7*DistSBY/3)
+elseif get("Type")="Depletion"
+  line(startSource, fy*DistSBY/3, startSource, fy*-7*DistSBY/3)
+end
+
+%EXTEND S,D CONNECTIONS TO BOTTOM AND TOP
+line(endeX, fy*(0), endeX, fy*(100))
+line(endeX, fy*(-2*DistSBY), endeX, fy*(-2*DistSBY-100))
+
+%DRAW ARROW
+polyfill(pfeilPosX-pfeilRadiusX, fy*pfeilMitteY, pfeilPosX+pfeilRadiusX, fy*(pfeilMitteY+pfeilRadiusY), pfeilPosX+pfeilRadiusX, fy*(pfeilMitteY-pfeilRadiusY))
+
+%ANSCHLUSS
+snapLeft(0, fy*0)
+snap(endeX, fy*100, 0, fy, false)
+snap(endeX, fy*(-2*DistSBY-100), 0, -fy, false)
+
+% Bulk Connection to Source
+line(endeX, fy*0, endeX, fy*(-DistSBY))
+dot(endeX, fy*0)
+
+%Kelvin Source
+if get("Source")="Kelvin":
+	snapLeft(0, fy*0+200)
+	line(0, fy*0+200, endeX/2, fy*0+200)
+	line(endeX/2, fy*0+200, endeX, fy*0)
+end
+
+% Diode
+if get("Diode")="Ja":
+	fill_backcolor()
+	polyfill(diodeX-dreieckHoehe, dreieckLaenge-fy*(DistSBY), diodeX+dreieckHoehe, dreieckLaenge-fy*(DistSBY), diodeX, -dreieckLaenge-fy*(DistSBY))
+	fill_forecolor()
+	poly(diodeX-dreieckHoehe, dreieckLaenge-fy*(DistSBY), diodeX+dreieckHoehe, dreieckLaenge-fy*(DistSBY), diodeX, -dreieckLaenge-fy*(DistSBY))
+	
+	line(diodeX-dreieckHoehe, -dreieckLaenge-fy*(DistSBY), diodeX+dreieckHoehe, -dreieckLaenge-fy*(DistSBY))
+	
+	line(diodeX, fy*(0), diodeX, fy*(-2*DistSBY))
+	line(endeX, fy*(0), diodeX, fy*(0))
+	line(endeX, fy*(-2*DistSBY), diodeX, fy*(-2*DistSBY))
+	
+	dot(endeX, fy*(-2*DistSBY))
+end
+
+if get("Diode")="Ja":
+	select(0, fy*(-2*DistSBY-100), diodeX+dreieckHoehe, fy*(2*DistSBY+200))
+else
+	select(0, fy*(-2*DistSBY-100), endeX, fy*(2*DistSBY+200))
+end
+
+	
+Drawing End
+
+TextPos:
+pos(diodeX, fy*(-DistSBY))
+vector(1, fy*-1)
+dist(1, 0)
+TextPos End
+
+TextPos:
+pos(endeX, fy*-2*DistSBY)
+vector(1, fy*-1)
+dist(1, 0)
+TextPos End
+
+TextPos:
+pos(endeX, fy*0)
+vector(1, fy*1)
+dist(1, 0)
+TextPos End
+
+TextPos:
+pos(50, fy*-DistSBY)
+vector(-1, fy*0)
+TextPos End
+
+TextPos:
+pos(50, fy*0)
+vector(-1, fy*1)
+dist(-1, 0)
+TextPos End
+
+TextPos:
+pos(endeX, fy*-DistSBY)
+vector(1, fy*0)
+TextPos End
+
+Info:
+text(M)
+name(N-Kanal MOSFET)
+namespace(Transistor)
+Info End 

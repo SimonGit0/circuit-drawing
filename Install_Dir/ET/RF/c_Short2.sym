@@ -1,0 +1,73 @@
+﻿param "Start 1" = {"GND" "Terminal"}
+param "Start 2" = {"GND" "Terminal"}
+
+param_int "Breite" = 50 from (0,#inf)
+param_int "Abstand" = 150 from (0,#inf)
+param_int "Länge" = 500 from (0,50,10000)
+param_int "Überhang TLine" = 0 from [0,50,#inf)
+var b=get("Breite")
+var a=get("Abstand")
+var l=get("Länge")
+var überhang=get("Überhang TLine")
+
+param_int "X Abstand GND" = 50 from (0,#inf)
+param_int "Y Abstand GND" = 100 from (0,#inf)
+param_int "Größe GND" = 150 from (0,#inf)
+
+var XAbstandGND = get("X Abstand GND")
+var YAbstandGND = get("Y Abstand GND")
+var wGND = get("Größe GND")
+
+var TPxmin=0
+var TPxmax=0
+var TPymin=0
+var TPymax=0
+
+Drawing:
+rectfill(0, -a-b/2, l, b)
+rectfill(-überhang, -b/2, l+überhang, b)
+rectfill(0, a-b/2, l, b)
+rectfill(l-b/2,-a-b/2,b,2*a+b)
+snapOnlyLeft(-überhang, 0)
+
+var TPxmin=-überhang
+var TPxmax=l
+var TPymin=-a-b/2
+var TPymax=a-b/2+b
+
+if get("Start 1")="GND":
+  line(0,a,-XAbstandGND,a,-XAbstandGND,a+YAbstandGND)
+  line(-XAbstandGND-wGND/2,a+YAbstandGND,-XAbstandGND-wGND/2+wGND,a+YAbstandGND)
+  var TPxmin=min(TPxmin,-XAbstandGND-wGND/2)
+  var TPymax=max(TPymax, a+YAbstandGND)
+else
+  snapOnlyLeft(0, a)
+end
+if get("Start 2")="GND":
+  line(0,-a,-XAbstandGND,-a,-XAbstandGND,-a-YAbstandGND)
+  line(-XAbstandGND-wGND/2,-a-YAbstandGND,-XAbstandGND-wGND/2+wGND,-a-YAbstandGND)
+  var TPxmin=min(TPxmin,-XAbstandGND-wGND/2)
+  var TPymin=min(TPymin, -a-YAbstandGND)
+else
+  snapOnlyLeft(0, -a)
+end
+if get("Start 1") = "Terminal" & get("Start 2") = "Terminal":
+  invisible("X Abstand GND")
+  invisible("Y Abstand GND")
+  invisible("Größe GND")
+end
+select(TPxmin, TPymin, TPxmax-TPxmin, TPymax-TPymin)
+var TPxmin=0
+var TPxmax=l
+Drawing End
+
+%input(_basic_rect_Textpos.sym)
+input(../_basic_rect_Textpos.sym)
+
+Info:
+%select(-200 -100 1000 200)
+%origin(-200 0)
+text(TL)
+name(Short 2)
+namespace(RF)
+Info End
