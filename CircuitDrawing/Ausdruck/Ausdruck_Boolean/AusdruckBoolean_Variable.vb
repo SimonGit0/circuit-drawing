@@ -43,7 +43,7 @@ Public Class AusdruckBoolean_Variable
         If var_intern Then
             Return New Export_AusdruckBoolean("v" & var_index, Export_AusdruckBoolean.Ausdruck_Art.Atom)
         Else
-            Return New Export_AusdruckBoolean("get(""" & writer.parameter(var_index).getName() & """)", Export_AusdruckBoolean.Ausdruck_Art.Atom)
+            Return New Export_AusdruckBoolean("get(""" & writer.parameter(var_index).getName().get_ID() & """)", Export_AusdruckBoolean.Ausdruck_Art.Atom)
         End If
     End Function
 End Class

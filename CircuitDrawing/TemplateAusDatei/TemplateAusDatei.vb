@@ -722,11 +722,16 @@ Public Class TemplateAusDatei
             Dim hasClipOrMod As Boolean = False
             Dim hasUnit As Boolean = False
             Dim hasFrom As Boolean = False
+            Dim hat_str As Boolean = False
             For i As Integer = 0 To lineLarge.Length - 1
                 Select Case mode
                     Case 0
                         If lineLarge(i) = """"c Then
                             mode = 1
+                        ElseIf lineLarge(i) = "["c Then
+                            mode = 101
+                            name = "["
+                            hat_str = False
                         ElseIf lineLarge(i) <> " "c Then
                             Throw New Exception("'""' erwartet!")
                         End If
@@ -809,6 +814,13 @@ Public Class TemplateAusDatei
                         Else
                             unit &= lineLarge(i)
                         End If
+                    Case 101
+                        name &= lineLarge(i)
+                        If lineLarge(i) = """"c Then
+                            hat_str = Not hat_str
+                        ElseIf lineLarge(i) = "]"c And Not hat_str Then
+                            mode = 2
+                        End If
                 End Select
             Next
             If mode <> 3 Then
@@ -880,8 +892,9 @@ Public Class TemplateAusDatei
             If TypeOf valueDefault IsNot Ausdruck_Konstante Then
                 Throw New Exception("Der Default-Wert muss ein Integer sein und darf nicht von Variablen abhängen (Bei " & lineLarge & ")")
             End If
-            parameter.Add(New TemplateParameter_Int(name, myIntervall, CInt(DirectCast(valueDefault, Ausdruck_Konstante).Ausrechnen(Nothing)), unit))
-            parameter_intern.Add(New ParamName(ParamName.paramArt.Int, name))
+            Dim name_str As New Multi_Lang_String(name)
+            parameter.Add(New TemplateParameter_Int(name_str, myIntervall, CInt(DirectCast(valueDefault, Ausdruck_Konstante).Ausrechnen(Nothing)), unit))
+            parameter_intern.Add(New ParamName(ParamName.paramArt.Int, name_str.get_ID()))
         ElseIf line.StartsWith("param_arrow ") Then
             lineLarge = lineLarge.Substring(12).Trim()
 
@@ -894,11 +907,16 @@ Public Class TemplateAusDatei
             Dim hatFrom As Boolean = False
             Dim hasClipOrMod As Boolean = False
             Dim outOfBounds As Intervall.OutOfRangeMode = Intervall.OutOfRangeMode.ClipToBounds
+            Dim hat_str As Boolean = False
             For i As Integer = 0 To lineLarge.Length - 1
                 Select Case mode
                     Case 0
                         If lineLarge(i) = """"c Then
                             mode = 1
+                        ElseIf lineLarge(i) = "["c Then
+                            mode = 101
+                            name = "["
+                            hat_str = False
                         ElseIf lineLarge(i) <> " "c Then
                             Throw New Exception("'""' erwartet!")
                         End If
@@ -956,6 +974,13 @@ Public Class TemplateAusDatei
                             mode = 3
                             hatFrom = True
                         End If
+                    Case 101
+                        name &= lineLarge(i)
+                        If lineLarge(i) = """"c Then
+                            hat_str = Not hat_str
+                        ElseIf lineLarge(i) = "]"c And Not hat_str Then
+                            mode = 2
+                        End If
                 End Select
             Next
             If mode <> 3 Then
@@ -1002,8 +1027,9 @@ Public Class TemplateAusDatei
                 Throw New Exception("Der Default-Wert muss ein Integer sein und darf nicht von Variablen abhängen (Bei " & lineLarge & ")")
             End If
 
-            parameter.Add(New TemplateParameter_Arrow(name, New Intervall(myIntervall.min, myIntervall.max, 1, intervalStart_geschlossen, intervalEnde_geschlossen, myIntervall.outOfRange), CInt(DirectCast(valueDefault, Ausdruck_Konstante).Ausrechnen(Nothing))))
-            parameter_intern.Add(New ParamName(ParamName.paramArt.Arrow, name))
+            Dim name_str As New Multi_Lang_String(name)
+            parameter.Add(New TemplateParameter_Arrow(name_str, New Intervall(myIntervall.min, myIntervall.max, 1, intervalStart_geschlossen, intervalEnde_geschlossen, myIntervall.outOfRange), CInt(DirectCast(valueDefault, Ausdruck_Konstante).Ausrechnen(Nothing))))
+            parameter_intern.Add(New ParamName(ParamName.paramArt.Arrow, name_str.get_ID()))
 
         ElseIf line.StartsWith("param ") Then
             lineLarge = lineLarge.Substring(6).Trim()
@@ -1012,11 +1038,16 @@ Public Class TemplateAusDatei
             Dim neueOption As String = ""
             Dim optionen As New List(Of String)()
             Dim oldOptionStr As String = ""
+            Dim hat_str As Boolean = False
             For i As Integer = 0 To lineLarge.Length - 1
                 Select Case mode
                     Case 0
                         If lineLarge(i) = """"c Then
                             mode = 1
+                        ElseIf lineLarge(i) = "["c Then
+                            mode = 101
+                            name = "["
+                            hat_str = False
                         ElseIf lineLarge(i) <> " "c Then
                             Throw New Exception("'""' erwartet!")
                         End If
@@ -1041,6 +1072,10 @@ Public Class TemplateAusDatei
                     Case 4
                         If lineLarge(i) = """" Then
                             mode = 5
+                        ElseIf lineLarge(i) = "[" Then
+                            mode = 105
+                            hat_str = False
+                            neueOption = "["
                         ElseIf lineLarge(i) = "}" Then
                             mode = 6
                         ElseIf lineLarge(i) <> " " Then
@@ -1077,15 +1112,41 @@ Public Class TemplateAusDatei
                         If lineLarge(i) <> " "c Then
                             Throw New Exception("Zeilenende erwartet.")
                         End If
+                    Case 100
+                        If lineLarge(i) = """"c Then
+                            mode = 101
+                        ElseIf lineLarge(i) <> " "c Then
+                            Throw New Exception("'""' erwartet!")
+                        End If
+                    Case 101
+                        name &= lineLarge(i)
+                        If lineLarge(i) = """"c Then
+                            hat_str = Not hat_str
+                        ElseIf lineLarge(i) = "]"c And Not hat_str Then
+                            mode = 2
+                        End If
+                    Case 105
+                        neueOption &= lineLarge(i)
+                        If lineLarge(i) = """"c Then
+                            hat_str = Not hat_str
+                        ElseIf lineLarge(i) = "]"c And Not hat_str Then
+                            mode = 4
+                            optionen.Add(neueOption)
+                            neueOption = ""
+                        End If
                 End Select
             Next
             If Not (mode = 6 OrElse mode = 9) Then
                 Throw New Exception("Ungültige Definition eines Parameters bei '" & lineLarge & "'")
             End If
+            Dim optionen_parse(optionen.Count - 1) As Multi_Lang_String
+            For i As Integer = 0 To optionen.Count - 1
+                optionen_parse(i) = New Multi_Lang_String(optionen(i))
+            Next
             Dim oldoption As Integer = -1
             If mode = 9 Then
-                For i As Integer = 0 To optionen.Count - 1
-                    If oldOptionStr = optionen(i) Then
+                For i As Integer = 0 To optionen_parse.Length - 1
+                    If oldOptionStr = optionen_parse(i).get_ID() Then
                         oldoption = i
                     End If
                 Next
@@ -1093,8 +1154,9 @@ Public Class TemplateAusDatei
                     Throw New Exception("Die Option '" & oldOptionStr & "' gibt es nicht.")
                 End If
             End If
-            parameter.Add(New TemplateParameter_Param(name, optionen.ToArray(), oldoption))
-            parameter_intern.Add(New ParamName(ParamName.paramArt.ParamListe, name)) 'dieser Parameter blockiert eine Position in der Liste. Aber mit dem "@param#" wird sichergestellt, dass er nicht als param_int oder param_var überschrieben wird!
+            Dim name_str As New Multi_Lang_String(name)
+            parameter.Add(New TemplateParameter_Param(name_str, optionen_parse, oldoption))
+            parameter_intern.Add(New ParamName(ParamName.paramArt.ParamListe, name_str.get_ID())) 'dieser Parameter blockiert eine Position in der Liste. Aber mit dem "@param#" wird sichergestellt, dass er nicht als param_int oder param_var überschrieben wird!
         ElseIf line.StartsWith("param_string ") Then
             lineLarge = lineLarge.Substring(13).Trim()
 
@@ -1102,11 +1164,16 @@ Public Class TemplateAusDatei
             Dim name As String = ""
             Dim defaultVal As String = ""
             Dim fromVal As String = ""
+            Dim hat_str As Boolean = False
             For i As Integer = 0 To lineLarge.Length - 1
                 Select Case mode
                     Case 0
                         If lineLarge(i) = """"c Then
                             mode = 1
+                        ElseIf lineLarge(i) = "["c Then
+                            mode = 101
+                            name = "["
+                            hat_str = False
                         ElseIf lineLarge(i) <> " "c Then
                             Throw New Exception("'""' erwartet!")
                         End If
@@ -1174,14 +1241,22 @@ Public Class TemplateAusDatei
                         If lineLarge(i) <> " "c Then
                             Throw New Exception("Ende der Zeile erwartet!")
                         End If
+                    Case 101
+                        name &= lineLarge(i)
+                        If lineLarge(i) = """"c Then
+                            hat_str = Not hat_str
+                        ElseIf lineLarge(i) = "]"c And Not hat_str Then
+                            mode = 2
+                        End If
                 End Select
             Next
+            Dim name_str As New Multi_Lang_String(name)
             If mode = 5 Then
-                parameter.Add(New TemplateParameter_String(name, defaultVal, False, ""))
-                parameter_intern.Add(New ParamName(ParamName.paramArt.Str, name))
+                parameter.Add(New TemplateParameter_String(name_str, defaultVal, False, ""))
+                parameter_intern.Add(New ParamName(ParamName.paramArt.Str, name_str.get_ID()))
             ElseIf mode = 11 Then
-                parameter.Add(New TemplateParameter_String(name, defaultVal, True, fromVal))
-                parameter_intern.Add(New ParamName(ParamName.paramArt.Str, name))
+                parameter.Add(New TemplateParameter_String(name_str, defaultVal, True, fromVal))
+                parameter_intern.Add(New ParamName(ParamName.paramArt.Str, name_str.get_ID()))
             Else
                 Throw New Exception("Falsche Definition eines param_string (Erwartet wird: 'param_string ""Name"" = ""Default-Wert"" [from ""Zeichen""]'")
             End If
@@ -2173,16 +2248,16 @@ Public Class TemplateAusDatei
             If TypeOf parameter(i) Is TemplateParameter_Param Then
                 param = DirectCast(parameter(i), TemplateParameter_Param)
                 If useNameSpaceUndName Then
-                    paramName = (_namespace & "." & _name & "." & param.name).ToLower()
+                    paramName = (_namespace & "." & _name & "." & param.name.get_ID()).ToLower()
                 Else
-                    paramName = param.name.ToLower()
+                    paramName = param.name.get_ID().ToLower()
                 End If
                 Dim hat_geändert As Boolean = False
                 For j As Integer = 0 To paramsQuelle.Length - 1
                     If paramName Like paramsQuelle(j).param Then
 
                         For k As Integer = 0 To param.options.Length - 1
-                            If param.options(k).ToLower() = paramsQuelle(j).value Then
+                            If param.options(k).get_ID().ToLower() = paramsQuelle(j).value Then
                                 paramsZiel(i) = New ParamInt(k)
                                 hat_geändert = True
                                 Exit For
@@ -2198,9 +2273,9 @@ Public Class TemplateAusDatei
             ElseIf TypeOf parameter(i) Is TemplateParameter_Arrow Then
                 param_a = DirectCast(parameter(i), TemplateParameter_Arrow)
                 If useNameSpaceUndName Then
-                    paramName = (_namespace & "." & _name & "." & param_a.name).ToLower()
+                    paramName = (_namespace & "." & _name & "." & param_a.name.get_ID()).ToLower()
                 Else
-                    paramName = param_a.name.ToLower()
+                    paramName = param_a.name.get_ID().ToLower()
                 End If
                 Dim hat_geändert As Boolean = False
                 For j As Integer = 0 To paramsQuelle.Length - 1
@@ -2221,9 +2296,9 @@ Public Class TemplateAusDatei
             ElseIf TypeOf parameter(i) Is TemplateParameter_Int Then
                 param_i = DirectCast(parameter(i), TemplateParameter_Int)
                 If useNameSpaceUndName Then
-                    paramName = (_namespace & "." & _name & "." & param_i.name).ToLower()
+                    paramName = (_namespace & "." & _name & "." & param_i.name.get_ID()).ToLower()
                 Else
-                    paramName = param_i.name.ToLower()
+                    paramName = param_i.name.get_ID().ToLower()
                 End If
                 Dim hat_geändert As Boolean = False
                 For j As Integer = 0 To paramsQuelle.Length - 1
@@ -2246,9 +2321,9 @@ Public Class TemplateAusDatei
             ElseIf TypeOf parameter(i) Is TemplateParameter_String Then
                 param_s = DirectCast(parameter(i), TemplateParameter_String)
                 If useNameSpaceUndName Then
-                    paramName = (_namespace & "." & _name & "." & param_s.name).ToLower()
+                    paramName = (_namespace & "." & _name & "." & param_s.name.get_ID()).ToLower()
                 Else
-                    paramName = param_s.name.ToLower()
+                    paramName = param_s.name.get_ID().ToLower()
                 End If
                 Dim hat_geändert As Boolean = False
                 For j As Integer = 0 To paramsQuelle.Length - 1
@@ -2272,6 +2347,66 @@ Public Class TemplateAusDatei
             End If
         Next
     End Sub
+
+    Public Function try_translate_param_value(_param As String, _value As String, str_to_ID As Boolean) As KeyValuePair(Of String, String)?
+        Dim paramName As String
+        Dim param As TemplateParameter_Param
+        Dim param_a As TemplateParameter
+        For i As Integer = 0 To parameter.Count - 1
+            If TypeOf parameter(i) Is TemplateParameter_Param Then
+                param = DirectCast(parameter(i), TemplateParameter_Param)
+                If str_to_ID Then
+                    paramName = (_namespace & "." & _name & "." & param.name.get_str()).ToLower()
+                Else
+                    paramName = (_namespace & "." & _name & "." & param.name.get_ID()).ToLower()
+                End If
+                If paramName Like _param Then
+                    For k As Integer = 0 To param.options.Length - 1
+                        If str_to_ID Then
+                            If param.options(k).get_str().ToLower() = _value Then
+                                Return New KeyValuePair(Of String, String)(replaceLast(_param, param.getName().get_ID), param.options(k).get_ID().ToLower())
+                            End If
+                        Else
+                            If param.options(k).get_ID().ToLower() = _value Then
+                                Return New KeyValuePair(Of String, String)(replaceLast(_param, param.getName().get_str), param.options(k).get_str().ToLower())
+                            End If
+                        End If
+                    Next
+                End If
+            ElseIf TypeOf parameter(i) Is TemplateParameter_Arrow OrElse
+                   TypeOf parameter(i) Is TemplateParameter_Int OrElse
+                   TypeOf parameter(i) Is TemplateParameter_String Then
+                param_a = DirectCast(parameter(i), TemplateParameter)
+                If str_to_ID Then
+                    paramName = (_namespace & "." & _name & "." & param_a.getName().get_str()).ToLower()
+                Else
+                    paramName = (_namespace & "." & _name & "." & param_a.getName().get_ID()).ToLower()
+                End If
+                If paramName Like _param Then
+                    If str_to_ID Then
+                        Return New KeyValuePair(Of String, String)(replaceLast(_param, param_a.getName().get_ID), _value)
+                    Else
+                        Return New KeyValuePair(Of String, String)(replaceLast(_param, param_a.getName().get_str), _value)
+                    End If
+                End If
+            Else
+                Throw New Exception("Unbekannte Parameter-Art!")
+            End If
+        Next
+        Return Nothing
+    End Function
+
+    Private Shared Function replaceLast(str As String, replace As String) As String
+        For k As Integer = str.Length - 1 To 1 Step -1
+            If str(k) = "." Then
+                Dim last_str As String = str.Substring(k + 1)
+                If last_str <> "" AndAlso Not last_str.Contains("*") Then
+                    Return str.Substring(0, k + 1) & replace.ToLower()
+                End If
+            End If
+        Next
+        Return str
+    End Function
 
     Public Function getDefaultParameter_copy(index As Integer) As ParamValue
         Return defaulParameterValues(index).Copy()
@@ -2416,7 +2551,7 @@ Public Class TemplateAusDatei
 
         Dim paramExport As New List(Of TemplateParameter)(Me.parameter.Count + extraParameterAmAnfang)
         '#textpos ist intern parameter0, der aber nicht in der parameterliste ist!
-        paramExport.Add(New TemplateParameter_Int("#textpos", New Intervall(Integer.MinValue, Integer.MaxValue, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), 0, ""))
+        paramExport.Add(New TemplateParameter_Int(New Multi_Lang_String("#textpos"), New Intervall(Integer.MinValue, Integer.MaxValue, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), 0, ""))
         If Me.isDeko Then
             CompileParentArgs.addParamsExport(paramExport)
         End If
@@ -2542,17 +2677,17 @@ Public MustInherit Class TemplateParameter
         End If
     End Sub
 
-    Public MustOverride Function getName() As String
+    Public MustOverride Function getName() As Multi_Lang_String
 End Class
 
 Public Class TemplateParameter_Arrow
     Inherits TemplateParameter
 
-    Public name As String
+    Public name As Multi_Lang_String
     Public intervall As Intervall
     Public defaultVal As Integer
 
-    Public Sub New(name As String, intervall As Intervall, defaultVal As Integer)
+    Public Sub New(name As Multi_Lang_String, intervall As Intervall, defaultVal As Integer)
         Me.name = name
         Me.intervall = intervall
         If Me.intervall.min < -1 Then Me.intervall.min = -1
@@ -2567,26 +2702,26 @@ Public Class TemplateParameter_Arrow
         Me.defaultVal = Me.intervall.fitToRange(defaultVal)
     End Sub
 
-    Public Overrides Function getName() As String
+    Public Overrides Function getName() As Multi_Lang_String
         Return name
     End Function
 
     Public Sub save(writer As BinaryWriter)
-        writer.Write(name)
+        name.speichern(writer)
         writer.Write(defaultVal)
         intervall.speichern(writer)
     End Sub
 
     Public Shared Function load(reader As BinaryReader, version As Integer) As TemplateParameter_Arrow
-        Dim name As String = reader.ReadString()
+        Dim name As Multi_Lang_String = Multi_Lang_String.Einlesen(reader, version)
         Dim defaultVal As Integer = reader.ReadInt32()
         Dim intervall As Intervall = Intervall.laden(reader, version)
         Return New TemplateParameter_Arrow(name, intervall, defaultVal)
     End Function
 
     Public Sub exportiere(writer As Export_StreamWriter)
-        Dim line As String = "param_arrow """
-        line &= name & """ = "
+        Dim line As String = "param_arrow "
+        line &= name.exportieren() & " = "
         line &= defaultVal
         If Not intervall.ist_unendlich() Then
             line &= " from ["
@@ -2603,31 +2738,31 @@ End Class
 
 Public Class TemplateParameter_Int
     Inherits TemplateParameter
-    Public name As String
+    Public name As Multi_Lang_String
     Public intervall As Intervall
     Public defaultVal As Integer
     Public unit As String
 
-    Public Sub New(name As String, intervall As Intervall, defaultVal As Integer, unit As String)
+    Public Sub New(name As Multi_Lang_String, intervall As Intervall, defaultVal As Integer, unit As String)
         Me.name = name
         Me.intervall = intervall
         Me.unit = unit
         Me.defaultVal = intervall.fitToRange(defaultVal)
     End Sub
 
-    Public Overrides Function getName() As String
+    Public Overrides Function getName() As Multi_Lang_String
         Return name
     End Function
 
     Public Sub save(writer As BinaryWriter)
-        writer.Write(name)
+        name.speichern(writer)
         writer.Write(defaultVal)
         writer.Write(unit)
         intervall.speichern(writer)
     End Sub
 
     Public Shared Function load(reader As BinaryReader, version As Integer) As TemplateParameter_Int
-        Dim name As String = reader.ReadString()
+        Dim name As Multi_Lang_String = Multi_Lang_String.Einlesen(reader, version)
         Dim defaultVal As Integer = reader.ReadInt32()
         Dim unit As String = reader.ReadString()
         Dim intervall As Intervall = Intervall.laden(reader, version)
@@ -2635,8 +2770,8 @@ Public Class TemplateParameter_Int
     End Function
 
     Public Sub exportiere(writer As Export_StreamWriter)
-        Dim line As String = "param_int """
-        line &= name & """ = "
+        Dim line As String = "param_int "
+        line &= name.exportieren() & " = "
         line &= defaultVal
         If Not intervall.ist_unendlich() Then
             line &= " from ["
@@ -2660,11 +2795,11 @@ End Class
 
 Public Class TemplateParameter_String
     Inherits TemplateParameter
-    Public name As String
+    Public name As Multi_Lang_String
     Public defaultval As String
     Public hatFrom As Boolean
     Public fromVal As String
-    Public Sub New(name As String, defaultVal As String, hatfrom As Boolean, fromVal As String)
+    Public Sub New(name As Multi_Lang_String, defaultVal As String, hatfrom As Boolean, fromVal As String)
         Me.name = name
         Me.defaultval = defaultVal
         If hatfrom Then
@@ -2674,7 +2809,7 @@ Public Class TemplateParameter_String
         End If
         Me.hatFrom = hatfrom
         If Not istErlaubt(Me.defaultval) Then
-            Throw New Exception("Der Default-Wert '" & defaultVal & "' ist ein nicht erlaubter Wert für den Parameter '" & name & "'.")
+            Throw New Exception("Der Default-Wert '" & defaultVal & "' ist ein nicht erlaubter Wert für den Parameter '" & name.get_ID() & "'.")
         End If
     End Sub
 
@@ -2689,12 +2824,12 @@ Public Class TemplateParameter_String
         Return True
     End Function
 
-    Public Overrides Function getName() As String
+    Public Overrides Function getName() As Multi_Lang_String
         Return name
     End Function
 
     Public Sub save(writer As BinaryWriter)
-        writer.Write(name)
+        name.speichern(writer)
         writer.Write(defaultval)
         writer.Write(hatFrom)
         If hatFrom Then
@@ -2703,7 +2838,7 @@ Public Class TemplateParameter_String
     End Sub
 
     Public Shared Function load(reader As BinaryReader, version As Integer) As TemplateParameter_String
-        Dim name As String = reader.ReadString()
+        Dim name As Multi_Lang_String = Multi_Lang_String.Einlesen(reader, version)
         Dim defaultVal As String = reader.ReadString()
         Dim hatFrom As Boolean = reader.ReadBoolean()
         Dim fromVal As String = ""
@@ -2715,7 +2850,7 @@ Public Class TemplateParameter_String
 
     Public Sub exportiere(writer As Export_StreamWriter)
         Dim line As String = "param_string "
-        line &= """" & name & """ = "
+        line &= name.exportieren() & " = "
         line &= """" & defaultval & """"
         If hatFrom Then
             line &= " from """
@@ -2727,36 +2862,36 @@ End Class
 
 Public Class TemplateParameter_Double
     Inherits TemplateParameter
-    Public name As String
+    Public name As Multi_Lang_String
     Public defaultVal As Double
     Public unit As String
 
-    Public Sub New(name As String, defaultVal As Double, unit As String)
+    Public Sub New(name As Multi_Lang_String, defaultVal As Double, unit As String)
         Me.name = name
         Me.unit = unit
         Me.defaultVal = defaultVal
     End Sub
 
-    Public Overrides Function getName() As String
+    Public Overrides Function getName() As Multi_Lang_String
         Return name
     End Function
 
     Public Sub save(writer As BinaryWriter)
-        writer.Write(name)
+        name.speichern(writer)
         writer.Write(defaultVal)
         writer.Write(unit)
     End Sub
 
     Public Shared Function load(reader As BinaryReader, version As Integer) As TemplateParameter_Double
-        Dim name As String = reader.ReadString()
+        Dim name As Multi_Lang_String = Multi_Lang_String.Einlesen(reader, version)
         Dim defaultVal As Double = reader.ReadDouble()
         Dim unit As String = reader.ReadString()
         Return New TemplateParameter_Double(name, defaultVal, unit)
     End Function
 
     Public Sub exportiere(writer As Export_StreamWriter)
-        Dim line As String = "param_double """
-        line &= name & """ = "
+        Dim line As String = "param_double "
+        line &= name.exportieren() & " = "
         line &= defaultVal
         If unit <> "" Then
             line &= " unit """ & unit & """"
@@ -2864,52 +2999,52 @@ End Class
 
 Public Class TemplateParameter_Param
     Inherits TemplateParameter
-    Public name As String
-    Public options() As String
+    Public name As Multi_Lang_String
+    Public options() As Multi_Lang_String
     Public oldOption As Integer
 
-    Public Sub New(name As String, options() As String, oldOption As Integer)
+    Public Sub New(name As Multi_Lang_String, options() As Multi_Lang_String, oldOption As Integer)
         Me.name = name
         Me.options = options
         Me.oldOption = oldOption
     End Sub
 
-    Public Overrides Function getName() As String
+    Public Overrides Function getName() As Multi_Lang_String
         Return name
     End Function
 
     Public Sub save(writer As BinaryWriter)
-        writer.Write(name)
+        name.speichern(writer)
         writer.Write(oldOption)
         writer.Write(options.Length)
         For i As Integer = 0 To options.Length - 1
-            writer.Write(options(i))
+            options(i).speichern(writer)
         Next
     End Sub
 
     Public Shared Function load(reader As BinaryReader, version As Integer) As TemplateParameter_Param
-        Dim name As String = reader.ReadString()
+        Dim name As Multi_Lang_String = Multi_Lang_String.Einlesen(reader, version)
         Dim oldOption As Integer = -1
         If version >= 15 Then
             oldOption = reader.ReadInt32()
         End If
         Dim anzahl As Integer = reader.ReadInt32()
         If anzahl < 0 Then Throw New Exception("Die Anzahl der Optionen darf nicht negativ sein!")
-        Dim options(anzahl - 1) As String
+        Dim options(anzahl - 1) As Multi_Lang_String
         For i As Integer = 0 To anzahl - 1
-            options(i) = reader.ReadString()
+            options(i) = Multi_Lang_String.Einlesen(reader, version)
         Next
         Return New TemplateParameter_Param(name, options, oldOption)
     End Function
 
     Public Sub exportiere(writer As Export_StreamWriter)
-        Dim line As String = "param """ & name & """ = {"
+        Dim line As String = "param " & name.exportieren() & " = {"
         For i As Integer = 0 To options.Length - 2
-            line &= """" & options(i) & """ "
+            line &= options(i).exportieren() & " "
         Next
-        line &= """" & options(options.Length - 1) & """}"
+        line &= options(options.Length - 1).exportieren & "}"
         If oldOption >= 0 AndAlso oldOption < options.Length - 1 Then
-            line &= " old """ & options(oldOption) & """"
+            line &= " old """ & options(oldOption).get_ID & """"
         End If
         writer.WriteLine(line)
     End Sub
@@ -3013,10 +3148,10 @@ Public Class CompileParentArgs
     End Sub
 
     Public Shared Sub addParamsExport(paramExport As List(Of TemplateParameter))
-        paramExport.Add(New TemplateParameter_Int("parent.select.width", New Intervall(Integer.MinValue, Integer.MaxValue, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), 0, ""))
-        paramExport.Add(New TemplateParameter_Int("parent.select.height", New Intervall(Integer.MinValue, Integer.MaxValue, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), 0, ""))
-        paramExport.Add(New TemplateParameter_Int("parent.select.x", New Intervall(Integer.MinValue, Integer.MaxValue, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), 0, ""))
-        paramExport.Add(New TemplateParameter_Int("parent.select.y", New Intervall(Integer.MinValue, Integer.MaxValue, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), 0, ""))
+        paramExport.Add(New TemplateParameter_Int(New Multi_Lang_String("parent.select.width"), New Intervall(Integer.MinValue, Integer.MaxValue, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), 0, ""))
+        paramExport.Add(New TemplateParameter_Int(New Multi_Lang_String("parent.select.height"), New Intervall(Integer.MinValue, Integer.MaxValue, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), 0, ""))
+        paramExport.Add(New TemplateParameter_Int(New Multi_Lang_String("parent.select.x"), New Intervall(Integer.MinValue, Integer.MaxValue, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), 0, ""))
+        paramExport.Add(New TemplateParameter_Int(New Multi_Lang_String("parent.select.y"), New Intervall(Integer.MinValue, Integer.MaxValue, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), 0, ""))
     End Sub
 End Class
 

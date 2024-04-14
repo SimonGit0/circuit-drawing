@@ -28,7 +28,7 @@
     Public Overrides Function setEinstellungen(sender As Vektor_Picturebox, einstellungen As List(Of ElementEinstellung)) As Boolean
         Dim changed As Boolean = MyBase.setEinstellungen(sender, einstellungen)
         For Each e As ElementEinstellung In einstellungen
-            If TypeOf e Is Einstellung_Pos AndAlso e.Name = My.Resources.Strings.Einstellung_Größe Then
+            If TypeOf e Is Einstellung_Pos AndAlso e.Name.get_ID() = My.Resources.Strings.Einstellung_Größe Then
                 With DirectCast(e, Einstellung_Pos)
                     If .changedX Then
                         Me.s.Width = .pos.X

@@ -4,8 +4,8 @@ name(n-type JFET)
 namespace(Transistor)
 Info End 
 
-param_arrow "Pfeil" = 2 from [-1, #inf) 
-param_int "Linienbreite Kanal" = 200 from [10, 1, 1000] unit "%"
+param_arrow ["Pfeil",en="Arrow"] = 2 from [-1, #inf) 
+param_int ["Linienbreite Kanal",en="Linewidth Channel"] = 200 from [10, 1, 1000] unit "%"
 
 % Defaults
 def l_channel = 400

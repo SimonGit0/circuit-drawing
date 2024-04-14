@@ -23,7 +23,7 @@
     End Sub
 
     Public Sub New(name As String, p As Point, xString As String, yString As String, xUnit As String, yUnit As String)
-        MyBase.New(name)
+        MyBase.New(New Multi_Lang_String(name, Nothing))
         Me.pos = p
 
         Me.xString = xString

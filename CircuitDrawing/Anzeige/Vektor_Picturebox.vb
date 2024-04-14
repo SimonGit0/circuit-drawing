@@ -363,7 +363,7 @@ Public Class Vektor_Picturebox
                     For i As Integer = liste.Count - 1 To 0 Step -1
                         hatEinstellungInBeiden = False
                         For j As Integer = 0 To listeNeu.Count - 1
-                            If liste(i).Name = listeNeu(j).Name AndAlso liste(i).GetType().ToString() = listeNeu(j).GetType().ToString() Then
+                            If liste(i).Name.get_ID() = listeNeu(j).Name.get_ID() AndAlso liste(i).GetType().ToString() = listeNeu(j).GetType().ToString() Then
                                 hatEinstellungInBeiden = True
                                 liste(i).CombineValues(listeNeu(j))
                                 Exit For

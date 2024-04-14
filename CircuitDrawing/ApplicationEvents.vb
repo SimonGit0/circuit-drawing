@@ -14,8 +14,10 @@ Namespace My
             Select Case CircuitDrawing.Settings.getSettings().sprache
                 Case Vektorgrafik_Sprache.Deutsch
                     Thread.CurrentThread.CurrentUICulture = New CultureInfo("de-DE")
+                    CircuitDrawing.Settings.lang_str = "de"
                 Case Vektorgrafik_Sprache.Englisch
                     Thread.CurrentThread.CurrentUICulture = New CultureInfo("en")
+                    CircuitDrawing.Settings.lang_str = "en"
             End Select
         End Sub
 

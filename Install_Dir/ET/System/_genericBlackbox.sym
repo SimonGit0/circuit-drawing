@@ -3,33 +3,33 @@
 def default_Breite=2*default_ExtraBreite+max(0, max((default_Links-1)*default_PitchLinks,(default_Rechts-1)*default_PitchRechts))
 def default_Hoehe=2*default_ExtraHöhe+max(0, max((default_Oben-1)*default_PitchOben,(default_Unten-1)*default_PitchUnten))
 
-param_int "Links"=default_Links from [0, maxPins]
-param_int "Rechts"=default_Rechts from [0, maxPins]
-param_int "Oben"=default_Oben from [0, maxPins]
-param_int "Unten"=default_Unten from [0, maxPins]
+param_int ["Links",en="Left"]=default_Links from [0, maxPins]
+param_int ["Rechts",en="Right"]=default_Rechts from [0, maxPins]
+param_int ["Oben",en="Top"]=default_Oben from [0, maxPins]
+param_int ["Unten",en="Bottom"]=default_Unten from [0, maxPins]
 
 var left=get("Links")
 var right=get("Rechts")
 var top=get("Oben")
 var bottom=get("Unten")
 
-param_int "Pitch Links"=default_PitchLinks from (0,100,10000]
-param_int "Pitch Rechts"=default_PitchRechts from (0,100,10000]
-param_int "Pitch Oben"=default_PitchOben from (0,100,10000]
-param_int "Pitch Unten"=default_PitchUnten from (0,100,10000]
+param_int ["Pitch Links",en="Pitch Left"]=default_PitchLinks from (0,100,10000]
+param_int ["Pitch Rechts",en="Pitch Right"]=default_PitchRechts from (0,100,10000]
+param_int ["Pitch Oben",en="Pitch Top"]=default_PitchOben from (0,100,10000]
+param_int ["Pitch Unten",en="Pitch Bottom"]=default_PitchUnten from (0,100,10000]
 
 var pLeft=get("Pitch Links")
 var pRight=get("Pitch Rechts")
 var pTop=get("Pitch Oben")
 var pBottom=get("Pitch Unten")
 
-param "Größe" = {"Größe definieren" "Größe aus Pins berechnen"} old "Größe aus Pins berechnen"
+param ["Größe",en="Size"] = {["Größe definieren",en="Define Size"] ["Größe aus Pins berechnen",en="Calculate Size from Pins"]} old "Größe aus Pins berechnen"
 
-param_int "Breite"=default_Breite from (0,100,#inf)
-param_int "Höhe"=default_Hoehe from (0,100,#inf)
+param_int ["Breite",en="Width"]=default_Breite from (0,100,#inf)
+param_int ["Höhe",en="Height"]=default_Hoehe from (0,100,#inf)
 
-param_int "Extra Breite"=default_ExtraBreite from (0,100,10000]
-param_int "Extra Höhe"=default_ExtraHöhe from (0,100,10000]
+param_int ["Extra Breite",en="Additional Width"]=default_ExtraBreite from (0,100,10000]
+param_int ["Extra Höhe",en="Additional Height"]=default_ExtraHöhe from (0,100,10000]
 
 var breite = 0 %Globale Variablen definieren
 var hoehe = 0 %Globale Variablen definieren

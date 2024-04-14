@@ -1,8 +1,8 @@
-﻿param_int "Linienbreite" = 200 from [10, 1, 1000] unit "%"
-param_int "Pfeil Position" = 100 from [0, 1, 100] unit "%"
-param_int "Kontaktposition" = 100 from [0,1,200]
-param_int "Gate Abstand" = 50 from [0,1,200]
-param "Diode"={"Ja" "Nein"}
+﻿param_int ["Linienbreite",de="Basis Breite",en="Base Width"] = 200 from [10, 1, 1000] unit "%"
+param_int ["Pfeil Position",en="Arrow Position"] = 100 from [0, 1, 100] unit "%"
+param_int ["Kontaktposition",en="Contact Position"] = 100 from [0,1,200]
+param_int ["Gate Abstand",en="Gate Distance"] = 50 from [0,1,200]
+param "Diode"={["Ja",en="Yes"] ["Nein",en="No"]}
 
 
 def dreieckLaenge = 50

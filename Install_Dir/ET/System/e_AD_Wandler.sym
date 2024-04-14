@@ -1,4 +1,4 @@
-﻿param "Type"={"AD-Wandler" "DA-Wandler"}
+﻿param ["Type",de="Typ"]={["AD-Wandler",en="ADC"] ["DA-Wandler",en="DAC"]}
 
 def default_Links=3
 def default_Rechts=3

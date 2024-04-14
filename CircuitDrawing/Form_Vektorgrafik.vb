@@ -5,7 +5,7 @@ Public Class Form_Vektorgrafik
     Private Const ALLOW_IMPORT_IMAGE As Boolean = False
 
     Public Const VEKTORGRAFIK_DATEIKONSTANTE As ULong = 4552427781276267190
-    Public Const Speicher_Version As Integer = 32
+    Public Const Speicher_Version As Integer = 33
     Private WR_NAME_Bauelemente As String = My.Resources.Strings.WR_NAME_Bauelemente
     Private WR_NAME_Einstellungen As String = My.Resources.Strings.WR_NAME_Einstellungen
     Private WR_NAME_MarkierungsEinstellungen As String = My.Resources.Strings.WR_NAME_MarkierungsEinstellungen

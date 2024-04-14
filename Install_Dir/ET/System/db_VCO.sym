@@ -1,6 +1,6 @@
 ﻿def scale_x=0
 def scale_y=-2
-param "Funktion"={"Sinus" "Rechteck" "Langes Rechteck" "Sägezahn"}
+param ["Funktion",en="Function"]={["Sinus",en="Sine"] ["Rechteck",en="Rect"] ["Langes Rechteck",en="Long Rect"] ["Sägezahn",en="Sawtooth"]}
 input(_genericRoundBlackbox.sym)
 
 Drawing:

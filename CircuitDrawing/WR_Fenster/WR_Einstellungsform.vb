@@ -91,7 +91,7 @@
                 If einstellungen(i).GetType().ToString <> myEinstellungen(i).GetType().ToString Then
                     Return False
                 End If
-                If einstellungen(i).Name <> myEinstellungen(i).Name Then
+                If Not einstellungen(i).Name.is_equal(myEinstellungen(i).Name) Then
                     Return False
                 End If
                 If TypeOf einstellungen(i) Is Einstellung_Multi Then

@@ -1,5 +1,5 @@
-﻿param "Type"={"Plain" "Dot at start" "Dot at end"}
-param_int "Dot"=25 from (0, #inf)
+﻿param ["Type",de="Typ"]={["Plain",de="Einfach"] ["Dot at start",de="Punkt am Start"] ["Dot at end",de="Punkt am Ende"]}
+param_int ["Dot",de="Punkt"]=25 from (0, #inf)
 def rad=75
 var radDot=get("Dot")
 Drawing:

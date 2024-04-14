@@ -245,6 +245,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Anzahl ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Einstellung_Anzahl() As String
+            Get
+                Return ResourceManager.GetString("Einstellung_Anzahl", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Art des Strompfeiles ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Einstellung_ArtDesStrompfeiles() As String
@@ -268,6 +277,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Einstellung_Deckkraft() As String
             Get
                 Return ResourceManager.GetString("Einstellung_Deckkraft", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Einfach ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Einstellung_Einfach() As String
+            Get
+                Return ResourceManager.GetString("Einstellung_Einfach", resourceCulture)
             End Get
         End Property
         
@@ -326,6 +344,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Funktion ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Einstellung_Funktion() As String
+            Get
+                Return ResourceManager.GetString("Einstellung_Funktion", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Größe ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Einstellung_Größe() As String
@@ -367,6 +394,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Einstellung_Linienstil() As String
             Get
                 Return ResourceManager.GetString("Einstellung_Linienstil", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Mehrere Rechtecke ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Einstellung_MehrereRechtecke() As String
+            Get
+                Return ResourceManager.GetString("Einstellung_MehrereRechtecke", resourceCulture)
             End Get
         End Property
         
@@ -434,6 +470,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Stützstellen ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Einstellung_Stützstellen() As String
+            Get
+                Return ResourceManager.GetString("Einstellung_Stützstellen", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Ausrichtung: ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Einstellung_Textausrichtung() As String
@@ -452,11 +497,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Textausrichtung ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Einstellung_Textausrichtung_Textfeld() As String
+            Get
+                Return ResourceManager.GetString("Einstellung_Textausrichtung_Textfeld", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Vertikal: ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Einstellung_Textausrichtung_Vertikal() As String
             Get
                 Return ResourceManager.GetString("Einstellung_Textausrichtung_Vertikal", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Typ ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Einstellung_Typ() As String
+            Get
+                Return ResourceManager.GetString("Einstellung_Typ", resourceCulture)
             End Get
         End Property
         
@@ -619,6 +682,15 @@ Namespace My.Resources
         Friend Shared ReadOnly Property NebenVerbinder() As String
             Get
                 Return ResourceManager.GetString("NebenVerbinder", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Neues Textfeld ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Neues_Textfeld() As String
+            Get
+                Return ResourceManager.GetString("Neues_Textfeld", resourceCulture)
             End Get
         End Property
         

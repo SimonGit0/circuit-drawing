@@ -110,7 +110,7 @@ Public Class SnapableLabel
         For Each e As ElementEinstellung In einstellungen
             If beschriftung.setEinstellung(e) Then
                 changed = True
-            ElseIf TypeOf e Is Einstellung_Fontstyle AndAlso e.Name = Element.EINSTELLUNG_FONTSTYLE Then
+            ElseIf TypeOf e Is Einstellung_Fontstyle AndAlso e.Name.get_ID() = Element.EINSTELLUNG_FONTSTYLE Then
                 Me.fontstyle = DirectCast(e, Einstellung_Fontstyle).getNewFontstyle(Me.fontstyle, sender.myFonts, changed, False)
             End If
         Next

@@ -271,13 +271,13 @@
                         With DirectCast(entry, IntelisenseEntryNamespace)
                             For z As Integer = 0 To .childs.Count - 1
                                 If SmallLarge_Egal Then
-                                    If (Like_Operator_Nutzen AndAlso .childs(z).name.ToLower() Like currentModifier) OrElse
-                                       (Not Like_Operator_Nutzen AndAlso .childs(z).name.ToLower() = currentModifier) Then
+                                    If (Like_Operator_Nutzen AndAlso .childs(z).name.get_str().ToLower() Like currentModifier) OrElse
+                                       (Not Like_Operator_Nutzen AndAlso .childs(z).name.get_str().ToLower() = currentModifier) Then
                                         neueListe.Add(.childs(z))
                                     End If
                                 Else
-                                    If (Like_Operator_Nutzen AndAlso .childs(z).name Like currentModifier) OrElse
-                                       (Not Like_Operator_Nutzen AndAlso .childs(z).name = currentModifier) Then
+                                    If (Like_Operator_Nutzen AndAlso .childs(z).name.get_str() Like currentModifier) OrElse
+                                       (Not Like_Operator_Nutzen AndAlso .childs(z).name.get_str() = currentModifier) Then
                                         neueListe.Add(.childs(z))
                                     End If
                                 End If
@@ -316,13 +316,15 @@
             If TypeOf entry Is IntelisenseEntryNamespace AndAlso Not hatGleich Then
                 With DirectCast(entry, IntelisenseEntryNamespace)
                     For i As Integer = 0 To .childs.Count - 1
-                        möglichkeiten.Add(.childs(i).name)
+                        möglichkeiten.Add(.childs(i).name.get_str())
                     Next
                 End With
             ElseIf TypeOf entry Is IntelisenseParameter AndAlso hatGleich Then
                 With DirectCast(entry, IntelisenseParameter)
                     If TypeOf .param Is TemplateParameter_Param Then
-                        möglichkeiten.AddRange(DirectCast(.param, TemplateParameter_Param).options)
+                        For Each o In DirectCast(.param, TemplateParameter_Param).options
+                            möglichkeiten.Add(o.get_str())
+                        Next
                     End If
                 End With
             End If
@@ -392,7 +394,7 @@
 End Class
 
 Public MustInherit Class IntelisenseEntry
-    Public name As String
+    Public name As Multi_Lang_String
 End Class
 
 Public Class IntelisenseEntryNamespace
@@ -401,7 +403,7 @@ Public Class IntelisenseEntryNamespace
     Public childs As List(Of IntelisenseEntry)
     Public Sub New(name As String)
         childs = New List(Of IntelisenseEntry)
-        Me.name = name
+        Me.name = New Multi_Lang_String(name)
     End Sub
 End Class
 

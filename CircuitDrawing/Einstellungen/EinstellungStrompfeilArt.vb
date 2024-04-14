@@ -10,7 +10,7 @@
     Private myCmb As JoSiCombobox
 
     Public Sub New(name As String, myart As SnapableCurrentArrow.StromPfeilArt)
-        MyBase.New(name)
+        MyBase.New(New Multi_Lang_String(name, Nothing))
         Me.myArt = myart
     End Sub
 

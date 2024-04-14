@@ -295,7 +295,7 @@ Public Class WireLuftlinie
     Public Overrides Function setEinstellungen(sender As Vektor_Picturebox, einstellungen As List(Of ElementEinstellung)) As Boolean
         Dim changed As Boolean = MyBase.setEinstellungen(sender, einstellungen)
         For Each e As ElementEinstellung In einstellungen
-            If TypeOf e Is Einstellung_Pfeilspitze AndAlso e.Name = EINSTELLUNG_PFEILSPITZEN Then
+            If TypeOf e Is Einstellung_Pfeilspitze AndAlso e.Name.get_ID() = EINSTELLUNG_PFEILSPITZEN Then
                 With DirectCast(e, Einstellung_Pfeilspitze)
                     If .startChanged Then
                         pfeilStart.pfeilArt = .pfeilStart.pfeilArt

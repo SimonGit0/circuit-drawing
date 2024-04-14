@@ -64,7 +64,7 @@ Public Class Ausdruck_Gleich
                 Dim param_index As Integer = DirectCast(links, Ausdruck_Variable).getVarIndex()
                 Dim rechts_ausgerechnet As Long = rechts.Ausrechnen(Nothing)
                 If rechts_ausgerechnet >= 0 AndAlso rechts_ausgerechnet < DirectCast(writer.parameter(param_index), TemplateParameter_Param).options.Length Then
-                    r.str = """" & DirectCast(writer.parameter(param_index), TemplateParameter_Param).options(CInt(rechts_ausgerechnet)) & """"
+                    r.str = """" & DirectCast(writer.parameter(param_index), TemplateParameter_Param).options(CInt(rechts_ausgerechnet)).get_ID() & """"
                     r.art = Export_AusdruckInt.Ausdruck_Art.Atom
                 Else
                     Throw New Exception("Parameteroption liegt außerhalb des gültigen Bereichs")
@@ -75,7 +75,7 @@ Public Class Ausdruck_Gleich
                 Dim param_index As Integer = DirectCast(rechts, Ausdruck_Variable).getVarIndex()
                 Dim links_ausgerechnet As Long = links.Ausrechnen(Nothing)
                 If links_ausgerechnet >= 0 AndAlso links_ausgerechnet < DirectCast(writer.parameter(param_index), TemplateParameter_Param).options.Length Then
-                    l.str = """" & DirectCast(writer.parameter(param_index), TemplateParameter_Param).options(CInt(links_ausgerechnet)) & """"
+                    l.str = """" & DirectCast(writer.parameter(param_index), TemplateParameter_Param).options(CInt(links_ausgerechnet)).get_ID() & """"
                     l.art = Export_AusdruckInt.Ausdruck_Art.Atom
                 Else
                     Throw New Exception("Parameteroption liegt außerhalb des gültigen Bereichs")

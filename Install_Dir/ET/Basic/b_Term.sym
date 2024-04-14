@@ -1,5 +1,5 @@
-﻿param "Form" = {"Kreis" "Quadrat mit X" "Quadrat"}
-param_int "Größe" = 50 from (0,50,10000]
+﻿param "Form" = {["Kreis",en="Circle"] ["Quadrat mit X",en="Square with X"] ["Quadrat",en="Square"]}
+param_int ["Größe",en="Size"] = 50 from (0,50,10000]
 
 var radX=get("Größe")
 var radY=get("Größe")

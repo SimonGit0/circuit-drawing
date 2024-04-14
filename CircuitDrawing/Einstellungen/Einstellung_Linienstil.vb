@@ -31,7 +31,7 @@
     Private _txtScale As Textbox_mitUnit
 
     Public Sub New(name As String, nummer As Integer, liste As LineStyleList)
-        MyBase.New(name)
+        MyBase.New(New Multi_Lang_String(name, Nothing))
         Me.style = liste.getLineStyle(nummer).copy()
         neueFarbe = Me.style.farbe
     End Sub

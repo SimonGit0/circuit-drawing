@@ -13,7 +13,7 @@
     Private txtSize As Textbox_mitUnit
 
     Public Sub New(name As String, pfeil As ParamArrow)
-        MyBase.New(name)
+        MyBase.New(New Multi_Lang_String(name, Nothing))
         Me.pfeil = pfeil.CopyPfeil()
     End Sub
 

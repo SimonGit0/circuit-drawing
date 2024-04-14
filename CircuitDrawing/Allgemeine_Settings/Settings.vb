@@ -71,6 +71,7 @@ Public Class Settings
     Public Const kursiverTextImMatheModus_NAME As String = "math_mode_italic"
     Public kursiverTextImMatheModus As Boolean = False
 
+    Public Shared lang_str As String = ""
     Private Sub New()
         KeysSelectInstance = New List(Of ShortcutKeySelectInstance)
     End Sub

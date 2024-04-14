@@ -1,18 +1,18 @@
 ﻿param "Start 1" = {"GND" "Terminal"}
 param "Start 2" = {"GND" "Terminal"}
 
-param_int "Breite" = 50 from (0,#inf)
-param_int "Abstand" = 150 from (0,#inf)
-param_int "Länge" = 500 from (0,50,10000)
-param_int "Überhang TLine" = 0 from [0,50,#inf)
+param_int ["Breite",en="Width"] = 50 from (0,#inf)
+param_int ["Abstand",en="Distance"] = 150 from (0,#inf)
+param_int ["Länge",en="Length"] = 500 from (0,50,10000)
+param_int ["Überhang TLine",en="Overhang TLine"] = 0 from [0,50,#inf)
 var b=get("Breite")
 var a=get("Abstand")
 var l=get("Länge")
 var überhang=get("Überhang TLine")
 
-param_int "X Abstand GND" = 50 from (0,#inf)
-param_int "Y Abstand GND" = 100 from (0,#inf)
-param_int "Größe GND" = 150 from (0,#inf)
+param_int ["X Abstand GND",en="X Distance GND"] = 50 from (0,#inf)
+param_int ["Y Abstand GND",en="Y Distance GND"] = 100 from (0,#inf)
+param_int ["Größe GND",en="Size GND"] = 150 from (0,#inf)
 
 var XAbstandGND = get("X Abstand GND")
 var YAbstandGND = get("Y Abstand GND")

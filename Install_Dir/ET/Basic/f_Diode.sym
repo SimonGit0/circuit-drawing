@@ -1,4 +1,4 @@
-﻿param "Typ"={"Simpel" "Schottky" "Zener" "LED"}
+﻿param ["Typ",en="Type"]={["Simpel",en="Simple"] "Schottky" "Zener" "LED"}
 
 def dreieckLaenge = 200
 def dreieckHoehe = 120

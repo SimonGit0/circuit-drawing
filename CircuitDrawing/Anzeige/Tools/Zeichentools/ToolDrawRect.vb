@@ -56,7 +56,7 @@
                         sender.addElement(New Element_Ellipse(sender.getNewID(), New Point(minX, minY), maxX - minX, maxY - minY, 2, 0))
                     Case FormArt.Textfeld
                         rück.setText("Textfeld hinzugefügt")
-                        sender.addElement(New Element_Textfeld(sender.getNewID(), New Point(minX, minY), maxX - minX, maxY - minY, 2, 0, 0, "Neues Textfeld", DO_Textfeld.AlignH.Mitte, DO_Text.AlignV.Mitte))
+                        sender.addElement(New Element_Textfeld(sender.getNewID(), New Point(minX, minY), maxX - minX, maxY - minY, 2, 0, 0, My.Resources.Strings.Neues_Textfeld, DO_Textfeld.AlignH.Mitte, DO_Text.AlignV.Mitte))
                     Case FormArt.RoundRect
                         rück.setText("Rundes Rechteck hinzugefügt")
                         Dim radius As Integer = Math.Min(maxX - minX, maxY - minY) \ 10

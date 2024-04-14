@@ -46,7 +46,8 @@
             txt = ""
             For i As Integer = 0 To .default_params.Length - 1
                 If i <> 0 Then txt &= vbCrLf
-                txt &= .default_params(i).param & " = " & .default_params(i).value
+                Dim kvp = translate_param_value(.default_params(i).param, .default_params(i).value, myBib, False) 'ID to str
+                txt &= kvp.Key & " = " & kvp.Value
             Next
             txtDefaultParam.Text = txt
 
@@ -78,7 +79,7 @@
                 For i As Integer = 0 To txtDefaultParam.Lines.Count - 1
                     Dim line As String = txtDefaultParam.Lines(i).Trim
                     If line <> "" Then
-                        readParameter(line, default_Val)
+                        readParameter(line, default_Val, args.bib)
                     End If
                 Next
                 .default_params = default_Val.ToArray()
@@ -93,15 +94,29 @@
         Return True
     End Function
 
-    Public Shared Sub readParameter(line As String, liste As List(Of default_Parameter))
+    Public Shared Sub readParameter(line As String, liste As List(Of default_Parameter), bib As Bibliothek)
         Dim values() As String = Mathe.splitString(line, "="c)
         If values.Length <> 2 Then
             Throw New Exception("Falsche Definition des Parameters: " & line)
         End If
         Dim param As String = Mathe.strToLower(values(0).Trim())
         Dim value As String = Mathe.strToLower(values(1).Trim())
-        liste.Add(New default_Parameter(param, value))
+        If bib IsNot Nothing Then
+            Dim kvp = translate_param_value(param, value, bib, True)
+            liste.Add(New default_Parameter(Mathe.strToLower(kvp.Key), Mathe.strToLower(kvp.Value)))
+        Else
+            liste.Add(New default_Parameter(param, value))
+        End If
     End Sub
+
+    Private Shared Function translate_param_value(param As String, value As String, bib As Bibliothek, str_to_ID As Boolean) As KeyValuePair(Of String, String)
+        Dim erg = bib.try_translate_param_value(param.ToLower(), value.ToLower(), str_to_ID)
+        If erg IsNot Nothing Then
+            Return erg.Value()
+        Else
+            Return New KeyValuePair(Of String, String)(param, value)
+        End If
+    End Function
 
     Public Function getPanel() As Panel Implements IEinstellungspanel.getPanel
         Return Panel1

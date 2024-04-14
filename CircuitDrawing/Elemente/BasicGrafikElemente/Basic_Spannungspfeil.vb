@@ -261,7 +261,7 @@ Public Class Basic_Spannungspfeil
     Public Overrides Function setEinstellungen(sender As Vektor_Picturebox, einstellungen As List(Of ElementEinstellung)) As Boolean
         Dim changed As Boolean = MyBase.setEinstellungen(sender, einstellungen)
         For Each e As ElementEinstellung In einstellungen
-            If TypeOf e Is Einstellung_Pfeilspitze AndAlso e.Name = Element.EINSTELLUNG_PFEILSPITZEN Then
+            If TypeOf e Is Einstellung_Pfeilspitze AndAlso e.Name.get_ID() = Element.EINSTELLUNG_PFEILSPITZEN Then
                 With DirectCast(e, Einstellung_Pfeilspitze)
                     If .startChanged Then
                         Me.pfeilStart.pfeilArt = .pfeilStart.pfeilArt
@@ -280,7 +280,7 @@ Public Class Basic_Spannungspfeil
                         changed = True
                     End If
                 End With
-            ElseIf TypeOf e Is Einstellung_Pos AndAlso e.Name = My.Resources.Strings.Einstellung_Krümmung Then
+            ElseIf TypeOf e Is Einstellung_Pos AndAlso e.Name.get_ID() = My.Resources.Strings.Einstellung_Krümmung Then
                 With DirectCast(e, Einstellung_Pos)
                     If .changedX Then
                         Me.krümmung = .pos.X
@@ -291,7 +291,7 @@ Public Class Basic_Spannungspfeil
                         changed = True
                     End If
                 End With
-            ElseIf TypeOf e Is Einstellung_Fontstyle AndAlso e.Name = EINSTELLUNG_FONTSTYLE Then
+            ElseIf TypeOf e Is Einstellung_Fontstyle AndAlso e.Name.get_ID() = EINSTELLUNG_FONTSTYLE Then
                 Me.fontstyle = DirectCast(e, Einstellung_Fontstyle).getNewFontstyle(Me.fontstyle, sender.myFonts, changed, False)
             ElseIf beschriftung.setEinstellung(e) Then
                 changed = True

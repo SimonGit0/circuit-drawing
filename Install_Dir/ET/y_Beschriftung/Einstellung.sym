@@ -5,12 +5,12 @@ var breite = get("parent.select.width")
 var mitteX = get("parent.select.x")+get("parent.select.width")/2
 var mitteY = get("parent.select.y")+get("parent.select.height")/2
 
-param "Art" = {"Durchgezogen" "Überspringen"} 
-param_int "Größe" = 150 from [-100000, 100000]
-param_int "Winkel" = 70 from [0, 359] unit "°" mod
+param ["Art",de="Typ",en="Type"] = {["Durchgezogen",en="Continuous"] ["Überspringen",en="Skip"]} 
+param_int ["Größe",en="Size"] = 150 from [-100000, 100000]
+param_int ["Winkel",en="Angle"] = 70 from [0, 359] unit "°" mod
 param_int "Offset X" = 0 from [-100000, 100000]
 param_int "Offset Y" = 0 from [-100000, 100000]
-param_arrow "Pfeilspitze" = 0 from [0, #inf]
+param_arrow ["Pfeilspitze",en="Arrowhead"] = 0 from [0, #inf]
 
 %var dy = hoehe/2+get("Größe")
 %var dx = dy*36/100

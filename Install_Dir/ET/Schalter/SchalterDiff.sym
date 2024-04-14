@@ -1,9 +1,9 @@
-﻿param_int "Radius Kontakt"=20 from [0,#inf)
+﻿param_int ["Radius Kontakt",en="Radius Contact"]=20 from [0,#inf)
 
-param_int "Abstand"=400 from (0, 50, #inf)
-param_int "Breite"=300 from (0, 50, #inf)
-param_int "Öffnung"=150
-param_int "Anschlüsse" = 100 from [0,50,#inf)
+param_int ["Abstand",en="Distance"]=400 from (0, 50, #inf)
+param_int ["Breite",en="Width"]=300 from (0, 50, #inf)
+param_int ["Öffnung",en="Opening"]=150
+param_int ["Anschlüsse",en="Connections"] = 100 from [0,50,#inf)
 
 var AbstandDiff = get("Abstand")
 

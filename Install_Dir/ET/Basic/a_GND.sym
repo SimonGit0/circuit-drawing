@@ -1,4 +1,4 @@
-﻿param "Typ"={"Eine Linie" "Drei Linien"}
+﻿param ["Typ",de="Typ",en="Type"]={["Eine Linie",en="One Line"] ["Drei Linien",en="Three Lines"]}
 
 Drawing:
 line(0, 0, 0, 200)

@@ -1,6 +1,6 @@
-﻿param_int "Breite" = 800 from (0,100,10000]
-param_int "Höhe" = 800 from (0,100,10000]
-param_int "Eingänge" = 2 from [2,10)
+﻿param_int ["Breite",en="Width"] = 800 from (0,100,10000]
+param_int ["Höhe",en="Height"] = 800 from (0,100,10000]
+param_int ["Eingänge",en="Inputs"] = 2 from [2,10)
 param_int "Pitch" = 400 from (0,50,10000]
 
 var int breite = get("Breite")

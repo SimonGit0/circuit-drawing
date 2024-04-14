@@ -5,7 +5,7 @@ var breite = get("parent.select.width")
 var mitteX = get("parent.select.x")+get("parent.select.width")/2
 var mitteY = get("parent.select.y")+get("parent.select.height")/2
 
-param_int "Größe" = 100 from [-100000, 100000]
+param_int ["Größe",en="Size"] = 100 from [-100000, 100000]
 var rad = max(breite,hoehe)/2+get("Größe")
 
 Drawing:

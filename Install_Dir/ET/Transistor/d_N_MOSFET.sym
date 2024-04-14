@@ -1,11 +1,11 @@
 ﻿def PMOS=0
 
-param "Type"={"Enhancement" "Depletion"}
+param ["Type",de="Typ"]={"Enhancement" "Depletion"}
 param "Source"={"Normal" "Kelvin"}
-param "Diode"={"Ja" "Nein"}
+param "Diode"={["Ja",en="Yes"] ["Nein",en="No"]}
 
-param_int "Linienbreite" = 100 from [10, 1, 1000] unit "%"
-param_int "Abstand Gate" = 50 from [0, 1, 150]
+param_int ["Linienbreite",de="Gate Breite",en="Gate Width"] = 100 from [10, 1, 1000] unit "%"
+param_int ["Abstand Gate",en="Distance Gate"] = 50 from [0, 1, 150]
 
 var abstandGS=get("Abstand Gate")
 def pfeilRadiusXBasic=54

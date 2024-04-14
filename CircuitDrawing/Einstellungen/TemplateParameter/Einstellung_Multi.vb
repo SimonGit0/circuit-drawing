@@ -6,7 +6,7 @@
     Public istGeschlossen As Boolean = False
 
     Public Sub New(name As String, hatSchließenButton As Boolean)
-        MyBase.New(name)
+        MyBase.New(New Multi_Lang_String(name, Nothing))
         Me.hatSchließenButton = hatSchließenButton
         liste = New List(Of Einstellung_TemplateParam)
     End Sub

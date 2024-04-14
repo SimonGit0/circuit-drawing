@@ -140,14 +140,14 @@ Public Class Element_Rect
 
         Dim e1 As New Einstellung_Multi("Parameter", False)
 
-        Dim param As New TemplateParameter_Param("Typ", {"Einfach", "Mehrere Rechtecke"}, -1)
+        Dim param As New TemplateParameter_Param(New Multi_Lang_String(My.Resources.Strings.Einstellung_Typ, Nothing), {New Multi_Lang_String(My.Resources.Strings.Einstellung_Einfach, Nothing), New Multi_Lang_String(My.Resources.Strings.Einstellung_MehrereRechtecke, Nothing)}, -1)
         e1.add(New Einstellung_TemplateParameter(param, CInt(myMode)))
         If myMode = Modus.MehrereRect Then
-            Dim paramX As New TemplateParameter_Int("Offset X", New Intervall(-1000, 1000, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), DefaultMultiRectVec_X, "")
-            Dim paramY As New TemplateParameter_Int("Offset Y", New Intervall(-1000, 1000, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), DefaultMultiRectVec_Y, "")
+            Dim paramX As New TemplateParameter_Int(New Multi_Lang_String("Offset X", Nothing), New Intervall(-1000, 1000, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), DefaultMultiRectVec_X, "")
+            Dim paramY As New TemplateParameter_Int(New Multi_Lang_String("Offset Y", Nothing), New Intervall(-1000, 1000, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), DefaultMultiRectVec_Y, "")
             e1.add(New Einstellung_TemplateParameter_Int(paramX, Me.multiRectVec.X))
             e1.add(New Einstellung_TemplateParameter_Int(paramY, Me.multiRectVec.Y))
-            Dim paramAnzahl As New TemplateParameter_Int("Anzahl", New Intervall(0, 10, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), DefaultMultiRectAnzahlStart, "")
+            Dim paramAnzahl As New TemplateParameter_Int(New Multi_Lang_String(My.Resources.Strings.Einstellung_Anzahl, Nothing), New Intervall(0, 10, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), DefaultMultiRectAnzahlStart, "")
             e1.add(New Einstellung_TemplateParameter_Int(paramAnzahl, Me.anzahlMultiRectStart))
         End If
         l.Add(e1)
@@ -161,12 +161,12 @@ Public Class Element_Rect
 
         For Each e As ElementEinstellung In einstellungen
             If TypeOf e Is Einstellung_Multi Then
-                If e.Name = "Parameter" Then
+                If e.Name.get_ID() = "Parameter" Then
                     For Each eSub As Einstellung_TemplateParam In DirectCast(e, Einstellung_Multi).getListe()
                         If TypeOf eSub Is Einstellung_TemplateParameter Then
                             With DirectCast(eSub, Einstellung_TemplateParameter)
                                 If .nrChanged Then
-                                    If .Name = "Typ" Then
+                                    If .Name.get_ID() = My.Resources.Strings.Einstellung_Typ Then
                                         If .myNr <> CInt(Me.myMode) Then
                                             Me.myMode = CType(.myNr, Modus)
                                             changed = True
@@ -177,17 +177,17 @@ Public Class Element_Rect
                         ElseIf TypeOf eSub Is Einstellung_TemplateParameter_Int Then
                             With DirectCast(eSub, Einstellung_TemplateParameter_Int)
                                 If .nrChanged Then
-                                    If .Name = "Offset X" Then
+                                    If .Name.get_ID() = "Offset X" Then
                                         If .myNr <> Me.multiRectVec.X Then
                                             Me.multiRectVec.X = .myNr
                                             changed = True
                                         End If
-                                    ElseIf .Name = "Offset Y" Then
+                                    ElseIf .Name.get_ID() = "Offset Y" Then
                                         If .myNr <> Me.multiRectVec.Y Then
                                             Me.multiRectVec.Y = .myNr
                                             changed = True
                                         End If
-                                    ElseIf .Name = "Anzahl" Then
+                                    ElseIf .Name.get_ID() = My.Resources.Strings.Einstellung_Anzahl Then
                                         If .myNr <> Me.anzahlMultiRectStart Then
                                             Me.anzahlMultiRectStart = .myNr
                                             changed = True

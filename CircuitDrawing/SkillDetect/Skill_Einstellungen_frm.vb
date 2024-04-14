@@ -17,7 +17,7 @@
             For i As Integer = 0 To txtDefaultParam.Lines.Count - 1
                 Dim line As String = txtDefaultParam.Lines(i).Trim
                 If line <> "" Then
-                    Einstellungspanel_Bauelemente.readParameter(line, default_Val)
+                    Einstellungspanel_Bauelemente.readParameter(line, default_Val, Nothing)
                 End If
             Next
             Me.myEinstellungenClose = default_Val

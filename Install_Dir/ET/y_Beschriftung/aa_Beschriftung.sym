@@ -6,10 +6,10 @@ var x = get("parent.select.x")+get("parent.select.width")/2
 var y = get("parent.select.y")+get("parent.select.height")/2
 
 param_string "Text" = "abc"
-param "Position" = {"Oben" "Unten" "Links" "Rechts" "Links Oben" "Rechts Oben" "Links Unten" "Rechts Unten"}
-param "Ausrichtung" = {"Normal" "90° gedreht" "180° gedreht" "270° gedreht"}
-param_int "Abstand" = 0
-param_int "Quer" = 0
+param "Position" = {["Oben",en="Top"] ["Unten",en="Bottom"] ["Links",en="Left"] ["Rechts",en="Right"] ["Links Oben",en="Top Left"] ["Rechts Oben",en="Top Right"] ["Links Unten",en="Bottom Left"] ["Rechts Unten",en="Bottom Right"]}
+param ["Ausrichtung",en="Rotation"] = {"Normal" ["90° gedreht",en="90° rotated"] ["180° gedreht",en="180° rotated"] ["270° gedreht",en="270° rotated"]}
+param_int ["Abstand",en="Distance"] = 0
+param_int ["Quer",en="Across"] = 0
 
 var abstand = get("Abstand")
 var quer = get("Quer")

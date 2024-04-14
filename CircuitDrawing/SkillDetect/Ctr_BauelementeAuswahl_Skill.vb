@@ -258,8 +258,8 @@
                                         anzahl = tmpl_compiled.getNrOfSnappoints()
 
                                         If anzahl = anzahlSnappoints Then
-                                            Dim name As String = DirectCast(tmpl.getParameter(i), TemplateParameter_Param).name
-                                            Dim value As String = DirectCast(tmpl.getParameter(i), TemplateParameter_Param).options(k)
+                                            Dim name As String = DirectCast(tmpl.getParameter(i), TemplateParameter_Param).name.get_ID()
+                                            Dim value As String = DirectCast(tmpl.getParameter(i), TemplateParameter_Param).options(k).get_ID()
                                             Me.einstellungen.Add(New default_Parameter(Mathe.strToLower(name), Mathe.strToLower(value)))
                                             hat_Gefunden = True
                                             Exit For

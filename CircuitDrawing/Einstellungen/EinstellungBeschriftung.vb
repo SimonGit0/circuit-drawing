@@ -25,7 +25,7 @@
     Private _txtQuer As TextBox
 
     Public Sub New(name As String, b As Beschriftung)
-        MyBase.New(name)
+        MyBase.New(New Multi_Lang_String(name, Nothing))
         Me.b = b
     End Sub
 

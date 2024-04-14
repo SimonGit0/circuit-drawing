@@ -2,11 +2,11 @@
 var rad=get("Radius")
 def overshootPfeil=25
 
-param "Pfeil"={"Mit Pfeil" "Ohne Pfeil" "Nur +/-"}
+param ["Pfeil",en="Arrow"]={["Mit Pfeil",en="With Arrow"] ["Ohne Pfeil",en="Without Arrow"] ["Nur +/-",en="Only +/-"]}
 
-param_arrow "Pfeilspitze" = 0 from [0, #inf)
+param_arrow ["Pfeilspitze",en="Arrowhead"] = 0 from [0, #inf)
 
-param_int "Pfeilabstand" = 75 from [0, #inf]
+param_int ["Pfeilabstand",en="Arrow Distance"] = 75 from [0, #inf]
 
 def pmGroesse=130
 var overshootPM=-rad*2/5
@@ -22,6 +22,7 @@ if get("Pfeil")="Mit Pfeil":
     linearrow(rad+get("Pfeilabstand"), -rad-overshootPfeil, rad+get("Pfeilabstand"), rad+overshootPfeil, -1, get("Pfeilspitze"))
   end
 elseif get("Pfeil")="Nur +/-"
+  invisible("Pfeilspitze")
   var extraTextabstand = 25
   if get("#textpos")=1:
     line(-rad-get("Pfeilabstand")-pmGroesse/2,-rad-overshootPM,-rad-get("Pfeilabstand")+pmGroesse/2,-rad-overshootPM)
@@ -32,6 +33,8 @@ elseif get("Pfeil")="Nur +/-"
 	line(rad+get("Pfeilabstand"),-rad-overshootPM-pmGroesse/2,rad+get("Pfeilabstand"),-rad-overshootPM+pmGroesse/2)
 	line(rad+get("Pfeilabstand")-pmGroesse/2,rad+overshootPM,rad+get("Pfeilabstand")+pmGroesse/2,rad+overshootPM)
   end
+else
+  invisible("Pfeilspitze")
 end
 Drawing End
 

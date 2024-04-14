@@ -34,7 +34,7 @@ Public Class Precompiled_Scaling_SetParamInt
 
     Public Overrides Sub export(writer As Export_StreamWriter)
         Dim line As String = "set_param("
-        line &= """" & writer.parameter(paramNr + writer.extraParameterAmAnfang).getName() & """, "
+        line &= """" & writer.parameter(paramNr + writer.extraParameterAmAnfang).getName().get_ID() & """, "
         line &= Ausdruck_Int.export(value, writer).str & ")"
         writer.WriteLine(line)
     End Sub

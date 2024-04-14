@@ -1,8 +1,8 @@
-﻿param "Funktion"={"Sinus" "Rechteck" "Sägezahn" "Sinus-Halbwelle"}
+﻿param ["Funktion",en="Function"]={["Sinus",en="Sine"] ["Rechteck",en="Rect"] ["Sägezahn",en="Sawtooth"] ["Sinus-Halbwelle",en="Sine half wave"]}
 
-param_int "Perioden" = 2 from [1, 10]
-param_int "Breite" = 400 from (0, 100000]
-param_int "Höhe" = 400   from (0, 100000]
+param_int ["Perioden",en="Periods"] = 2 from [1, 10]
+param_int ["Breite",en="Width"] = 400 from (0, 100000]
+param_int ["Höhe",en="Height"] = 400   from (0, 100000]
 var p=get("Perioden")
 var w=get("Breite")
 var h=get("Höhe")

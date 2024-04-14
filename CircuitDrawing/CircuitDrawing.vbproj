@@ -282,6 +282,7 @@
     <Compile Include="Elemente\CircuitElemente\Bauteil.vb" />
     <Compile Include="Elemente\CircuitElemente\Blackbox.vb" />
     <Compile Include="Elemente\CircuitElemente\Deko_Bauteil.vb" />
+    <Compile Include="TemplateAusDatei\Multi_Lang_String.vb" />
     <Compile Include="TemplateAusDatei\ParamValue.vb" />
     <Compile Include="Elemente\CommonInterfaces\IElementWithLinestyle.vb" />
     <Compile Include="Elemente\CommonInterfaces\IWire.vb" />

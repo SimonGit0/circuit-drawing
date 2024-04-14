@@ -1,4 +1,4 @@
-﻿param "Eingänge"={"2" "3" "4"}
+﻿param ["Eingänge",en="Inputs"]={"2" "3" "4"}
 
 Drawing:
 fill_backcolor()

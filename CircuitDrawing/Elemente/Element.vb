@@ -34,7 +34,7 @@
     Public Overrides Function setEinstellungen(sender As Vektor_Picturebox, einstellungen As List(Of ElementEinstellung)) As Boolean
         Dim changed As Boolean = False
         For Each e As ElementEinstellung In einstellungen
-            If TypeOf e Is Einstellung_Pos AndAlso e.Name = EINSTELLUNG_POS Then
+            If TypeOf e Is Einstellung_Pos AndAlso e.Name.get_ID() = EINSTELLUNG_POS Then
                 With DirectCast(e, Einstellung_Pos)
                     If .changedX Then
                         Me.position = New Point(.pos.X, position.Y)

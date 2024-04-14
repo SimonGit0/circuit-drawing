@@ -1,4 +1,4 @@
-﻿param_int "Größe"=200 from (0, 50, 10000)
+﻿param_int ["Größe",en="Size"]=200 from (0, 50, 10000)
 var size=get("Größe")
 Drawing:
 line(0, 0, -size, -size)

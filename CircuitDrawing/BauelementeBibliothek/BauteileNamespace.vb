@@ -59,6 +59,14 @@ Public Class BauteileNamespace
         Next
     End Sub
 
+    Public Function try_translate_param_value(param As String, value As String, str_to_ID As Boolean) As KeyValuePair(Of String, String)?
+        For Each c As BauteilCell In cells.Values
+            Dim erg = c.try_translate_param_value(param, value, str_to_ID)
+            If erg IsNot Nothing Then Return erg
+        Next
+        Return Nothing
+    End Function
+
     Public Function getBauteile() As Dictionary(Of String, BauteilCell)
         Return Me.cells
     End Function

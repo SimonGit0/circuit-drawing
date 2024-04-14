@@ -1,6 +1,6 @@
-﻿param_string "Daten" = "0f84783" from "0123456789ABCDEFabcdef"
-param_int "Breite" = 100 from (0, 100000]
-param_int "Höhe" = 25   from (0, 100000]
+﻿param_string ["Daten",en="Data"] = "0f84783" from "0123456789ABCDEFabcdef"
+param_int ["Breite",en="Width"] = 100 from (0, 100000]
+param_int ["Höhe",en="Height"] = 25   from (0, 100000]
 var p=length(get("Daten"))
 var w=get("Breite")
 var h=-get("Höhe")

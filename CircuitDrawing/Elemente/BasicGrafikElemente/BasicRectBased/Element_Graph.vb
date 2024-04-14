@@ -129,22 +129,22 @@ Public Class Element_Graph
         Dim l As New List(Of ElementEinstellung)
         Dim e1 As New Einstellung_Multi("Parameter", False)
 
-        Dim funktion As New TemplateParameter_String("Funktion", Me.function_as_string, False, "")
+        Dim funktion As New TemplateParameter_String(New Multi_Lang_String(My.Resources.Strings.Einstellung_Funktion, Nothing), Me.function_as_string, False, "")
         e1.add(New Einstellung_TemplateParameterString(funktion, Me.function_as_string))
 
-        Dim stützstellen As New TemplateParameter_Int("Stützstellen", New Intervall(2, 10000, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), Me.stützstellen, "")
+        Dim stützstellen As New TemplateParameter_Int(New Multi_Lang_String(My.Resources.Strings.Einstellung_Stützstellen, Nothing), New Intervall(2, 10000, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), Me.stützstellen, "")
         e1.add(New Einstellung_TemplateParameter_Int(stützstellen, Me.stützstellen))
 
-        Dim xmin As New TemplateParameter_Double("X-Min", Me.xMin, "")
+        Dim xmin As New TemplateParameter_Double(New Multi_Lang_String("Min X", Nothing), Me.xMin, "")
         e1.add(New Einstellung_TemplateParameter_Double(xmin, Me.xMin))
 
-        Dim xmax As New TemplateParameter_Double("X-Max", Me.xMax, "")
+        Dim xmax As New TemplateParameter_Double(New Multi_Lang_String("Max X", Nothing), Me.xMax, "")
         e1.add(New Einstellung_TemplateParameter_Double(xmax, Me.xMax))
 
-        Dim ymin As New TemplateParameter_Double("Y-Min", Me.yMin, "")
+        Dim ymin As New TemplateParameter_Double(New Multi_Lang_String("Min Y", Nothing), Me.yMin, "")
         e1.add(New Einstellung_TemplateParameter_Double(ymin, Me.yMin))
 
-        Dim ymax As New TemplateParameter_Double("Y-Max", Me.yMax, "")
+        Dim ymax As New TemplateParameter_Double(New Multi_Lang_String("Max Y", Nothing), Me.yMax, "")
         e1.add(New Einstellung_TemplateParameter_Double(ymax, Me.yMax))
 
         l.Add(e1)
@@ -158,12 +158,12 @@ Public Class Element_Graph
 
         For Each e As ElementEinstellung In einstellungen
             If TypeOf e Is Einstellung_Multi Then
-                If e.Name = "Parameter" Then
+                If e.Name.get_ID() = "Parameter" Then
                     For Each eSub As Einstellung_TemplateParam In DirectCast(e, Einstellung_Multi).getListe()
                         If TypeOf eSub Is Einstellung_TemplateParameterString Then
                             With DirectCast(eSub, Einstellung_TemplateParameterString)
                                 If .txtChanged Then
-                                    If .Name = "Funktion" Then
+                                    If .Name.get_ID() = My.Resources.Strings.Einstellung_Funktion Then
                                         If .myStr <> Me.function_as_string Then
                                             Me.function_as_string = .myStr
                                             changed = True
@@ -175,7 +175,7 @@ Public Class Element_Graph
                         ElseIf TypeOf eSub Is Einstellung_TemplateParameter_Int Then
                             With DirectCast(eSub, Einstellung_TemplateParameter_Int)
                                 If .nrChanged Then
-                                    If .Name = "Stützstellen" Then
+                                    If .Name.get_ID() = My.Resources.Strings.Einstellung_Stützstellen Then
                                         If .myNr <> Me.stützstellen Then
                                             Me.stützstellen = .myNr
                                             changed = True
@@ -187,25 +187,25 @@ Public Class Element_Graph
                         ElseIf TypeOf eSub Is Einstellung_TemplateParameter_Double Then
                             With DirectCast(eSub, Einstellung_TemplateParameter_Double)
                                 If .nrChanged Then
-                                    If .Name = "X-Min" Then
+                                    If .Name.get_ID() = "Min X" Then
                                         If .myNr <> Me.xMin AndAlso Not Double.IsNaN(.myNr) AndAlso Not Double.IsInfinity(.myNr) AndAlso .myNr < Me.xMax Then
                                             Me.xMin = .myNr
                                             changed = True
                                             reCalc = True
                                         End If
-                                    ElseIf .Name = "X-Max" Then
+                                    ElseIf .Name.get_ID() = "Max X" Then
                                         If .myNr <> Me.xMax AndAlso Not Double.IsNaN(.myNr) AndAlso Not Double.IsInfinity(.myNr) AndAlso .myNr > Me.xMin Then
                                             Me.xMax = .myNr
                                             changed = True
                                             reCalc = True
                                         End If
-                                    ElseIf .Name = "Y-Min" Then
+                                    ElseIf .Name.get_ID() = "Min Y" Then
                                         If .myNr <> Me.yMin AndAlso Not Double.IsNaN(.myNr) AndAlso Not Double.IsInfinity(.myNr) AndAlso .myNr < Me.yMax Then
                                             Me.yMin = .myNr
                                             changed = True
                                             reCalc = True
                                         End If
-                                    ElseIf .Name = "Y-Max" Then
+                                    ElseIf .Name.get_ID() = "Max Y" Then
                                         If .myNr <> Me.yMax AndAlso Not Double.IsNaN(.myNr) AndAlso Not Double.IsInfinity(.myNr) AndAlso .myNr > Me.yMin Then
                                             Me.yMax = .myNr
                                             changed = True

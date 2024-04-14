@@ -1,5 +1,5 @@
-﻿param_string "Type 1" = "="
-param_string "Type 2" = "~"
+﻿param_string ["Type 1",de="Typ 1"] = "="
+param_string ["Type 2",de="Typ 2"] = "~"
 
 def default_Links=2
 def default_Rechts=2

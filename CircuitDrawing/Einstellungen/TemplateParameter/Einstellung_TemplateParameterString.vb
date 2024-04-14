@@ -19,7 +19,7 @@
     Public Overrides Function isSameParameter(e2 As Einstellung_TemplateParam) As Boolean
         If TypeOf e2 IsNot Einstellung_TemplateParameterString Then Return False
         Dim e2_i As Einstellung_TemplateParameterString = DirectCast(e2, Einstellung_TemplateParameterString)
-        If Me.Name <> e2_i.Name Then Return False
+        If Me.Name.get_ID() <> e2_i.Name.get_ID() Then Return False
         Return True
     End Function
 
@@ -59,7 +59,7 @@
         Dim lbl1 As Label = Nothing
         Dim txt1 As TextBox = Nothing
         Me.createLabelTextbox(lbl1, txt1, True)
-        lbl1.Text = myParam.name & ":"
+        lbl1.Text = myParam.name.get_str() & ":"
         If variousStr Then
             txt1.Text = VARIOUS_STRING
         Else

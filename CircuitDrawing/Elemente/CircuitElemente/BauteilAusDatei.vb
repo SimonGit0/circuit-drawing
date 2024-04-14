@@ -263,20 +263,20 @@ Public Class BauteilAusDatei
         For i As Integer = 0 To paramEinstellungen.Length - 1
             If TypeOf myTemplate.getParameter(i) Is TemplateParameter_Param Then
                 writer.Write(0)
-                writer.Write(DirectCast(myTemplate.getParameter(i), TemplateParameter_Param).name)
+                writer.Write(DirectCast(myTemplate.getParameter(i), TemplateParameter_Param).name.get_ID())
                 writer.Write(DirectCast(paramEinstellungen(i), ParamInt).myVal)
             ElseIf TypeOf myTemplate.getParameter(i) Is TemplateParameter_Arrow Then
                 writer.Write(1)
-                writer.Write(DirectCast(myTemplate.getParameter(i), TemplateParameter_Arrow).name)
+                writer.Write(DirectCast(myTemplate.getParameter(i), TemplateParameter_Arrow).name.get_ID())
                 writer.Write(CInt(DirectCast(paramEinstellungen(i), ParamArrow).pfeilArt))
                 writer.Write(CInt(DirectCast(paramEinstellungen(i), ParamArrow).pfeilSize))
             ElseIf TypeOf myTemplate.getParameter(i) Is TemplateParameter_Int Then
                 writer.Write(2)
-                writer.Write(DirectCast(myTemplate.getParameter(i), TemplateParameter_Int).name)
+                writer.Write(DirectCast(myTemplate.getParameter(i), TemplateParameter_Int).name.get_ID())
                 writer.Write(DirectCast(paramEinstellungen(i), ParamInt).myVal)
             ElseIf TypeOf myTemplate.getParameter(i) Is TemplateParameter_String Then
                 writer.Write(3)
-                writer.Write(DirectCast(myTemplate.getParameter(i), TemplateParameter_String).name)
+                writer.Write(DirectCast(myTemplate.getParameter(i), TemplateParameter_String).name.get_ID())
                 writer.Write(DirectCast(paramEinstellungen(i), ParamString).myVal)
             Else
                 writer.Write(-1) 'unbekannte (leere) Art!
@@ -422,7 +422,7 @@ Public Class BauteilAusDatei
                 Dim valueE As Integer = reader.ReadInt32()
                 For k As Integer = 0 To b.myTemplate.getNrOfParams() - 1
                     If TypeOf b.myTemplate.getParameter(k) Is TemplateParameter_Param Then
-                        If DirectCast(b.myTemplate.getParameter(k), TemplateParameter_Param).name = nameE AndAlso DirectCast(b.myTemplate.getParameter(k), TemplateParameter_Param).options.Length > valueE Then
+                        If DirectCast(b.myTemplate.getParameter(k), TemplateParameter_Param).name.get_ID() = nameE AndAlso DirectCast(b.myTemplate.getParameter(k), TemplateParameter_Param).options.Length > valueE Then
                             b.paramEinstellungen(k) = New ParamInt(valueE)
                         End If
                     End If
@@ -439,7 +439,7 @@ Public Class BauteilAusDatei
                 End If
                 For k As Integer = 0 To b.myTemplate.getNrOfParams() - 1
                     If TypeOf b.myTemplate.getParameter(k) Is TemplateParameter_Arrow Then
-                        If DirectCast(b.myTemplate.getParameter(k), TemplateParameter_Arrow).name = nameE Then
+                        If DirectCast(b.myTemplate.getParameter(k), TemplateParameter_Arrow).name.get_ID() = nameE Then
                             Dim intervall As Intervall = DirectCast(b.myTemplate.getParameter(k), TemplateParameter_Arrow).intervall
                             If valueE.pfeilArt >= intervall.min AndAlso valueE.pfeilArt <= intervall.max Then
                                 b.paramEinstellungen(k) = valueE
@@ -452,7 +452,7 @@ Public Class BauteilAusDatei
                 Dim valueE As Integer = reader.ReadInt32()
                 For k As Integer = 0 To b.myTemplate.getNrOfParams() - 1
                     If TypeOf b.myTemplate.getParameter(k) Is TemplateParameter_Int Then
-                        If DirectCast(b.myTemplate.getParameter(k), TemplateParameter_Int).name = nameE Then
+                        If DirectCast(b.myTemplate.getParameter(k), TemplateParameter_Int).name.get_ID() = nameE Then
                             Dim intervall As Intervall = DirectCast(b.myTemplate.getParameter(k), TemplateParameter_Int).intervall
                             If valueE >= intervall.min AndAlso valueE <= intervall.max AndAlso (CLng(valueE) - intervall.min) Mod CLng(intervall._step) = 0 Then
                                 b.paramEinstellungen(k) = New ParamInt(valueE)
@@ -465,7 +465,7 @@ Public Class BauteilAusDatei
                 Dim valueE As String = reader.ReadString()
                 For k As Integer = 0 To b.myTemplate.getNrOfParams() - 1
                     If TypeOf b.myTemplate.getParameter(k) Is TemplateParameter_String Then
-                        If DirectCast(b.myTemplate.getParameter(k), TemplateParameter_String).name = nameE Then
+                        If DirectCast(b.myTemplate.getParameter(k), TemplateParameter_String).name.get_ID() = nameE Then
                             b.paramEinstellungen(k) = New ParamString(valueE)
                         End If
                     End If
@@ -581,14 +581,14 @@ Public Class BauteilAusDatei
         Dim params_changed As Boolean = False
         For Each e As ElementEinstellung In einstellungen
             If TypeOf e Is Einstellung_Multi Then
-                If e.Name = "Parameter" Then
+                If e.Name.get_ID() = "Parameter" Then
                     For Each eSub As Einstellung_TemplateParam In DirectCast(e, Einstellung_Multi).getListe()
                         If TypeOf eSub Is Einstellung_TemplateParameter Then
                             With DirectCast(eSub, Einstellung_TemplateParameter)
                                 If .nrChanged Then
                                     For i As Integer = 0 To myTemplate.getNrOfParams - 1
                                         If TypeOf myTemplate.getParameter(i) Is TemplateParameter_Param Then
-                                            If DirectCast(myTemplate.getParameter(i), TemplateParameter_Param).name = .Name Then
+                                            If DirectCast(myTemplate.getParameter(i), TemplateParameter_Param).name.get_ID() = .Name.get_ID() Then
                                                 Me.paramEinstellungen(i) = New ParamInt(.myNr)
                                                 changed = True
                                                 params_changed = True
@@ -603,7 +603,7 @@ Public Class BauteilAusDatei
                                 If .nrChanged OrElse .sizeChanged Then
                                     For i As Integer = 0 To myTemplate.getNrOfParams - 1
                                         If TypeOf myTemplate.getParameter(i) Is TemplateParameter_Arrow Then
-                                            If DirectCast(myTemplate.getParameter(i), TemplateParameter_Arrow).name = .Name Then
+                                            If DirectCast(myTemplate.getParameter(i), TemplateParameter_Arrow).name.get_ID() = .Name.get_ID() Then
                                                 If .nrChanged Then
                                                     DirectCast(Me.paramEinstellungen(i), ParamArrow).pfeilArt = .myNr.pfeilArt
                                                     changed = True
@@ -625,7 +625,7 @@ Public Class BauteilAusDatei
                                 If .nrChanged Then
                                     For i As Integer = 0 To myTemplate.getNrOfParams - 1
                                         If TypeOf myTemplate.getParameter(i) Is TemplateParameter_Int Then
-                                            If DirectCast(myTemplate.getParameter(i), TemplateParameter_Int).name = .Name Then
+                                            If DirectCast(myTemplate.getParameter(i), TemplateParameter_Int).name.get_ID() = .Name.get_ID() Then
                                                 Me.paramEinstellungen(i) = New ParamInt(.myNr)
                                                 changed = True
                                                 params_changed = True
@@ -640,7 +640,7 @@ Public Class BauteilAusDatei
                                 If .txtChanged Then
                                     For i As Integer = 0 To myTemplate.getNrOfParams - 1
                                         If TypeOf myTemplate.getParameter(i) Is TemplateParameter_String Then
-                                            If DirectCast(myTemplate.getParameter(i), TemplateParameter_String).name = .Name Then
+                                            If DirectCast(myTemplate.getParameter(i), TemplateParameter_String).name.get_ID() = .Name.get_ID() Then
                                                 Me.paramEinstellungen(i) = New ParamString(.myStr)
                                                 changed = True
                                                 params_changed = True
@@ -655,7 +655,7 @@ Public Class BauteilAusDatei
                 Else
                     If mydeko IsNot Nothing Then
                         For i As Integer = 0 To mydeko.Count - 1
-                            If e.Name = getDekoParamName(i) Then
+                            If e.Name.get_ID() = getDekoParamName(i) Then
                                 If DirectCast(e, Einstellung_Multi).istGeschlossen Then
                                     mydeko.RemoveAt(i)
                                     changed = True
@@ -669,9 +669,9 @@ Public Class BauteilAusDatei
                         Next
                     End If
                 End If
-            ElseIf TypeOf e Is Einstellung_Fontstyle AndAlso e.Name = EINSTELLUNG_FONTSTYLE Then
+            ElseIf TypeOf e Is Einstellung_Fontstyle AndAlso e.Name.get_ID() = EINSTELLUNG_FONTSTYLE Then
                 Me.myfontstyle = DirectCast(e, Einstellung_Fontstyle).getNewFontstyle(Me.myfontstyle, sender.myFonts, changed, False)
-            ElseIf TypeOf e Is Einstellung_Fillstil AndAlso e.Name = EINSTELLUNG_FILLSTYLE Then
+            ElseIf TypeOf e Is Einstellung_Fillstil AndAlso e.Name.get_ID() = EINSTELLUNG_FILLSTYLE Then
                 Me.myfillstyle = DirectCast(e, Einstellung_Fillstil).getNewFillstil(Me.myfillstyle, sender.myFillStyles, changed)
             Else
                 If myBeschriftung.setEinstellung(e) Then
@@ -1158,7 +1158,7 @@ Public Structure Beschriftung
 
     Public Function setEinstellung(e As ElementEinstellung) As Boolean
         Dim changed As Boolean = False
-        If TypeOf e Is EinstellungBeschriftung AndAlso e.Name = Element.EINSTELLUNG_BESCHRIFTUNG Then
+        If TypeOf e Is EinstellungBeschriftung AndAlso e.Name.get_ID() = Element.EINSTELLUNG_BESCHRIFTUNG Then
             Dim neu As Beschriftung = DirectCast(e, EinstellungBeschriftung).getNewValue(Me, changed)
             Me.text = neu.text
             Me.positionIndex = neu.positionIndex

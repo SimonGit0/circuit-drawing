@@ -465,4 +465,28 @@
   <data name="ToolAddImpedanz" xml:space="preserve">
     <value>Impedance: Click to add impedance arrow.</value>
   </data>
+  <data name="Einstellung_Anzahl" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="Einstellung_Einfach" xml:space="preserve">
+    <value>Simple</value>
+  </data>
+  <data name="Einstellung_Funktion" xml:space="preserve">
+    <value>Function</value>
+  </data>
+  <data name="Einstellung_MehrereRechtecke" xml:space="preserve">
+    <value>Multiple Rectangles</value>
+  </data>
+  <data name="Einstellung_Stützstellen" xml:space="preserve">
+    <value>Support Points</value>
+  </data>
+  <data name="Einstellung_Textausrichtung_Textfeld" xml:space="preserve">
+    <value>Text Rotation</value>
+  </data>
+  <data name="Einstellung_Typ" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Neues_Textfeld" xml:space="preserve">
+    <value>New Textfield</value>
+  </data>
 </root>

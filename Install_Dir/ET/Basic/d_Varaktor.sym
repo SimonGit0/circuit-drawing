@@ -1,6 +1,6 @@
-﻿param_int "Abstand"=50 from (0,2,400]
+﻿param_int ["Abstand",en="Distance"]=50 from (0,2,400]
 var mydist=get("Abstand")/2
-param_int "Länge"=150 from (0, 10000]
+param_int ["Länge",en="Length"]=150 from (0, 10000]
 var mylen=get("Länge")
 def dreieckLaenge = 200
 def dreieckHoehe = 120

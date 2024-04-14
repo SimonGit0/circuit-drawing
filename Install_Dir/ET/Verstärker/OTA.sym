@@ -1,10 +1,10 @@
-﻿param "Ausgang"={"Single Ended" "Fully Differential" "Fully Differential flipped output"}
-param "Größe" = {"Groß" "Klein" "Benutzerdefiniert"}
-param_int "Höhe 1" = 600 from (0, 100000]
-param_int "Höhe 2" = 350 from (0, 100000]
-param_int "Breite" = 750 from (0, 50, 100000]
-param_int "Pin-Höhe1" = 250 from (0, 50, 10000]
-param_int "Pin-Höhe2" = 250 from (0, 50, 10000]
+﻿param ["Ausgang",en="Output"]={"Single Ended" "Fully Differential" "Fully Differential flipped output"}
+param ["Größe",en="Size"] = {["Groß",en="Large"] ["Klein",en="Small"] ["Benutzerdefiniert",en="Custom"]}
+param_int ["Höhe 1",en="Height 1"] = 600 from (0, 100000]
+param_int ["Höhe 2",en="Height 2"] = 350 from (0, 100000]
+param_int ["Breite",en="Width"] = 750 from (0, 50, 100000]
+param_int ["Pin-Höhe1",de="Pin-Höhe 1",en="Pin Height 1"] = 250 from (0, 50, 10000]
+param_int ["Pin-Höhe2",de="Pin-Höhe 2",en="Pin Height 2"] = 250 from (0, 50, 10000]
 
 var rY = get("Höhe 1")
 var rY2 = get("Höhe 2")

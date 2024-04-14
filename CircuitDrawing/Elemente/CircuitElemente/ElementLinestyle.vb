@@ -25,7 +25,7 @@
     Public Overrides Function setEinstellungen(sender As Vektor_Picturebox, einstellungen As List(Of ElementEinstellung)) As Boolean
         Dim changed As Boolean = MyBase.setEinstellungen(sender, einstellungen)
         For Each e As ElementEinstellung In einstellungen
-            If TypeOf e Is Einstellung_Linienstil AndAlso e.Name = Element.EINSTELLUNG_LINESTYLE Then
+            If TypeOf e Is Einstellung_Linienstil AndAlso e.Name.get_ID() = Element.EINSTELLUNG_LINESTYLE Then
                 Me.linestyle = DirectCast(e, Einstellung_Linienstil).getNewLinienstil(Me.linestyle, sender.myLineStyles, changed, False)
             End If
         Next

@@ -21,7 +21,7 @@
     Private _txtStart, _txtEnde As Textbox_mitUnit
 
     Public Sub New(name As String, pfeilStart As ParamArrow, pfeilEnde As ParamArrow)
-        MyBase.New(name)
+        MyBase.New(New Multi_Lang_String(name, Nothing))
         Me.pfeilStart = pfeilStart.CopyPfeil()
         Me.pfeilEnde = pfeilEnde.CopyPfeil()
     End Sub

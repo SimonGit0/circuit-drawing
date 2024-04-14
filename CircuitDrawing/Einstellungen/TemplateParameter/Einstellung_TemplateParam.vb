@@ -1,7 +1,7 @@
 ﻿Public MustInherit Class Einstellung_TemplateParam
     Inherits ElementEinstellung
 
-    Public Sub New(name As String)
+    Public Sub New(name As Multi_Lang_String)
         MyBase.New(name)
     End Sub
 

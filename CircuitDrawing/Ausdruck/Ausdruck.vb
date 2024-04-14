@@ -215,11 +215,11 @@ Public MustInherit Class Ausdruck
         End If
         Dim param_i As TemplateParameter_Param = DirectCast(param, TemplateParameter_Param)
         For i As Integer = 0 To param_i.options.Length - 1
-            If param_i.options(i).ToLower() = value Then
+            If param_i.options(i).get_ID().ToLower() = value Then
                 Return New Ausdruck_Gleich(New Ausdruck_Variable(varNr, False), New Ausdruck_Konstante(i), ungleich)
             End If
         Next
-        Throw New Exception("Die Option """ & value & """ ist für den Parameter """ & param_i.name & """ nicht definiert")
+        Throw New Exception("Die Option """ & value & """ ist für den Parameter """ & param_i.name.get_ID() & """ nicht definiert")
     End Function
 
     Public Shared Function getSubTermeAusdruck(str As String, konst_lokal As Dictionary(Of String, Integer), parameter As List(Of ParamName), vars_Intern_lokal As List(Of VariableEinlesen), params As List(Of TemplateParameter)) As List(Of Ausdruck)
@@ -495,7 +495,7 @@ Public MustInherit Class Ausdruck
                                     If params IsNot Nothing Then
                                         For j As Integer = 0 To params.Count - 1
                                             If TypeOf params(j) Is TemplateParameter_Param Then
-                                                If DirectCast(params(j), TemplateParameter_Param).name.ToLower() = varL Then
+                                                If DirectCast(params(j), TemplateParameter_Param).name.get_ID().ToLower() = varL Then
                                                     Return New AusdruckParam(j, i)
                                                 End If
                                             End If

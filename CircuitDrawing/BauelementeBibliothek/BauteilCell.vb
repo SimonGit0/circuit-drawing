@@ -45,6 +45,16 @@ Public Class BauteilCell
         Next
     End Sub
 
+    Public Function try_translate_param_value(param As String, value As String, str_to_ID As Boolean) As KeyValuePair(Of String, String)?
+        For Each v As BauteilView In views.Values
+            Dim erg = v.template.try_translate_param_value(param, value, str_to_ID)
+            If erg IsNot Nothing Then
+                Return erg
+            End If
+        Next
+        Return Nothing
+    End Function
+
     Public Function sucheBauteil_Compatibility(_namespace As String, _name As String) As TemplateCompatibility
         For Each pair As KeyValuePair(Of String, BauteilView) In views
             Dim erg As TemplateCompatibility = pair.Value.sucheBauteil_Compatibility(_namespace, _name)

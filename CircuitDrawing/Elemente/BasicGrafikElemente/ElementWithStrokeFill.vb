@@ -18,7 +18,7 @@
     Public Overrides Function setEinstellungen(sender As Vektor_Picturebox, einstellungen As List(Of ElementEinstellung)) As Boolean
         Dim changed As Boolean = MyBase.setEinstellungen(sender, einstellungen)
         For Each e As ElementEinstellung In einstellungen
-            If TypeOf e Is Einstellung_Fillstil AndAlso e.Name = Element.EINSTELLUNG_FILLSTYLE Then
+            If TypeOf e Is Einstellung_Fillstil AndAlso e.Name.get_ID() = Element.EINSTELLUNG_FILLSTYLE Then
                 Me.fillstyle = DirectCast(e, Einstellung_Fillstil).getNewFillstil(Me.fillstyle, sender.myFillStyles, changed)
             End If
         Next

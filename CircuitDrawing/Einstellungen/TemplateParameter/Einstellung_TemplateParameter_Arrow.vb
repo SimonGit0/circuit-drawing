@@ -23,7 +23,7 @@
     Public Overrides Function isSameParameter(e2 As Einstellung_TemplateParam) As Boolean
         If TypeOf e2 IsNot Einstellung_TemplateParameter_Arrow Then Return False
         Dim e2_i As Einstellung_TemplateParameter_Arrow = DirectCast(e2, Einstellung_TemplateParameter_Arrow)
-        If Me.Name <> e2_i.Name Then Return False
+        If Me.Name.get_ID() <> e2_i.Name.get_ID() Then Return False
         If Me.myParam.intervall.min <> e2_i.myParam.intervall.min Then Return False
         If Me.myParam.intervall.max <> e2_i.myParam.intervall.max Then Return False
         If Me.myParam.intervall._step <> e2_i.myParam.intervall._step Then Return False
@@ -77,7 +77,7 @@
         Dim txt1 As Textbox_mitUnit = Nothing
         Dim cmb1 As New PfeilCombobox(myParam.intervall.min, myParam.intervall.max)
         Me.createLabelComboboxTextbox(lbl1, cmb1, txt1, True)
-        lbl1.Text = myParam.name & ":"
+        lbl1.Text = myParam.name.get_str() & ":"
         txt1.unit = "%"
         cmb1.SelectedIndex = myNr.pfeilArt - myParam.intervall.min
         cmb1.Various = variousNr

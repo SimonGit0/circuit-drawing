@@ -1,11 +1,11 @@
-﻿param "Eingang"={"Differential" "Single Ended" "Differential without text"}
-param "Ausgang"={"Single Ended" "Differential" "Differential flipped output" "Differential without text"}
+﻿param ["Eingang",en="Input"]={"Differential" "Single Ended" ["Differential without text",en="Differential without Text",de="Differential ohne Text"]}
+param ["Ausgang",en="Output"]={"Single Ended" "Differential" ["Differential flipped output",en="Differential flipped Output",de="Differential vertauschter Ausgang"] ["Differential without text",en="Differential without Text",de="Differential ohne Text"]}
 
-param "Größe" = {"Groß" "Klein" "Benutzerdefiniert"}
-param_int "Breite" = 1100 from (0, 50, 100000]
-param_int "Höhe" = 600 from (0, 100000]
-param_int "Pin-Höhe" = 300 from (0, 50, 100000]
-param "VDD/GND"={"Ohne" "Mit"}
+param ["Größe",en="Size"] = {["Groß",en="Large"] ["Klein",en="Small"] ["Benutzerdefiniert",en="Custom"]}
+param_int ["Breite",en="Width"] = 1100 from (0, 50, 100000]
+param_int ["Höhe",en="Height"] = 600 from (0, 100000]
+param_int ["Pin-Höhe",en="Pin-Height"] = 300 from (0, 50, 100000]
+param "VDD/GND"={["Ohne",en="No"] ["Mit",en="Yes"]}
 param_int "Pos. VDD"=400 from [0, 50, 100000]
 param_int "Pos. GND"=400 from [0, 50, 100000]
 

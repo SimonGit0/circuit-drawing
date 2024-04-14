@@ -11,7 +11,7 @@
     Public myTxt As TextBox
 
     Public Sub New(name As String, name_lbl As String, value As Integer)
-        MyBase.New(name)
+        MyBase.New(New Multi_Lang_String(name, Nothing))
         Me.name_lbl = name_lbl
         Me.value = value
     End Sub

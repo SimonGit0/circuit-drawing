@@ -2,15 +2,15 @@
 
 param_int "Radius" = 200 from (0, 50, #inf]
 
-param_int "Links" = 1 from [0, maxPins]
-param_int "Rechts" = 1 from [0, maxPins]
-param_int "Oben" = 1 from [0, maxPins]
-param_int "Unten" = 1 from [0, maxPins]
+param_int ["Links",en="Left"] = 1 from [0, maxPins]
+param_int ["Rechts",en="Right"] = 1 from [0, maxPins]
+param_int ["Oben",en="Top"] = 1 from [0, maxPins]
+param_int ["Unten",en="Bottom"] = 1 from [0, maxPins]
 
-param_int "Pitch Links" = 100 from [0, 50, #inf]
-param_int "Pitch Rechts" = 100 from [0, 50, #inf]
-param_int "Pitch Oben" = 100 from [0, 50, #inf]
-param_int "Pitch Unten" = 100 from [0, 50, #inf]
+param_int ["Pitch Links",en="Pitch Left"] = 100 from [0, 50, #inf]
+param_int ["Pitch Rechts",en="Pitch Right"] = 100 from [0, 50, #inf]
+param_int ["Pitch Oben",en="Pitch Top"] = 100 from [0, 50, #inf]
+param_int ["Pitch Unten",en="Pitch Bottom"] = 100 from [0, 50, #inf]
 
 var left=get("Links")
 var pLeft=get("Pitch Links")

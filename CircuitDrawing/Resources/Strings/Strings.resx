@@ -465,4 +465,28 @@
   <data name="ToolAddImpedanz" xml:space="preserve">
     <value>Impedanz: Klicken um Impedanzpfeil zu platzieren.</value>
   </data>
+  <data name="Einstellung_Anzahl" xml:space="preserve">
+    <value>Anzahl</value>
+  </data>
+  <data name="Einstellung_Einfach" xml:space="preserve">
+    <value>Einfach</value>
+  </data>
+  <data name="Einstellung_Funktion" xml:space="preserve">
+    <value>Funktion</value>
+  </data>
+  <data name="Einstellung_MehrereRechtecke" xml:space="preserve">
+    <value>Mehrere Rechtecke</value>
+  </data>
+  <data name="Einstellung_Stützstellen" xml:space="preserve">
+    <value>Stützstellen</value>
+  </data>
+  <data name="Einstellung_Textausrichtung_Textfeld" xml:space="preserve">
+    <value>Textausrichtung</value>
+  </data>
+  <data name="Einstellung_Typ" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="Neues_Textfeld" xml:space="preserve">
+    <value>Neues Textfeld</value>
+  </data>
 </root>

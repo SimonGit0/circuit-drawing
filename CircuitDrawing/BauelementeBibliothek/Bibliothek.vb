@@ -123,6 +123,14 @@ Public Class Bibliothek
         Next
     End Sub
 
+    Public Function try_translate_param_value(param As String, value As String, str_to_ID As Boolean) As KeyValuePair(Of String, String)?
+        For Each b As BauteileNamespace In myBauteile.Values
+            Dim erg = b.try_translate_param_value(param, value, str_to_ID)
+            If erg IsNot Nothing Then Return erg
+        Next
+        Return Nothing
+    End Function
+
 #Region "Lokale Namespaces"
     Public Sub clear_local_namespace()
         If myBauteile.ContainsKey(NAMESPACE_LOKAL) Then

@@ -16,7 +16,7 @@
     Private aWert_txt As TextBox
 
     Public Sub New(name As String, nummer As Integer, liste As FillStyleList)
-        MyBase.New(name)
+        MyBase.New(New Multi_Lang_String(name, Nothing))
         Me.style = liste.getFillStyle(nummer).copy()
         neueFarbe = Me.style.farbe
     End Sub

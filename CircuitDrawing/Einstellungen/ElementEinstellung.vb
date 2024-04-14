@@ -13,9 +13,9 @@
 
     Public Const TAB_X1 As Integer = 100
     Public Const TAB_X2 As Integer = 175
-    Public ReadOnly Name As String
+    Public ReadOnly Name As Multi_Lang_String
 
-    Public Sub New(name As String)
+    Public Sub New(name As Multi_Lang_String)
         Me.Name = name
     End Sub
 
@@ -41,7 +41,7 @@
         Next
 
         Dim g As New GroupBox()
-        g.Text = Name
+        g.Text = Name.get_str()
         g.Font = MyFont_Header
         g.Size = New Size(BREITE_INITIAL, posY + MARGIN_GRB_BOTTOM)
         For i As Integer = 0 To listeOfElemente.Count - 1

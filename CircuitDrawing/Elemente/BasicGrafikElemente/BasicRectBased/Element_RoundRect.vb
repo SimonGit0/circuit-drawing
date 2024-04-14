@@ -80,7 +80,7 @@ Public Class Element_RoundRect
     Public Overrides Function setEinstellungen(sender As Vektor_Picturebox, einstellungen As List(Of ElementEinstellung)) As Boolean
         Dim changed As Boolean = MyBase.setEinstellungen(sender, einstellungen)
         For Each e As ElementEinstellung In einstellungen
-            If TypeOf e Is Einstellung_Int AndAlso e.Name = EINSTELLUNG_RUNDES_RECHTECK Then
+            If TypeOf e Is Einstellung_Int AndAlso e.Name.get_ID() = EINSTELLUNG_RUNDES_RECHTECK Then
                 With DirectCast(e, Einstellung_Int)
                     If .changed Then
                         If .value < 0 Then

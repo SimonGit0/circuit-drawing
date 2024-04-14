@@ -1,6 +1,6 @@
-﻿param_int "Anzahl" = 2 from [0, 20]
-param_int "Breite" = 600 from (0, 100000]
-param_int "Höhe" = 800   from (0, 100000]
+﻿param_int ["Anzahl",en="Turns"] = 2 from [0, 20]
+param_int ["Breite",en="Width"] = 600 from (0, 100000]
+param_int ["Höhe",en="Height"] = 800   from (0, 100000]
 var p=get("Anzahl")
 var w=get("Breite")
 var h=get("Höhe")

@@ -1,11 +1,11 @@
 ﻿param "Style"={"eu" "us"}
 param "Bulk"={"Bulk connected to source" "Bulk connected to source without dot" "Bulk terminal"}
-param "Type"={"Enhancement" "Depletion"}
+param ["Type",de="Typ"]={"Enhancement" "Depletion"}
 
-param_arrow "Pfeil" = 2 from [-1, #inf) 
-param "Kreis"={"Mit Kreis" "Ohne Kreis"}
-param_int "Linienbreite" = 100 from [10, 1, 1000] unit "%"
-param_int "Abstand Gate" = 50 from [0, 1, 150]
+param_arrow ["Pfeil",en="Arrow"] = 2 from [-1, #inf) 
+param ["Kreis",en="Circle"]={["Mit Kreis",en="With Circle"] ["Ohne Kreis",en="Without Circle"]}
+param_int ["Linienbreite",de="Gate Breite",en="Gate Width"] = 100 from [10, 1, 1000] unit "%"
+param_int ["Abstand Gate",en="Distance Gate"] = 50 from [0, 1, 150]
 
 var abstandGS=get("Abstand Gate")
 def pfeilRadiusXBasic=54

@@ -44,7 +44,7 @@ Public Class AusdruckString_Variable
         If var_intern Then
             Return New Export_AusdruckString("v" & var_index, Export_AusdruckString.Ausdruck_Art.Atom)
         Else
-            Return New Export_AusdruckString("get(""" & writer.parameter(var_index).getName() & """)", Export_AusdruckString.Ausdruck_Art.Atom)
+            Return New Export_AusdruckString("get(""" & writer.parameter(var_index).getName().get_ID() & """)", Export_AusdruckString.Ausdruck_Art.Atom)
         End If
     End Function
 End Class

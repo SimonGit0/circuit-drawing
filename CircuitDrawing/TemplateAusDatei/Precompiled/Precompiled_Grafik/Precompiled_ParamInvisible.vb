@@ -32,7 +32,7 @@ Public Class Precompiled_ParamInvisible
         Else
             line = "visible("
         End If
-        line &= """" & writer.parameter(paramNr).getName() & """)"
+        line &= """" & writer.parameter(paramNr).getName().get_ID() & """)"
         writer.WriteLine(line)
     End Sub
 End Class

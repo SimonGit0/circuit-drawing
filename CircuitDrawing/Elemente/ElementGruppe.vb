@@ -141,7 +141,7 @@ Public Class ElementGruppe
         For i As Integer = 0 To mySubElements.Count - 1
             Dim lsub As List(Of ElementEinstellung) = mySubElements(i).getEinstellungen(sender)
             For j As Integer = lsub.Count - 1 To 0 Step -1
-                If lsub(j).Name = EINSTELLUNG_POS Then
+                If lsub(j).Name.get_ID() = EINSTELLUNG_POS Then
                     lsub.RemoveAt(j)
                 End If
             Next
@@ -152,7 +152,7 @@ Public Class ElementGruppe
                 For k As Integer = l.Count - 1 To 0 Step -1
                     hatEinstellungInBeiden = False
                     For j As Integer = 0 To lsub.Count - 1
-                        If l(k).Name = lsub(j).Name AndAlso l(k).GetType().ToString() = lsub(j).GetType().ToString() Then
+                        If l(k).Name.get_ID() = lsub(j).Name.get_ID() AndAlso l(k).GetType().ToString() = lsub(j).GetType().ToString() Then
                             hatEinstellungInBeiden = True
                             l(k).CombineValues(lsub(j))
                             Exit For

@@ -25,7 +25,7 @@
     Private _aWert_txt As TextBox
     Private Color_Picturebox As PictureBox
     Public Sub New(name As String, style As Integer, liste As FontList)
-        MyBase.New(name)
+        MyBase.New(New Multi_Lang_String(name, Nothing))
         Me.OLDstyle = liste.getFontStyle(style).copy()
 
         fontSize = Me.OLDstyle.getSizeInPoints()

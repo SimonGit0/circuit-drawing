@@ -1,6 +1,6 @@
-﻿param_int "Linienbreite" = 200 from [10, 1, 1000] unit "%"
-param_int "Pfeil Position" = 0 from [0, 1, 100] unit "%"
-param_int "Kontaktposition" = 50 from [0,1,200]
+﻿param_int ["Linienbreite",de="Basisbreite",en="Base Width"] = 200 from [10, 1, 1000] unit "%"
+param_int ["Pfeil Position",en="Arrow Position"] = 0 from [0, 1, 100] unit "%"
+param_int ["Kontaktposition",en="Contact Position"] = 50 from [0,1,200]
 
 def endeX=300
 var verschiebungY=get("Kontaktposition")

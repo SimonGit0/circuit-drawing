@@ -1,16 +1,16 @@
 ﻿param_int "Radius" = 400 from (0,50,100000] clip
-param_int "Stunden" = 7 from [0,11] mod
-param_int "Minuten" = 0 from [0,59] mod
+param_int ["Stunden",en="Hour"] = 7 from [0,11] mod
+param_int ["Minuten",en="Minute"] = 0 from [0,59] mod
 var int rad = get("Radius")
 var int centerRad = 30*rad/400
 
-param_int "Stundenzeiger" = 40 unit "%" clip from [0,100] 
+param_int ["Stundenzeiger",en="Hour Hand"] = 40 unit "%" clip from [0,100] 
 var int lenStunden = get("Stundenzeiger")*rad/100
-param_int "Minutenzeiger" = 70 clip unit "%" from [0,100]
+param_int ["Minutenzeiger",en="Minute Hand"] = 70 clip unit "%" from [0,100]
 var int lenMinuten = get("Minutenzeiger")*rad/100
 
-param_int "Große Striche" = 15 from [0,100] clip unit "%"
-param_int "Kleine Striche" = 7 from [0,100] unit "%" clip
+param_int ["Große Striche",en="Large Ticks"] = 15 from [0,100] clip unit "%"
+param_int ["Kleine Striche",en="Small Ticks"] = 7 from [0,100] unit "%" clip
 var int largeTickLen = get("Große Striche")*rad/100
 var int smallTickLen = get("Kleine Striche")*rad/100
 var int largeTicks = 3

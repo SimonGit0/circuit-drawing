@@ -14,7 +14,7 @@
     Private cmb_ah, cmb_av As JoSiCombobox
 
     Public Sub New(name As String, ah As DO_Textfeld.AlignH, av As DO_Text.AlignV)
-        MyBase.New(name)
+        MyBase.New(New Multi_Lang_String(name, Nothing))
         Me.ah = ah
         Me.av = av
     End Sub

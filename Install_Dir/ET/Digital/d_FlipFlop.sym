@@ -1,10 +1,10 @@
-﻿param_int "Breite"=1400 from [800, 100, 10000]
-param_int "Höhe"=1500 from [800, 100, 10000]
+﻿param_int ["Breite",en="Width"]=1400 from [800, 100, 10000]
+param_int ["Höhe",en="Height"]=1500 from [800, 100, 10000]
 var breiteFF=get("Breite")
 var hoeheFF=get("Höhe")
 
-param "Ausgang"={"Q und Nicht Q" "Nicht Q und Q" "Nur Q" "Nur Nicht Q"}
-param "Set und Reset Eingang"={"Ja" "Ja Invertiert" "Nein"}
+param ["Ausgang",en="Output"]={["Q und Nicht Q",en="Q and Not Q"] ["Nicht Q und Q",en="Not Q and Q"] ["Nur Q",en="Only Q"] ["Nur Nicht Q",en="Only Not Q"]}
+param ["Set und Reset Eingang",en="Set and Reset Input"]={["Ja",en="Yes"] ["Ja Invertiert",en="Yes Inverted"] ["Nein",en="No"]}
 
 scaling rechts(x):
 set_param("Breite", get("Breite")+x)

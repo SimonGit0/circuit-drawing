@@ -1,4 +1,4 @@
-﻿param "Art" = {"2 Frequenzen" "3 Frequenzen"} old "2 Frequenzen"
+﻿param ["Art",en="Type"] = {["2 Frequenzen",en="2 Frequencies"] ["3 Frequenzen",en="3 Frequencies"]} old "2 Frequenzen"
 
 def default_Links=3
 def default_Rechts=3

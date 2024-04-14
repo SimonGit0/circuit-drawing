@@ -1,7 +1,7 @@
 ﻿use_as_child
 
-param_int "Breite" = 100 from [0, 100000]
-param_int "Höhe" = 200 from [-100000, 100000]
+param_int ["Breite",en="Width"] = 100 from [0, 100000]
+param_int ["Höhe",en="Height"] = 200 from [-100000, 100000]
 
 param_int "Offset X" = -50
 param_int "Offset Y" = 0

@@ -87,7 +87,7 @@ Public Class Element_Textfeld
     Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
         Dim liste As New List(Of ElementEinstellung)
         liste.Add(New EinstellungTextMultiLine("Text", Me.myText))
-        liste.Add(New Einstellung_Textausrichtung("Textausrichtung", ah, av))
+        liste.Add(New Einstellung_Textausrichtung(My.Resources.Strings.Einstellung_Textausrichtung_Textfeld, ah, av))
         liste.Add(New Einstellung_Fontstyle(Element.EINSTELLUNG_FONTSTYLE, Me.myFont, sender.myFonts))
         liste.AddRange(MyBase.getEinstellungen(sender))
         Return liste
@@ -96,14 +96,14 @@ Public Class Element_Textfeld
     Public Overrides Function setEinstellungen(sender As Vektor_Picturebox, einstellungen As List(Of ElementEinstellung)) As Boolean
         Dim changed As Boolean = MyBase.setEinstellungen(sender, einstellungen)
         For Each e As ElementEinstellung In einstellungen
-            If TypeOf e Is EinstellungTextMultiLine AndAlso e.Name = "Text" Then
+            If TypeOf e Is EinstellungTextMultiLine AndAlso e.Name.get_ID() = "Text" Then
                 With DirectCast(e, EinstellungTextMultiLine)
                     If .textChanged Then
                         Me.myText = .neuerText
                         changed = True
                     End If
                 End With
-            ElseIf TypeOf e Is Einstellung_Textausrichtung AndAlso e.Name = "Textausrichtung" Then
+            ElseIf TypeOf e Is Einstellung_Textausrichtung AndAlso e.Name.get_ID() = My.Resources.Strings.Einstellung_Textausrichtung_Textfeld Then
                 With DirectCast(e, Einstellung_Textausrichtung)
                     If .av_changed Then
                         Me.av = .av
@@ -114,7 +114,7 @@ Public Class Element_Textfeld
                         changed = True
                     End If
                 End With
-            ElseIf TypeOf e Is Einstellung_Fontstyle AndAlso e.Name = Element.EINSTELLUNG_FONTSTYLE Then
+            ElseIf TypeOf e Is Einstellung_Fontstyle AndAlso e.Name.get_ID() = Element.EINSTELLUNG_FONTSTYLE Then
                 Me.myFont = DirectCast(e, Einstellung_Fontstyle).getNewFontstyle(Me.myFont, sender.myFonts, changed, False)
             End If
         Next

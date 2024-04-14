@@ -1,5 +1,5 @@
-﻿param_int "Breite" = 700 from (0,50,#inf)
-param_int "Höhe" = 800 from (0,100,#inf)
+﻿param_int ["Breite",en="Width"] = 700 from (0,50,#inf)
+param_int ["Höhe",en="Height"] = 800 from (0,100,#inf)
 
 var rY=get("Höhe")/2
 var breite=get("Breite")
