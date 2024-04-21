@@ -91,7 +91,7 @@ Public Class Multi_Lang_String
         Return Me.ID
     End Function
 
-    Public Sub speichern(writer As binaryWriter)
+    Public Sub speichern(writer As BinaryWriter)
         writer.Write(ID)
         If names Is Nothing Then
             writer.Write(-1)
@@ -133,7 +133,7 @@ Public Class Multi_Lang_String
             For Each kvp In names
                 erg &= kvp.Key & " = """ & kvp.Value & """, "
             Next
-            Return erg.Substring(0, erg.Length - 2)
+            Return erg.Substring(0, erg.Length - 2) & "]"
         End If
     End Function
 
