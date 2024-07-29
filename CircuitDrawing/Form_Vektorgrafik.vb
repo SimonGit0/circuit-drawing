@@ -124,6 +124,8 @@ Public Class Form_Vektorgrafik
 
             HorizontalSpiegelnToolStripMenuItem.ShortcutKeyDisplayString = .keyToolAddInstanceMirrorX.getMenuString()
             VertikalSpiegelnToolStripMenuItem.ShortcutKeyDisplayString = .keyToolAddInstanceMirrorY.getMenuString()
+            ImUhrzeigersinnDrehenToolStripMenuItem.ShortcutKeyDisplayString = .keyRotate90.getMenuString()
+            GegenDenUhrzeigersinnDrehenToolStripMenuItem.ShortcutKeyDisplayString = .keyRotateMinus90.getMenuString()
 
             InZwischenablageKopierenToolStripMenuItem.ShortcutKeyDisplayString = .keyCopy.getMenuString()
             AusZwischenablageEinfügenToolStripMenuItem.ShortcutKeyDisplayString = .keyPaste.getMenuString()
@@ -1072,6 +1074,10 @@ Public Class Form_Vektorgrafik
                     EineEbeneNachVorneToolStripMenuItem_Click(Nothing, EventArgs.Empty)
                 ElseIf k.keyEbeneNachHinten.isDown(e) Then
                     EineEbeneNachHintenToolStripMenuItem_Click(Nothing, EventArgs.Empty)
+                ElseIf k.keyRotate90.isDown(e) Then
+                    ImUhrzeigersinnDrehenToolStripMenuItem_Click(Nothing, EventArgs.Empty)
+                ElseIf k.keyRotateMinus90.isDown(e) Then
+                    GegenDenUhrzeigersinnDrehenToolStripMenuItem_Click(Nothing, EventArgs.Empty)
                 Else
                     Dim hatAbgearbeitet As Boolean = False
                     For i As Integer = 0 To Settings.getSettings().KeysSelectInstance.Count - 1

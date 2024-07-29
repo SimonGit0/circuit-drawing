@@ -30,6 +30,9 @@
 
     Public ReadOnly keyFitToScreen As ShortcutKey
 
+    Public ReadOnly keyRotate90 As ShortcutKey
+    Public ReadOnly keyRotateMinus90 As ShortcutKey
+
     Public ReadOnly keyShowElementEinstellungen As ShortcutKey
 
     Public ReadOnly keyMarkierungAufheben As ShortcutKey
@@ -105,6 +108,11 @@
 
         keyFitToScreen = New ShortcutKey(Keys.F)
         alleKeys.Add(keyFitToScreen)
+
+        keyRotate90 = New ShortcutKey(Keys.R, True)
+        alleKeys.Add(keyRotate90)
+        keyRotateMinus90 = New ShortcutKey(Keys.R, True, True)
+        alleKeys.Add(keyRotateMinus90)
 
         keyShowElementEinstellungen = New ShortcutKey(Keys.Q)
         alleKeys.Add(keyShowElementEinstellungen)
