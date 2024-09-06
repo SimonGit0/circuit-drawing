@@ -193,6 +193,15 @@
   <data name="ToolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
     <value>201, 6</value>
   </data>
+  <data name="AlsEMFKopierenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>204, 22</value>
+  </data>
+  <data name="AlsEMFKopierenToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copy as EMF</value>
+  </data>
+  <data name="ToolStripSeparator21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 6</value>
+  </data>
   <data name="ExportEinstellungenToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 22</value>
   </data>

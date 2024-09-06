@@ -27,7 +27,33 @@ Public Class EMF_Speicherer
         End If
     End Sub
 
+    Public Shared Sub CopyAsEmfToClipboard(metafile As Metafile)
+        Dim enfMetafileHandle As IntPtr = metafile.GetHenhmetafile()
+        Dim enfMetafileHandleCopy As IntPtr = CopyEnhMetaFileA(enfMetafileHandle, New IntPtr(0))
+
+        If OpenClipboard(IntPtr.Zero) Then
+            If EmptyClipboard() Then
+                Dim hRes As IntPtr
+                hRes = SetClipboardData(14, enfMetafileHandleCopy)
+            End If
+            CloseClipboard()
+            DeleteEnhMetaFile(enfMetafileHandle.ToInt32())
+        End If
+    End Sub
+
     Public Declare Function GetEnhMetaFileBits Lib "gdi32.dll" (hemf As Integer, cbBuffer As Integer, lpbBuffer() As Byte) As Integer
 
     Public Declare Function DeleteEnhMetaFile Lib "gdi32.dll" (hemfBitHandle As Integer) As Boolean
+
+    Public Declare Function CopyEnhMetaFileA Lib "gdi32.dll" (ByVal hemfSrc As IntPtr, ByVal hNULL As IntPtr) As IntPtr
+
+    Public Declare Function OpenClipboard Lib "user32.dll" (ByVal hWnd As IntPtr) As Boolean
+
+    Public Declare Function EmptyClipboard Lib "user32.dll" () As Boolean
+
+    Public Declare Function SetClipboardData Lib "user32.dll" (ByVal uFormat As Integer, ByVal hWnd As IntPtr) As IntPtr
+
+    Public Declare Function CloseClipboard Lib "user32.dll" () As Boolean
+
+
 End Class

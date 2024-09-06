@@ -138,6 +138,8 @@ Public Class Form_Vektorgrafik
 
             EineEbeneNachHintenToolStripMenuItem.ShortcutKeyDisplayString = .keyEbeneNachHinten.getMenuString()
             EineEbeneNachVorneToolStripMenuItem.ShortcutKeyDisplayString = .keyEbeneNachVorne.getMenuString()
+
+            AlsEMFKopierenToolStripMenuItem.ShortcutKeyDisplayString = .keyCopyEMFToClipboard.getMenuString()
         End With
     End Sub
 #End Region
@@ -496,6 +498,14 @@ Public Class Form_Vektorgrafik
             Dim pfad As String = s.FileName
             Vektor_Picturebox1.exportierenAlsEMF(pfad)
         End If
+    End Sub
+
+    Private Sub AlsEMFKopierenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlsEMFKopierenToolStripMenuItem.Click
+        CopyEMFToClipboard()
+    End Sub
+
+    Private Sub CopyEMFToClipboard()
+        Vektor_Picturebox1.copyEMFToClipboard()
     End Sub
 
     Private Sub AlsBildPNGJPEGToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlsBildPNGJPEGToolStripMenuItem.Click
@@ -1078,6 +1088,8 @@ Public Class Form_Vektorgrafik
                     ImUhrzeigersinnDrehenToolStripMenuItem_Click(Nothing, EventArgs.Empty)
                 ElseIf k.keyRotateMinus90.isDown(e) Then
                     GegenDenUhrzeigersinnDrehenToolStripMenuItem_Click(Nothing, EventArgs.Empty)
+                ElseIf k.keyCopyEMFToClipboard.isDown(e) Then
+                    CopyEMFToClipboard()
                 Else
                     Dim hatAbgearbeitet As Boolean = False
                     For i As Integer = 0 To Settings.getSettings().KeysSelectInstance.Count - 1

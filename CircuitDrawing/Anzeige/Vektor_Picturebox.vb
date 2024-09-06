@@ -4344,6 +4344,54 @@ Public Class Vektor_Picturebox
 #End Region
 
 #Region "Exportieren"
+    Public Sub copyEMFToClipboard()
+        Dim f As Single = 0.1
+
+        Dim pixelPerMM As Single = f / MM_PER_INT
+
+        Dim box As Rectangle = getBoundingBoxWithMarginExport()
+
+
+        Dim ox As Single = -box.X * f
+        Dim oy As Single = -box.Y * f
+
+        Dim args As New GrafikDrawArgs(myLineStyles, myFillStyles, myFonts, pixelPerMM, False)
+        args.faktorX = f
+        args.faktorY = f
+        args.offsetX = ox
+        args.offsetY = oy
+
+        Try
+            Dim size As New Size(CInt(box.Width * f), CInt(box.Height * f))
+            Dim bmp As New Bitmap(size.Width, size.Height)
+
+            Dim gRef As Graphics = Graphics.FromImage(bmp)
+            gRef.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+            gRef.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
+            gRef.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+            Dim hdc As IntPtr = gRef.GetHdc()
+            Dim meta As New Imaging.Metafile(hdc, Imaging.EmfType.EmfPlusOnly, "...")
+
+            Using g As Graphics = Graphics.FromImage(meta)
+                g.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+                g.TextRenderingHint = Drawing.Text.TextRenderingHint.AntiAliasGridFit
+                g.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+
+                Dim myElementeKomplett As List(Of DO_Grafik) = getExportElemente()
+
+                For Each element As DO_Grafik In myElementeKomplett
+                    element.drawGraphics(g, args)
+                Next
+            End Using
+
+            gRef.ReleaseHdc(hdc)
+            gRef.Dispose()
+            EMF_Speicherer.CopyAsEmfToClipboard(meta)
+        Catch ex As Exception
+            MessageBox.Show("Export als EMF fehlgeschlagen: " + ex.Message)
+        End Try
+    End Sub
+
     Public Sub exportierenAlsEMF(pfad As String)
         Dim f As Single = 0.1
 

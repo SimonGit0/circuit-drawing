@@ -51,6 +51,8 @@
     Public ReadOnly keyEbeneNachVorne As ShortcutKey
     Public ReadOnly keyEbeneNachHinten As ShortcutKey
 
+    Public ReadOnly keyCopyEMFToClipboard As ShortcutKey
+
     Private alleKeys As List(Of ShortcutKey)
 
     Private Sub New()
@@ -142,6 +144,8 @@
         alleKeys.Add(keyEbeneNachVorne)
         keyEbeneNachHinten = New ShortcutKey(Keys.OemMinus, True)
         alleKeys.Add(keyEbeneNachHinten)
+
+        keyCopyEMFToClipboard = New ShortcutKey(Keys.M, True)
     End Sub
 
     Public Function hasKey(k As ShortcutKey) As Boolean
