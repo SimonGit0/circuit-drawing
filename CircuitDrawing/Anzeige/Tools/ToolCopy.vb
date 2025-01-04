@@ -276,7 +276,7 @@
 
             Dim transform As New Transform_translate(delta.X, delta.Y)
             For Each element As ElementMaster In neueElemente
-                Dim grafik As DO_Grafik = element.getGrafik()
+                Dim grafik As DO_Grafik = element.getGrafik(New getGrafikArgs(False, Nothing, 0))
                 grafik.transform(transform)
                 grafik.drawGraphics(e.Graphics, e.args_Elemente)
 

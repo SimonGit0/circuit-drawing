@@ -49,7 +49,7 @@ Public Class SnapableImpedanceArrow
     End Sub
 
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         Dim g As New DO_MultiGrafik()
 
         Dim p As PointF = Me.pos.getMitteF()

@@ -30,7 +30,7 @@ Public Class SnapableLabel
         pos = s
     End Sub
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         Dim g As New DO_MultiGrafik()
         SnapableCurrentArrow.AddBeschriftungToGrafik(g, beschriftung, pos.wireStart, pos.wireEnd, pos.alpha, beschriftung.abstand, beschriftung.abstandQuer, fontstyle)
         pos.setLastVectorGroeßerNull_DuringDraw()

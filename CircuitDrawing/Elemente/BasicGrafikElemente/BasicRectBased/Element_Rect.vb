@@ -18,7 +18,7 @@ Public Class Element_Rect
         Me.anzahlMultiRectStart = anzahlMultiRectStart
     End Sub
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         If myMode = Modus.EinRect Then
             Dim r As New DO_Rechteck(New Rectangle(position, s), False, Drawing_FillMode.FillAndStroke)
             r.lineStyle.linestyle = linestyle

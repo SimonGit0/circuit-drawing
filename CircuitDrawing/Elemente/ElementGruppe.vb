@@ -17,16 +17,31 @@ Public Class ElementGruppe
         Return mySubElements
     End Function
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
+        args.deltaX += position.X
+        args.deltaY += position.Y
+
         Dim g As New DO_MultiGrafik()
         For i As Integer = 0 To mySubElements.Count - 1
-            g.childs.Add(mySubElements(i).getGrafik())
+            g.childs.Add(mySubElements(i).getGrafik(args))
         Next
         If Me.position.X <> 0 OrElse Me.position.Y <> 0 Then
             g.transform(New Transform_translate(Me.position))
         End If
+
+        args.deltaX -= position.X
+        args.deltaY -= position.Y
         Return g
     End Function
+
+    Public Sub getWires(w As List(Of Tuple(Of Point, Point)), dx As Integer, dy As Integer)
+        For Each el As ElementMaster In mySubElements
+            If TypeOf el Is IWire Then w.Add(New Tuple(Of Point, Point)(DirectCast(el, IWire).getStart(New Point(dx + position.X, dy + position.Y)), DirectCast(el, IWire).getEnde(New Point(dx + position.X, dy + position.Y))))
+            If TypeOf el Is ElementGruppe Then
+                DirectCast(el, ElementGruppe).getWires(w, dx + position.X, dy + position.Y)
+            End If
+        Next
+    End Sub
 
     Public Overrides Function getSelection() As Selection
         Dim r As Rectangle

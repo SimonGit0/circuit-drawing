@@ -12,7 +12,7 @@ Public Class Element_RoundRect
         Me.radius = radius
     End Sub
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         Dim r As New DO_RoundRect(New Rectangle(position, s), radius, False)
         r.lineStyle.linestyle = linestyle
         r.lineStyle.scaling = 1.0F

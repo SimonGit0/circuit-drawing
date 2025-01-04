@@ -55,7 +55,7 @@
 
             Dim args As New GrafikDrawArgs(myLinestyleList, sender.myFillStyles, sender.myFonts, sender.calcPixelPerMM(), sender.TextVorschauMode)
             sender.setViewArgs(args)
-            Dim g As DO_Grafik = arrow.getGrafik()
+            Dim g As DO_Grafik = arrow.getGrafik(New getGrafikArgs(False, Nothing, 0))
             If TypeOf g Is DO_MultiGrafik Then
                 DirectCast(g, DO_MultiGrafik).setLineStyleRekursiv(0)
             Else

@@ -71,7 +71,7 @@ Public Class Basic_Bezier
         Me.vec4 = New Point(ende.X - start.X, ende.Y - start.Y)
     End Sub
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         Dim g As DO_Grafik
         Dim p1 As Point = Me.getStart()
         Dim p2 As Point = Me.getP2()

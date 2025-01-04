@@ -88,7 +88,7 @@ Public Class BauteilAusDatei
         End If
     End Sub
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         Dim g As DO_MultiGrafik = DirectCast(template_compiled.getGrafik(), DO_MultiGrafik)
         If mydeko IsNot Nothing AndAlso mydeko.Count > 0 Then
             For i As Integer = 0 To mydeko.Count - 1

@@ -437,7 +437,7 @@ Public Class Vektor_Picturebox
         usedLinestyles(3) = True
 
         For Each e As ElementMaster In myElemente
-            e.getGrafik().markAllUsedLinestyles(usedLinestyles)
+            e.getGrafik(New getGrafikArgs(False, Nothing, DEFAULT_RADIUS_ZEILENSPRÜNGE)).markAllUsedLinestyles(usedLinestyles)
         Next
         'Nicht verwendete Linestyles wieder löschen
         For i As Integer = usedLinestyles.Count - 1 To 0 Step -1
@@ -451,7 +451,7 @@ Public Class Vektor_Picturebox
         Dim usedFillStyles(myFillStyles.Count() - 1) As Boolean
         usedFillStyles(0) = True
         For Each e As ElementMaster In myElemente
-            e.getGrafik().markAllUsedFillstyles(usedFillStyles)
+            e.getGrafik(New getGrafikArgs(False, Nothing, DEFAULT_RADIUS_ZEILENSPRÜNGE)).markAllUsedFillstyles(usedFillStyles)
             If TypeOf e Is Element Then
                 DirectCast(e, Element).markAllUsedFillstyles(usedFillStyles)
             End If
@@ -468,7 +468,7 @@ Public Class Vektor_Picturebox
         Dim usedFonStyles(myFonts.Count() - 1) As Boolean
         usedFonStyles(0) = True
         For Each e As ElementMaster In myElemente
-            e.getGrafik().markAllUsedFontStyles(usedFonStyles)
+            e.getGrafik(New getGrafikArgs(False, Nothing, DEFAULT_RADIUS_ZEILENSPRÜNGE)).markAllUsedFontStyles(usedFonStyles)
         Next
         'Nicht verwendete Fillstyles wieder löschen
         For i As Integer = usedFonStyles.Count - 1 To 0 Step -1
@@ -1480,7 +1480,7 @@ Public Class Vektor_Picturebox
     Public Sub dreheSelectedBauteileUmJeweiligenMittelpunkt(drehung As Drehmatrix)
         For i As Integer = 0 To myElemente.Count - 1
             If TypeOf myElemente(i) Is Bauteil AndAlso myElemente(i).hasSelection() Then
-                Dim rect As Rectangle = myElemente(i).getGrafik().getBoundingBox()
+                Dim rect As Rectangle = myElemente(i).getGrafik(New getGrafikArgs(False, Nothing, DEFAULT_RADIUS_ZEILENSPRÜNGE)).getBoundingBox()
                 Dim pos As New Point(rect.X + rect.Width \ 2, rect.Y + rect.Height \ 2)
                 myElemente(i).drehe(pos, drehung)
             End If
@@ -4615,7 +4615,7 @@ Public Class Vektor_Picturebox
                 writer.WriteLine("\put(0,0){\includegraphics[scale=\scaleSchematic]{\pathSchematic " & dateinamePDF & "}}%")
 
                 For Each e As ElementMaster In myElemente
-                    e.getGrafik().drawTEX_Text(writer, args)
+                    e.getGrafik(New getGrafikArgs(False, Nothing, DEFAULT_RADIUS_ZEILENSPRÜNGE)).drawTEX_Text(writer, args)
                 Next
 
                 writer.WriteLine("\end{picture}%")
@@ -4723,11 +4723,14 @@ Public Class Vektor_Picturebox
     Private Function getExportElemente() As List(Of DO_Grafik)
         Dim erg As New List(Of DO_Grafik)(myElemente.Count)
 
-        Dim wires As List(Of IWire) = Nothing
+        Dim wires As List(Of Tuple(Of Point, Point)) = Nothing
         If drawZeilensprünge Then
-            wires = New List(Of IWire)
+            wires = New List(Of Tuple(Of Point, Point))
             For Each el As ElementMaster In myElemente
-                If TypeOf el Is IWire Then wires.Add(DirectCast(el, IWire))
+                If TypeOf el Is IWire Then wires.Add(New Tuple(Of Point, Point)(DirectCast(el, IWire).getStart(), DirectCast(el, IWire).getEnde()))
+                If TypeOf el Is ElementGruppe Then
+                    DirectCast(el, ElementGruppe).getWires(wires, 0, 0)
+                End If
             Next
         End If
 
@@ -4741,12 +4744,10 @@ Public Class Vektor_Picturebox
             End If
         End If
 
+        Dim getGrafikArgs As New getGrafikArgs(Me.drawZeilensprünge, wires, radius_Zeilensprünge)
+
         For i As Integer = 0 To myElemente.Count - 1
-            If Not (Me.drawZeilensprünge AndAlso TypeOf myElemente(i) Is IWire) Then
-                erg.Add(myElemente(i).getGrafik())
-            Else
-                erg.Add(DirectCast(myElemente(i), IWire).getGrafikMitZeilensprüngen(radius_Zeilensprünge, wires))
-            End If
+            erg.Add(myElemente(i).getGrafik(getGrafikArgs))
             If Me.drawDotsOnIntersectingWires Then
                 'Dots malen
                 While dotsCurrentZorder = i
@@ -4823,11 +4824,14 @@ Public Class Vektor_Picturebox
         If myElemente IsNot Nothing Then
             'male Elemente
 
-            Dim wires As List(Of IWire) = Nothing
+            Dim wires As List(Of Tuple(Of Point, Point)) = Nothing
             If drawZeilensprünge Then
-                wires = New List(Of IWire)
+                wires = New List(Of Tuple(Of Point, Point))
                 For Each el As ElementMaster In myElemente
-                    If TypeOf el Is IWire Then wires.Add(DirectCast(el, IWire))
+                    If TypeOf el Is IWire Then wires.Add(New Tuple(Of Point, Point)(DirectCast(el, IWire).getStart(), DirectCast(el, IWire).getEnde()))
+                    If TypeOf el Is ElementGruppe Then
+                        DirectCast(el, ElementGruppe).getWires(wires, 0, 0)
+                    End If
                 Next
             End If
 
@@ -4841,12 +4845,10 @@ Public Class Vektor_Picturebox
                 End If
             End If
 
+            Dim getGrafikArgs As New getGrafikArgs(Me.drawZeilensprünge, wires, radius_Zeilensprünge)
+
             For i As Integer = 0 To myElemente.Count - 1
-                If Not (Me.drawZeilensprünge AndAlso TypeOf myElemente(i) Is IWire) Then
-                    grafik = myElemente(i).getGrafik()
-                Else
-                    grafik = DirectCast(myElemente(i), IWire).getGrafikMitZeilensprüngen(radius_Zeilensprünge, wires)
-                End If
+                grafik = myElemente(i).getGrafik(getGrafikArgs)
                 grafik.drawGraphics(e.Graphics, args)
                 If Me.drawDotsOnIntersectingWires Then
                     'Dots malen
@@ -5132,43 +5134,7 @@ Public Class Vektor_Picturebox
 
     Public Function drawDots() As List(Of Zorder_DO_Grafik)
         Dim points As New Dictionary(Of Point, Tuple(Of Integer, Integer, Integer)) 'Pos, Anzahl Vorkommen, Min. Linestyle, Max. zOrder
-        Dim points_el As New Dictionary(Of Point, Integer)
-
-        Dim w As IWire
-        Dim t As Tuple(Of Integer, Integer, Integer)
-        For i As Integer = 0 To myElemente.Count - 1
-            If TypeOf myElemente(i) Is IWire Then
-                w = DirectCast(myElemente(i), IWire)
-                If points.ContainsKey(w.getStart) Then
-                    t = points(w.getStart())
-                    points(w.getStart) = New Tuple(Of Integer, Integer, Integer)(t.Item1 + 1, Math.Min(t.Item2, DirectCast(myElemente(i), ElementLinestyle).linestyle), i)
-                Else
-                    points.Add(w.getStart, New Tuple(Of Integer, Integer, Integer)(1, DirectCast(myElemente(i), ElementLinestyle).linestyle, i))
-                End If
-                If points.ContainsKey(w.getEnde) Then
-                    t = points(w.getEnde())
-                    points(w.getEnde) = New Tuple(Of Integer, Integer, Integer)(t.Item1 + 1, Math.Min(t.Item2, DirectCast(myElemente(i), ElementLinestyle).linestyle), i)
-                Else
-                    points.Add(w.getEnde, New Tuple(Of Integer, Integer, Integer)(1, DirectCast(myElemente(i), ElementLinestyle).linestyle, i))
-                End If
-            ElseIf TypeOf myElemente(i) Is Bauteil Then
-                points_el.Clear()
-                For k As Integer = 0 To DirectCast(myElemente(i), Bauteil).NrOfSnappoints() - 1
-                    If Not DirectCast(myElemente(i), Bauteil).getSnappoint(k).KeinWireDot Then
-                        Dim p As Point = DirectCast(myElemente(i), Bauteil).getSnappoint(k).p
-                        If Not points_el.ContainsKey(p) Then
-                            points_el.Add(p, 1)
-                            If points.ContainsKey(p) Then
-                                t = points(p)
-                                points(p) = New Tuple(Of Integer, Integer, Integer)(t.Item1 + 1, Math.Min(t.Item2, DirectCast(myElemente(i), Bauteil).linestyle), i)
-                            Else
-                                points.Add(p, New Tuple(Of Integer, Integer, Integer)(1, DirectCast(myElemente(i), Bauteil).linestyle, i))
-                            End If
-                        End If
-                    End If
-                Next
-            End If
-        Next
+        drawDots_recursive(-1, myElemente, points, New Point(0, 0))
 
         Dim grafik As New List(Of Zorder_DO_Grafik)
         For Each pair As KeyValuePair(Of Point, Tuple(Of Integer, Integer, Integer)) In points
@@ -5179,6 +5145,61 @@ Public Class Vektor_Picturebox
         grafik.Sort()
         Return grafik
     End Function
+
+    Private Sub drawDots_recursive(zOrder As Integer, el As List(Of ElementMaster), points As Dictionary(Of Point, Tuple(Of Integer, Integer, Integer)), delta As Point)
+        'if zOrder = -1 ==> first iteration; zOrder is to be extracted by i
+        Dim w As IWire
+        Dim t As Tuple(Of Integer, Integer, Integer)
+        Dim points_el As New Dictionary(Of Point, Integer)
+        Dim p As Point
+
+        For i As Integer = 0 To el.Count - 1
+            Dim current_z_order As Integer
+            If zOrder < 0 Then
+                current_z_order = i
+            Else
+                current_z_order = zOrder
+            End If
+            If TypeOf el(i) Is IWire Then
+                w = DirectCast(el(i), IWire)
+                p = w.getStart(delta)
+                If points.ContainsKey(p) Then
+                    t = points(p)
+                    points(p) = New Tuple(Of Integer, Integer, Integer)(t.Item1 + 1, Math.Min(t.Item2, DirectCast(el(i), ElementLinestyle).linestyle), current_z_order)
+                Else
+                    points.Add(p, New Tuple(Of Integer, Integer, Integer)(1, DirectCast(el(i), ElementLinestyle).linestyle, current_z_order))
+                End If
+                p = w.getEnde(delta)
+                If points.ContainsKey(p) Then
+                    t = points(p)
+                    points(p) = New Tuple(Of Integer, Integer, Integer)(t.Item1 + 1, Math.Min(t.Item2, DirectCast(el(i), ElementLinestyle).linestyle), current_z_order)
+                Else
+                    points.Add(p, New Tuple(Of Integer, Integer, Integer)(1, DirectCast(el(i), ElementLinestyle).linestyle, current_z_order))
+                End If
+            ElseIf TypeOf el(i) Is Bauteil Then
+                points_el.Clear()
+                For k As Integer = 0 To DirectCast(el(i), Bauteil).NrOfSnappoints() - 1
+                    If Not DirectCast(el(i), Bauteil).getSnappoint(k).KeinWireDot Then
+                        p = DirectCast(el(i), Bauteil).getSnappoint(k).p
+                        p.X += delta.X
+                        p.Y += delta.Y
+                        If Not points_el.ContainsKey(p) Then
+                            points_el.Add(p, 1)
+                            If points.ContainsKey(p) Then
+                                t = points(p)
+                                points(p) = New Tuple(Of Integer, Integer, Integer)(t.Item1 + 1, Math.Min(t.Item2, DirectCast(el(i), Bauteil).linestyle), current_z_order)
+                            Else
+                                points.Add(p, New Tuple(Of Integer, Integer, Integer)(1, DirectCast(el(i), Bauteil).linestyle, current_z_order))
+                            End If
+                        End If
+                    End If
+                Next
+            ElseIf TypeOf el(i) Is ElementGruppe Then
+                Dim d As New Point(delta.X + DirectCast(el(i), ElementGruppe).position.X, delta.Y + DirectCast(el(i), ElementGruppe).position.Y)
+                drawDots_recursive(current_z_order, DirectCast(el(i), ElementGruppe).getElemente(), points, d)
+            End If
+        Next
+    End Sub
 
     Public Sub drawCursorAtPosition(e As PaintEventArgs, p As Point, style As CursorStyle, isMainCursor As Boolean)
         Dim pos As PointF = toPictureboxPoint(p)

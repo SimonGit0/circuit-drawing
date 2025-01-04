@@ -17,7 +17,7 @@ Public Class Element_Textfeld
         Me.av = av
     End Sub
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         Dim t As New DO_Textfeld(New Rectangle(position, s), myText, myFont, av, ah, False)
         t.lineStyle.linestyle = linestyle
         t.lineStyle.scaling = 1.0F

@@ -105,7 +105,7 @@ Public Class Element_Graph
         Return MatheAusrechnen.ausrechnen(function_as_string, x)
     End Function
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         If ausgewerteteLinienZüge Is Nothing Then
             CalcFunktion()
         End If

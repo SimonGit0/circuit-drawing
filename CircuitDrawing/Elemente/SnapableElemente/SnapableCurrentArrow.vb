@@ -44,7 +44,7 @@ Public Class SnapableCurrentArrow
         pos = s
     End Sub
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         Dim g As New DO_MultiGrafik()
         If myArt = StromPfeilArt.OnWire Then
             g.childs.Add(Pfeil_Verwaltung.getVerwaltung().getPfeilOnLine(pos, pfeilspitze))

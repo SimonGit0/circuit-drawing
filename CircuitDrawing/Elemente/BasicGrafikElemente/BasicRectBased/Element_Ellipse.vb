@@ -7,7 +7,7 @@ Public Class Element_Ellipse
         MyBase.New(ID, pos, breite, höhe, linestyle, fillstyle)
     End Sub
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         Dim r As New DO_Ellipse(New Rectangle(position, s), False, Drawing_FillMode.FillAndStroke)
         r.lineStyle.linestyle = linestyle
         r.lineStyle.scaling = 1.0F

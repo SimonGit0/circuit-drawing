@@ -7,7 +7,7 @@ Public MustInherit Class ElementMaster
         Me.ID = ID
     End Sub
 
-    Public MustOverride Function getGrafik() As DO_Grafik
+    Public MustOverride Function getGrafik(args As getGrafikArgs) As DO_Grafik
 
     Public MustOverride Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
 
@@ -30,4 +30,20 @@ Public MustInherit Class ElementMaster
 
     Public MustOverride Function isEqualExceptSelection(e2 As ElementMaster) As Boolean
 
+End Class
+
+Public Class getGrafikArgs
+    Public ReadOnly mitZeilensprüngen As Boolean
+    Public ReadOnly wires As List(Of Tuple(Of Point, Point))
+    Public ReadOnly radiusZeilensprünge As Integer
+    Public deltaX As Integer
+    Public deltaY As Integer
+
+    Public Sub New(mitZeilensprüngen As Boolean, wires As List(Of Tuple(Of Point, Point)), radiusZeilensprünge As Integer)
+        Me.mitZeilensprüngen = mitZeilensprüngen
+        Me.wires = wires
+        Me.radiusZeilensprünge = radiusZeilensprünge
+        Me.deltaX = 0
+        Me.deltaY = 0
+    End Sub
 End Class

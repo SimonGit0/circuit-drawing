@@ -33,7 +33,7 @@ Public Class SnapableBusTap
         pos = s
     End Sub
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         Dim g As New DO_MultiGrafik()
 
         Dim delta As Point = New Point(pos.wireEnd.X - pos.wireStart.X, pos.wireEnd.Y - pos.wireStart.Y)

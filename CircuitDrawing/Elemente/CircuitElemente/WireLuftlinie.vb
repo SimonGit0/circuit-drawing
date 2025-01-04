@@ -16,7 +16,15 @@ Public Class WireLuftlinie
         Me.pfeilStart = New ParamArrow(-1, 100)
     End Sub
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
+        If Not args.mitZeilensprüngen Then
+            Return Me.getGrafikBasic()
+        Else
+            Return Me.getGrafikMitZeilensprüngen(args.radiusZeilensprünge, args.wires, New Point(args.deltaX, args.deltaY))
+        End If
+    End Function
+
+    Private Function getGrafikBasic() As DO_Grafik
         Dim g As DO_Grafik = Pfeil_Verwaltung.getVerwaltung().getLineWithPfeil(getStart(), getEnde(), pfeilStart, pfeilEnde)
         If TypeOf g Is DO_MultiGrafik Then
             g.lineStyle.linestyle = Me.linestyle
@@ -27,10 +35,10 @@ Public Class WireLuftlinie
         Return g
     End Function
 
-    Public Function getGrafikMitZeilensprüngen(radius As Integer, allWires As List(Of IWire)) As DO_Grafik Implements IWire.getGrafikMitZeilensprüngen
+    Private Function getGrafikMitZeilensprüngen(radius As Integer, allWires As List(Of Tuple(Of Point, Point)), delta As Point) As DO_Grafik
         If vector.X = 0 Then
             'Zeilensprünge nicht bei vertikalen wires
-            Return getGrafik()
+            Return getGrafikBasic()
         End If
 
         Dim myEnde As Point = Me.getEnde()
@@ -47,29 +55,31 @@ Public Class WireLuftlinie
 
         Dim zeilensprünge As New List(Of Double)
         For i As Integer = 0 To allWires.Count - 1
-            If Not allWires(i).Equals(Me) Then
-                Dim start As Point = allWires(i).getStart()
-                Dim ende As Point = allWires(i).getEnde()
-                Dim yMin2 As Integer = Math.Min(start.Y, ende.Y)
-                Dim yMax2 As Integer = Math.Max(start.Y, ende.Y)
-                Dim xMin2 As Integer = Math.Min(start.X, ende.X)
-                Dim xMax2 As Integer = Math.Max(start.X, ende.X)
-                If yMax2 >= yMin AndAlso yMin2 <= yMax AndAlso xMax2 >= xMin AndAlso xMin2 <= xMax Then
-                    'nur wenn das wire im Bereich liegt kann es einen Schnittpunkt geben!
+            Dim start As Point = allWires(i).Item1
+            Dim ende As Point = allWires(i).Item2
+            start.X -= delta.X
+            start.Y -= delta.Y
+            ende.X -= delta.X
+            ende.Y -= delta.Y
+            Dim yMin2 As Integer = Math.Min(start.Y, ende.Y)
+            Dim yMax2 As Integer = Math.Max(start.Y, ende.Y)
+            Dim xMin2 As Integer = Math.Min(start.X, ende.X)
+            Dim xMax2 As Integer = Math.Max(start.X, ende.X)
+            If yMax2 >= yMin AndAlso yMin2 <= yMax AndAlso xMax2 >= xMin AndAlso xMin2 <= xMax Then
+                'nur wenn das wire im Bereich liegt kann es einen Schnittpunkt geben!
 
-                    'Schauen welches Wire "steiler" ist
-                    beta = Math.Atan2(Math.Abs(ende.Y - start.Y), Math.Abs(ende.X - start.X))
-                    If myWinkel < beta Then
-                        'Schnittpunkt berechnen (alpha = 0 --> Schnittpunkt bei i1; alpha = 1 --> Schnittpunkt bei i2)
-                        det = CLng(myEnde.Y - myStart.Y) * (ende.X - start.X) - CLng(myEnde.X - myStart.X) * (ende.Y - start.Y)
-                        If det <> 0 Then
-                            alpha = (CLng(ende.X - start.X) * (start.Y - myStart.Y) - (ende.Y - start.Y) * (start.X - myStart.X)) / det
-                            If alpha > 0 AndAlso alpha < 1 Then
-                                'Prüfen ob auch Linie2 bei beta > 0 und beta < 1 den Schnittpunkt hat!
-                                beta = ((myEnde.X - myStart.X) * (start.Y - myStart.Y) - (myEnde.Y - myStart.Y) * (start.X - myStart.X)) / det
-                                If beta > 0 AndAlso beta < 1 Then
-                                    zeilensprünge.Add(alpha)
-                                End If
+                'Schauen welches Wire "steiler" ist
+                beta = Math.Atan2(Math.Abs(ende.Y - start.Y), Math.Abs(ende.X - start.X))
+                If myWinkel < beta Then
+                    'Schnittpunkt berechnen (alpha = 0 --> Schnittpunkt bei i1; alpha = 1 --> Schnittpunkt bei i2)
+                    det = CLng(myEnde.Y - myStart.Y) * (ende.X - start.X) - CLng(myEnde.X - myStart.X) * (ende.Y - start.Y)
+                    If det <> 0 Then
+                        alpha = (CLng(ende.X - start.X) * (start.Y - myStart.Y) - (ende.Y - start.Y) * (start.X - myStart.X)) / det
+                        If alpha > 0 AndAlso alpha < 1 Then
+                            'Prüfen ob auch Linie2 bei beta > 0 und beta < 1 den Schnittpunkt hat!
+                            beta = ((myEnde.X - myStart.X) * (start.Y - myStart.Y) - (myEnde.Y - myStart.Y) * (start.X - myStart.X)) / det
+                            If beta > 0 AndAlso beta < 1 Then
+                                zeilensprünge.Add(alpha)
                             End If
                         End If
                     End If
@@ -80,9 +90,9 @@ Public Class WireLuftlinie
         Return Me.getGrafikMitZeilensprüngen(radius, zeilensprünge)
     End Function
 
-    Public Function getGrafikMitZeilensprüngen(radius As Integer, sprünge As List(Of Double)) As DO_Grafik
+    Private Function getGrafikMitZeilensprüngen(radius As Integer, sprünge As List(Of Double)) As DO_Grafik
         If sprünge Is Nothing OrElse sprünge.Count < 1 Then
-            Return getGrafik()
+            Return getGrafikBasic()
         End If
 
         sprünge.Sort()
@@ -91,7 +101,7 @@ Public Class WireLuftlinie
         Dim start As Point = getStart()
         Dim ende As Point = getEnde()
         Dim len As Double = Math.Sqrt(CDbl(ende.X - start.X) * (ende.X - start.X) + CDbl(ende.Y - start.Y) * (ende.Y - start.Y))
-        If len = 0 Then Return getGrafik()
+        If len = 0 Then Return getGrafikBasic()
         Dim faktor As Double = radius / len
 
         Dim startwinkel As Single = CSng(Math.Atan2(vector.Y, vector.X) * 180 / Math.PI)
@@ -208,9 +218,15 @@ Public Class WireLuftlinie
     Public Function getStart() As Point Implements IWire.getStart
         Return position
     End Function
+    Public Function getStart(delta As Point) As Point Implements IWire.getStart
+        Return New Point(position.X + delta.X, position.Y + delta.Y)
+    End Function
 
     Public Function getEnde() As Point Implements IWire.getEnde
         Return New Point(position.X + vector.X, position.Y + vector.Y)
+    End Function
+    Public Function getEnde(delta As Point) As Point Implements IWire.getEnde
+        Return New Point(position.X + vector.X + delta.X, position.Y + vector.Y + delta.Y)
     End Function
 
     Public Sub moveStart(neuerStart As Point)

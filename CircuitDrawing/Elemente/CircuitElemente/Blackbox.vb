@@ -91,7 +91,7 @@ Public Class Blackbox
         Throw New NotImplementedException("Falsche Richtung")
     End Sub
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         Dim g As New DO_MultiGrafik()
         g.childs.Add(New DO_Rechteck(New Rectangle(Me.position, New Size(breite, höhe)), False, Drawing_FillMode.FillAndStroke))
 

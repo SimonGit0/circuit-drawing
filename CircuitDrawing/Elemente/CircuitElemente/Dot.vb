@@ -20,7 +20,7 @@ Public Class Dot
         Throw New NotImplementedException()
     End Sub
 
-    Public Overrides Function getGrafik() As DO_Grafik
+    Public Overrides Function getGrafik(args As getGrafikArgs) As DO_Grafik
         Dim e As New DO_Dot(position, radius, radius, Me.linestyle, False)
         Return e
     End Function
