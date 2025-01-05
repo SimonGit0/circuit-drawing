@@ -489,4 +489,13 @@
   <data name="Neues_Textfeld" xml:space="preserve">
     <value>New Textfield</value>
   </data>
+  <data name="Einstellung_AbstandPfeil" xml:space="preserve">
+    <value>Distance Arrow</value>
+  </data>
+  <data name="Einstellung_LaengePfeil_p" xml:space="preserve">
+    <value>Length (parallel)</value>
+  </data>
+  <data name="Einstellung_LaengePfeil_s" xml:space="preserve">
+    <value>Length (perpendicular)</value>
+  </data>
 </root>

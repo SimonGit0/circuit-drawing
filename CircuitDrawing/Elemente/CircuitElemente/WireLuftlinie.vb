@@ -302,8 +302,8 @@ Public Class WireLuftlinie
         Return True
     End Function
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
-        Dim l As List(Of ElementEinstellung) = MyBase.getEinstellungen(sender)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
+        Dim l As List(Of ElementEinstellung) = MyBase.getEinstellungen(sender, mode)
         l.Add(New Einstellung_Pfeilspitze(EINSTELLUNG_PFEILSPITZEN, pfeilStart, pfeilEnde))
         Return l
     End Function

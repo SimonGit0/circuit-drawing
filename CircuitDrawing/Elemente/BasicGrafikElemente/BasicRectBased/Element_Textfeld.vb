@@ -84,12 +84,12 @@ Public Class Element_Textfeld
         Return MyBase.isEqualExceptSelection(e2)
     End Function
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Dim liste As New List(Of ElementEinstellung)
         liste.Add(New EinstellungTextMultiLine("Text", Me.myText))
         liste.Add(New Einstellung_Textausrichtung(My.Resources.Strings.Einstellung_Textausrichtung_Textfeld, ah, av))
         liste.Add(New Einstellung_Fontstyle(Element.EINSTELLUNG_FONTSTYLE, Me.myFont, sender.myFonts))
-        liste.AddRange(MyBase.getEinstellungen(sender))
+        liste.AddRange(MyBase.getEinstellungen(sender, mode))
         Return liste
     End Function
 

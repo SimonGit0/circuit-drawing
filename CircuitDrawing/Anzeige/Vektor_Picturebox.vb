@@ -349,35 +349,53 @@ Public Class Vektor_Picturebox
         Return myElemente
     End Function
 
-    Public Function getEinstellungenOfSelectedElements() As List(Of ElementEinstellung)
+    Public Function getEinstellungenOfSelectedElements(mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Dim liste As List(Of ElementEinstellung) = Nothing
         Dim listeNeu As List(Of ElementEinstellung) = Nothing
         Dim hatEinstellungInBeiden As Boolean
 
+        Dim hatEinstellung_listeNeu() As Boolean = Nothing
+
         For Each e As ElementMaster In myElemente
             If e.hasSelection() Then
                 If liste Is Nothing Then
-                    liste = e.getEinstellungen(Me)
+                    liste = e.getEinstellungen(Me, mode)
                 Else
-                    listeNeu = e.getEinstellungen(Me)
+                    listeNeu = e.getEinstellungen(Me, mode)
+                    If mode = ElementEinstellung.combineModus.AlleEinstellungenAnzeigen Then
+                        ReDim hatEinstellung_listeNeu(listeNeu.Count - 1)
+                    End If
                     For i As Integer = liste.Count - 1 To 0 Step -1
                         hatEinstellungInBeiden = False
                         For j As Integer = 0 To listeNeu.Count - 1
                             If liste(i).Name.get_ID() = listeNeu(j).Name.get_ID() AndAlso liste(i).GetType().ToString() = listeNeu(j).GetType().ToString() Then
                                 hatEinstellungInBeiden = True
-                                liste(i).CombineValues(listeNeu(j))
+                                liste(i).CombineValues(listeNeu(j), mode)
+                                If mode = ElementEinstellung.combineModus.AlleEinstellungenAnzeigen Then
+                                    hatEinstellung_listeNeu(j) = True
+                                End If
                                 Exit For
                             End If
                         Next
-                        If Not hatEinstellungInBeiden Then
+                        If Not hatEinstellungInBeiden AndAlso Not mode = ElementEinstellung.combineModus.AlleEinstellungenAnzeigen Then
                             liste.RemoveAt(i)
                         ElseIf TypeOf liste(i) Is Einstellung_Multi AndAlso DirectCast(liste(i), Einstellung_Multi).getListe().Count = 0 Then
                             liste.RemoveAt(i) 'Leere Liste löschen!
                         End If
                     Next
+                    If mode = ElementEinstellung.combineModus.AlleEinstellungenAnzeigen Then
+                        For i As Integer = 0 To listeNeu.Count - 1
+                            If Not hatEinstellung_listeNeu(i) Then
+                                liste.Add(listeNeu(i))
+                            End If
+                        Next
+                    End If
                 End If
             End If
         Next
+
+        liste.Sort()
+
         Return liste
     End Function
 

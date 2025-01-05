@@ -16,12 +16,12 @@
     Private aWert_txt As TextBox
 
     Public Sub New(name As String, nummer As Integer, liste As FillStyleList)
-        MyBase.New(New Multi_Lang_String(name, Nothing))
+        MyBase.New(SortierTyp.Fillstyle, New Multi_Lang_String(name, Nothing))
         Me.style = liste.getFillStyle(nummer).copy()
         neueFarbe = Me.style.farbe
     End Sub
 
-    Public Overrides Sub CombineValues(e2 As ElementEinstellung)
+    Public Overrides Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
         Dim e As Einstellung_Fillstil = DirectCast(e2, Einstellung_Fillstil)
         If e.style.farbe.Color_R <> Me.style.farbe.Color_R OrElse
            e.style.farbe.Color_B <> Me.style.farbe.Color_B OrElse

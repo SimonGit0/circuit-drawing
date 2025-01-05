@@ -16,8 +16,8 @@
         Me.linestyle = ls
     End Sub
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
-        Dim erg As List(Of ElementEinstellung) = MyBase.getEinstellungen(sender)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
+        Dim erg As List(Of ElementEinstellung) = MyBase.getEinstellungen(sender, mode)
         erg.Add(New Einstellung_Linienstil(Element.EINSTELLUNG_LINESTYLE, Me.linestyle, sender.myLineStyles))
         Return erg
     End Function

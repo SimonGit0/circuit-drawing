@@ -31,12 +31,12 @@
     Private _txtScale As Textbox_mitUnit
 
     Public Sub New(name As String, nummer As Integer, liste As LineStyleList)
-        MyBase.New(New Multi_Lang_String(name, Nothing))
+        MyBase.New(SortierTyp.Linestyle, New Multi_Lang_String(name, Nothing))
         Me.style = liste.getLineStyle(nummer).copy()
         neueFarbe = Me.style.farbe
     End Sub
 
-    Public Overrides Sub CombineValues(e2 As ElementEinstellung)
+    Public Overrides Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
         Dim e As Einstellung_Linienstil = DirectCast(e2, Einstellung_Linienstil)
         If e.style.Dicke <> Me.style.Dicke Then
             variousDicke = True

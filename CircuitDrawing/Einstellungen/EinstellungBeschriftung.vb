@@ -25,11 +25,11 @@
     Private _txtQuer As TextBox
 
     Public Sub New(name As String, b As Beschriftung)
-        MyBase.New(New Multi_Lang_String(name, Nothing))
+        MyBase.New(SortierTyp.Label, New Multi_Lang_String(name, Nothing))
         Me.b = b
     End Sub
 
-    Public Overrides Sub CombineValues(e2 As ElementEinstellung)
+    Public Overrides Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
         Dim e As EinstellungBeschriftung = DirectCast(e2, EinstellungBeschriftung)
         If b.text <> e.b.text Then
             variousText = True

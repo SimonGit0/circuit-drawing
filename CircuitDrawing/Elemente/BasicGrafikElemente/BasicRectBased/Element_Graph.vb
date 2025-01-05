@@ -125,7 +125,7 @@ Public Class Element_Graph
         Return g
     End Function
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Dim l As New List(Of ElementEinstellung)
         Dim e1 As New Einstellung_Multi("Parameter", False)
 
@@ -148,7 +148,7 @@ Public Class Element_Graph
         e1.add(New Einstellung_TemplateParameter_Double(ymax, Me.yMax))
 
         l.Add(e1)
-        l.AddRange(MyBase.getEinstellungen(sender))
+        l.AddRange(MyBase.getEinstellungen(sender, mode))
         Return l
     End Function
 

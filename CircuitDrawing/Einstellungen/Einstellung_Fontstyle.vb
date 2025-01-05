@@ -25,7 +25,7 @@
     Private _aWert_txt As TextBox
     Private Color_Picturebox As PictureBox
     Public Sub New(name As String, style As Integer, liste As FontList)
-        MyBase.New(New Multi_Lang_String(name, Nothing))
+        MyBase.New(SortierTyp.Font, New Multi_Lang_String(name, Nothing))
         Me.OLDstyle = liste.getFontStyle(style).copy()
 
         fontSize = Me.OLDstyle.getSizeInPoints()
@@ -34,7 +34,7 @@
         neueFarbe = Me.OLDstyle.farbe
     End Sub
 
-    Public Overrides Sub CombineValues(e2 As ElementEinstellung)
+    Public Overrides Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
         Dim e As Einstellung_Fontstyle = DirectCast(e2, Einstellung_Fontstyle)
         If e.OLDstyle.getFontName() <> Me.OLDstyle.getFontName() Then
             variousFontName = True

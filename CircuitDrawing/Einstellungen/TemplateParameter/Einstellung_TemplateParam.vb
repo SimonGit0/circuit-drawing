@@ -2,7 +2,7 @@
     Inherits ElementEinstellung
 
     Public Sub New(name As Multi_Lang_String)
-        MyBase.New(name)
+        MyBase.New(SortierTyp.ElementEinstellung, name)
     End Sub
 
     Public MustOverride Function isSameParameter(e2 As Einstellung_TemplateParam) As Boolean

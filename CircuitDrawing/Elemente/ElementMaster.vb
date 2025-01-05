@@ -9,7 +9,7 @@ Public MustInherit Class ElementMaster
 
     Public MustOverride Function getGrafik(args As getGrafikArgs) As DO_Grafik
 
-    Public MustOverride Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public MustOverride Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
 
     Public MustOverride Function setEinstellungen(sender As Vektor_Picturebox, einstellungen As List(Of ElementEinstellung)) As Boolean
 

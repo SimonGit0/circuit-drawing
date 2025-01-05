@@ -536,7 +536,7 @@ Public Class BauteilAusDatei
         myBeschriftung.text = val
     End Sub
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Dim l As New List(Of ElementEinstellung)
         If myTemplate.getNrOfParams() > 0 Then
             Dim e1 As New Einstellung_Multi("Parameter", False)
@@ -561,7 +561,7 @@ Public Class BauteilAusDatei
             l.Add(New Einstellung_Fillstil(EINSTELLUNG_FILLSTYLE, Me.myfillstyle, sender.myFillStyles))
         End If
 
-        l.AddRange(MyBase.getEinstellungen(sender))
+        l.AddRange(MyBase.getEinstellungen(sender, mode))
         If mydeko IsNot Nothing Then
             For i As Integer = 0 To mydeko.Count - 1
                 Dim e1 As New Einstellung_Multi(getDekoParamName(i), True)

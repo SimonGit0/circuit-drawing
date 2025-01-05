@@ -21,12 +21,12 @@
     Private _txtStart, _txtEnde As Textbox_mitUnit
 
     Public Sub New(name As String, pfeilStart As ParamArrow, pfeilEnde As ParamArrow)
-        MyBase.New(New Multi_Lang_String(name, Nothing))
+        MyBase.New(SortierTyp.ElementEinstellung_Arrowheads, New Multi_Lang_String(name, Nothing))
         Me.pfeilStart = pfeilStart.CopyPfeil()
         Me.pfeilEnde = pfeilEnde.CopyPfeil()
     End Sub
 
-    Public Overrides Sub CombineValues(e2 As ElementEinstellung)
+    Public Overrides Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
         Dim e As Einstellung_Pfeilspitze = DirectCast(e2, Einstellung_Pfeilspitze)
         If Me.pfeilEnde.pfeilArt <> e.pfeilEnde.pfeilArt Then
             variousEnde = True

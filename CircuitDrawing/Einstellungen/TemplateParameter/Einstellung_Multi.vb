@@ -6,8 +6,11 @@
     Public istGeschlossen As Boolean = False
 
     Public Sub New(name As String, hatSchließenButton As Boolean)
-        MyBase.New(New Multi_Lang_String(name, Nothing))
+        MyBase.New(SortierTyp.ElementEinstellung, New Multi_Lang_String(name, Nothing))
         Me.hatSchließenButton = hatSchließenButton
+        If hatSchließenButton Then
+            MyBase.sortID = SortierTyp.ElementEinstellungSubelement
+        End If
         liste = New List(Of Einstellung_TemplateParam)
     End Sub
 
@@ -20,7 +23,7 @@
         AddHandler e.EinstellungLiveChanged, AddressOf ChildEinstellungChanged
     End Sub
 
-    Public Overrides Sub CombineValues(e2 As ElementEinstellung)
+    Public Overrides Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
         'For i As Integer = 0 To liste.Count - 1
         '    If liste(i).Name = e2.Name Then
         '        liste(i).CombineValues(e2)
@@ -28,20 +31,37 @@
         'Next
         Dim e As Einstellung_Multi = DirectCast(e2, Einstellung_Multi)
         Dim hatEinstellung As Boolean
+
+        Dim hatEinstellung_e2() As Boolean = Nothing
+        If mode = combineModus.AlleEinstellungenAnzeigen Then
+            ReDim hatEinstellung_e2(e.liste.Count - 1)
+        End If
+
         For i As Integer = liste.Count - 1 To 0 Step -1
             hatEinstellung = False
             For j As Integer = 0 To e.liste.Count - 1
                 If liste(i).isSameParameter(e.liste(j)) Then
                     hatEinstellung = True
-                    liste(i).CombineValues(e.liste(j))
+                    liste(i).CombineValues(e.liste(j), mode)
+                    If mode = combineModus.AlleEinstellungenAnzeigen Then
+                        hatEinstellung_e2(j) = True
+                    End If
                     Exit For
                 End If
             Next
-            If Not hatEinstellung Then
+            If Not hatEinstellung AndAlso mode <> combineModus.AlleEinstellungenAnzeigen Then
                 RemoveHandler liste(i).EinstellungLiveChanged, AddressOf ChildEinstellungChanged
                 liste.RemoveAt(i)
             End If
         Next
+        If mode = combineModus.AlleEinstellungenAnzeigen Then
+            For i As Integer = 0 To e.liste.Count - 1
+                If Not hatEinstellung_e2(i) Then
+                    RemoveHandler e.liste(i).EinstellungLiveChanged, AddressOf e.ChildEinstellungChanged
+                    Me.add(e.liste(i))
+                End If
+            Next
+        End If
     End Sub
 
     Public Function sindGleicheEinstellungen(e2 As ElementEinstellung) As Boolean

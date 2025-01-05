@@ -1,4 +1,5 @@
 ﻿Public MustInherit Class ElementEinstellung
+    Implements IComparable(Of ElementEinstellung)
 
     Public Const DIST_BETWEEN_ELEMENTS As Integer = 1
 
@@ -15,11 +16,14 @@
     Public Const TAB_X2 As Integer = 175
     Public ReadOnly Name As Multi_Lang_String
 
-    Public Sub New(name As Multi_Lang_String)
+    Protected sortID As SortierTyp
+
+    Public Sub New(sortID As SortierTyp, name As Multi_Lang_String)
+        Me.sortID = sortID
         Me.Name = name
     End Sub
 
-    Public MustOverride Sub CombineValues(e2 As ElementEinstellung)
+    Public MustOverride Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
 
     Public Shared MyFont As Font = New Font(SystemFonts.DefaultFont.FontFamily, 9.75F, Drawing.FontStyle.Regular)
     Public Shared MyFont_Header As Font = New Font(SystemFonts.DefaultFont.FontFamily, 9.75F, Drawing.FontStyle.Bold)
@@ -250,5 +254,36 @@
         RaiseEvent EinstellungLiveChanged(Me, EventArgs.Empty)
     End Sub
 
+    Public Function CompareTo(other As ElementEinstellung) As Integer Implements IComparable(Of ElementEinstellung).CompareTo
+        If Me.sortID = other.sortID Then
+            Return Me.Name.get_ID().CompareTo(other.Name.get_ID())
+        End If
+        Return CInt(Me.sortID).CompareTo(CInt(other.sortID))
+    End Function
+
     Public Event EinstellungLiveChanged(sender As Object, e As EventArgs)
+
+    Public Enum combineModus
+        NurGleicheEinstellungenAnzeigen
+        AlleEinstellungenAnzeigen
+    End Enum
+
+    Public Enum SortierTyp
+        ElementEinstellung = 0
+        ElementEinstellung_Speziell = 1
+        ElementEinstellung_Arrowheads = 2
+        ElementEinstellung_Textfeld_Text = 3
+        ElementEinstellung_Textfeld_Rotation = 4
+
+        Label = 10
+
+        Font = 20
+        Linestyle = 21
+        Fillstyle = 22
+
+        Size = 100
+        Position = 101
+
+        ElementEinstellungSubelement = 1000
+    End Enum
 End Class

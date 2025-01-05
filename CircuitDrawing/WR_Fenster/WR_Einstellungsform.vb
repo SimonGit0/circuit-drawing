@@ -4,7 +4,6 @@
     Private panel_main2 As Panel
 
     Private myEinstellungen As List(Of ElementEinstellung)
-
     Public Sub New()
         InitializeComponent()
 
@@ -26,6 +25,8 @@
         panel_main2.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
         Me.Controls.Add(panel_main2)
         panel_main2.AutoScroll = True
+
+        Me.cmbShowStyle.SelectedIndex = 0
     End Sub
 
     Public Sub setEinstellungen(einstellungen As List(Of ElementEinstellung))
@@ -45,6 +46,7 @@
                 panel_main1.Visible = False
                 panel_main2.Visible = False
                 Button1.Visible = False
+                cmbShowStyle.Visible = False
             Else
                 Dim panel_main As Panel
                 Dim panel_secondary As Panel
@@ -74,6 +76,7 @@
                 panel_main.Visible = True
                 panel_secondary.Visible = False
                 Button1.Visible = True
+                cmbShowStyle.Visible = True
             End If
 
             If myEinstellungen IsNot Nothing Then
@@ -120,5 +123,20 @@
         RaiseEvent EinstellungenÜbernehmen(Me, myEinstellungen)
     End Sub
 
+    Private Sub cmbShowStyle_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbShowStyle.SelectedIndexChanged
+        If myEinstellungen IsNot Nothing Then
+            RaiseEvent EinstellungenShowStyleChanged(Me, EventArgs.Empty)
+        End If
+    End Sub
+
+    Public Function getCombineMode() As ElementEinstellung.combineModus
+        If cmbShowStyle.SelectedIndex = 0 Then
+            Return ElementEinstellung.combineModus.AlleEinstellungenAnzeigen
+        Else
+            Return ElementEinstellung.combineModus.NurGleicheEinstellungenAnzeigen
+        End If
+    End Function
+
     Public Event EinstellungenÜbernehmen(sender As Object, liste As List(Of ElementEinstellung))
+    Public Event EinstellungenShowStyleChanged(sender As Object, e As EventArgs)
 End Class

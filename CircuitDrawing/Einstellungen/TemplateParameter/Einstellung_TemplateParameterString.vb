@@ -23,7 +23,7 @@
         Return True
     End Function
 
-    Public Overrides Sub CombineValues(e2 As ElementEinstellung)
+    Public Overrides Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
         Dim e As Einstellung_TemplateParameterString = DirectCast(e2, Einstellung_TemplateParameterString)
         If myStr <> e.myStr Then
             variousStr = True

@@ -14,12 +14,12 @@
     Private cmb_ah, cmb_av As JoSiCombobox
 
     Public Sub New(name As String, ah As DO_Textfeld.AlignH, av As DO_Text.AlignV)
-        MyBase.New(New Multi_Lang_String(name, Nothing))
+        MyBase.New(SortierTyp.ElementEinstellung_Textfeld_Rotation, New Multi_Lang_String(name, Nothing))
         Me.ah = ah
         Me.av = av
     End Sub
 
-    Public Overrides Sub CombineValues(e2 As ElementEinstellung)
+    Public Overrides Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
         Dim e As Einstellung_Textausrichtung = DirectCast(e2, Einstellung_Textausrichtung)
         If e.ah <> Me.ah Then
             ah_various = True

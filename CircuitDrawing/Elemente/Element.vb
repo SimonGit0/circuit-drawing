@@ -25,9 +25,9 @@
 
     Public MustOverride Function getSnappoint(i As Integer) As Snappoint
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Dim erg As New List(Of ElementEinstellung)
-        erg.Add(New Einstellung_Pos(EINSTELLUNG_POS, position, "X:", "Y:"))
+        erg.Add(New Einstellung_Pos(ElementEinstellung.SortierTyp.Position, EINSTELLUNG_POS, position, "X:", "Y:"))
         Return erg
     End Function
 

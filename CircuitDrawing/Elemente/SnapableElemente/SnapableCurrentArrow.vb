@@ -224,12 +224,11 @@ Public Class SnapableCurrentArrow
         Return res
     End Function
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
-        Dim l As List(Of ElementEinstellung) = MyBase.getEinstellungen(sender)
-        l.Add(New EinstellungStrompfeilArt(My.Resources.Strings.Einstellung_ArtDesStrompfeiles, myArt))
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
+        Dim l As List(Of ElementEinstellung) = MyBase.getEinstellungen(sender, mode)
+        l.Add(New EinstellungStrompfeilArt(My.Resources.Strings.Einstellung_ArtDesStrompfeiles, myArt, pfeilspitze))
         beschriftung.addEinstellungen(l)
         l.Add(New Einstellung_Fontstyle(Element.EINSTELLUNG_FONTSTYLE, Me.fontstyle, sender.myFonts))
-        l.Add(New Einstellung_SinglePfeilspitze(Element.EINSTELLUNG_SINGLEPFEILSPITZE, pfeilspitze))
         l.Add(New Einstellung_Linienstil(Element.EINSTELLUNG_LINESTYLE, linestyle, sender.myLineStyles))
         Return l
     End Function
@@ -239,21 +238,18 @@ Public Class SnapableCurrentArrow
         For Each e As ElementEinstellung In einstellungen
             If TypeOf e Is Einstellung_Linienstil AndAlso e.Name.get_ID() = Element.EINSTELLUNG_LINESTYLE Then
                 Me.linestyle = DirectCast(e, Einstellung_Linienstil).getNewLinienstil(Me.linestyle, sender.myLineStyles, changed, False)
-            ElseIf TypeOf e Is Einstellung_SinglePfeilspitze AndAlso e.Name.get_ID() = Element.EINSTELLUNG_SINGLEPFEILSPITZE Then
-                With DirectCast(e, Einstellung_SinglePfeilspitze)
-                    If .Changed Then
+            ElseIf TypeOf e Is EinstellungStrompfeilArt AndAlso e.Name.get_ID() = My.Resources.Strings.Einstellung_ArtDesStrompfeiles Then
+                With DirectCast(e, EinstellungStrompfeilArt)
+                    If .changedArt Then
+                        Me.myArt = .myArt
+                        changed = True
+                    End If
+                    If .ChangedPfeil Then
                         Me.pfeilspitze.pfeilArt = .pfeil.pfeilArt
                         changed = True
                     End If
                     If .changedSize Then
                         Me.pfeilspitze.pfeilSize = .pfeil.pfeilSize
-                        changed = True
-                    End If
-                End With
-            ElseIf TypeOf e Is EinstellungStrompfeilArt AndAlso e.Name.get_ID() = My.Resources.Strings.Einstellung_ArtDesStrompfeiles Then
-                With DirectCast(e, EinstellungStrompfeilArt)
-                    If .changedArt Then
-                        Me.myArt = .myArt
                         changed = True
                     End If
                 End With

@@ -98,8 +98,8 @@ Public Class SnapableLabel
         Return res
     End Function
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
-        Dim l As List(Of ElementEinstellung) = MyBase.getEinstellungen(sender)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
+        Dim l As List(Of ElementEinstellung) = MyBase.getEinstellungen(sender, mode)
         beschriftung.addEinstellungen(l)
         l.Add(New Einstellung_Fontstyle(Element.EINSTELLUNG_FONTSTYLE, Me.fontstyle, sender.myFonts))
         Return l

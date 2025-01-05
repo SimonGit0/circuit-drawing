@@ -246,15 +246,15 @@ Public Class Basic_Spannungspfeil
         beschriftung.text = val
     End Sub
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Dim l As New List(Of ElementEinstellung)
         beschriftung.addEinstellungen(l)
         l.Add(New Einstellung_Fontstyle(Element.EINSTELLUNG_FONTSTYLE, Me.fontstyle, sender.myFonts))
         'l.Add(New Einstellung_SinglePfeilspitze(Element.EINSTELLUNG_SINGLEPFEILSPITZE, Me.pfeil))
         l.Add(New Einstellung_Pfeilspitze(Element.EINSTELLUNG_PFEILSPITZEN, pfeilStart, pfeilEnde))
-        l.Add(New Einstellung_Pos(My.Resources.Strings.Einstellung_Krümmung, New Point(krümmung, eckigkeit), My.Resources.Strings.Einstellung_KrümmungAbstand, My.Resources.Strings.Einstellung_KrümmungRundheit, "%", "%"))
+        l.Add(New Einstellung_Pos(ElementEinstellung.SortierTyp.ElementEinstellung_Speziell, My.Resources.Strings.Einstellung_Krümmung, New Point(krümmung, eckigkeit), My.Resources.Strings.Einstellung_KrümmungAbstand, My.Resources.Strings.Einstellung_KrümmungRundheit, "%", "%"))
         MyBase.addEinstellungenStrokeFill(sender, l)
-        l.AddRange(MyBase.getEinstellungen(sender))
+        l.AddRange(MyBase.getEinstellungen(sender, mode))
         Return l
     End Function
 

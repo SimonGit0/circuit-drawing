@@ -124,4 +124,10 @@ No elements selected. Select an element to edit the settings here!</value>
   <data name="Button1.Text" xml:space="preserve">
     <value>Apply</value>
   </data>
+  <data name="cmbShowStyle.Items" xml:space="preserve">
+    <value>Show all</value>
+  </data>
+  <data name="cmbShowStyle.Items1" xml:space="preserve">
+    <value>Show uniform</value>
+  </data>
 </root>

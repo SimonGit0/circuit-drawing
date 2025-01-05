@@ -18,12 +18,12 @@
     Private nichtAufUIEingabenReagieren As Boolean = False
     Private txt_X, txt_Y As Textbox_mitUnit
 
-    Public Sub New(name As String, p As Point, xString As String, yString As String)
-        Me.New(name, p, xString, yString, "", "")
+    Public Sub New(sortierID As SortierTyp, name As String, p As Point, xString As String, yString As String)
+        Me.New(sortierID, name, p, xString, yString, "", "")
     End Sub
 
-    Public Sub New(name As String, p As Point, xString As String, yString As String, xUnit As String, yUnit As String)
-        MyBase.New(New Multi_Lang_String(name, Nothing))
+    Public Sub New(sortierID As SortierTyp, name As String, p As Point, xString As String, yString As String, xUnit As String, yUnit As String)
+        MyBase.New(sortierID, New Multi_Lang_String(name, Nothing))
         Me.pos = p
 
         Me.xString = xString
@@ -33,7 +33,7 @@
         Me.yUnit = yUnit
     End Sub
 
-    Public Overrides Sub CombineValues(e2 As ElementEinstellung)
+    Public Overrides Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
         Dim e As Einstellung_Pos = DirectCast(e2, Einstellung_Pos)
         If pos.X <> e.pos.X Then
             variousX = True

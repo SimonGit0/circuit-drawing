@@ -179,11 +179,11 @@ Public Class Basic_Linie
     End Function
 #End Region
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Dim l As New List(Of ElementEinstellung)
         l.Add(New Einstellung_Pfeilspitze(Element.EINSTELLUNG_PFEILSPITZEN, pfeilStart, pfeilEnde))
         MyBase.addEinstellungenStrokeFill(sender, l)
-        l.AddRange(MyBase.getEinstellungen(sender))
+        l.AddRange(MyBase.getEinstellungen(sender, mode))
         Return l
     End Function
 

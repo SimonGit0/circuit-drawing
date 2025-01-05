@@ -30,7 +30,7 @@
         Return True
     End Function
 
-    Public Overrides Sub CombineValues(e2 As ElementEinstellung)
+    Public Overrides Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
         Dim e As Einstellung_TemplateParameter_Arrow = DirectCast(e2, Einstellung_TemplateParameter_Arrow)
         If myNr.pfeilArt <> e.myNr.pfeilArt Then
             variousNr = True

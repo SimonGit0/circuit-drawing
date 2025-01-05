@@ -151,10 +151,12 @@ Public Class ElementGruppe
         Return True
     End Function
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Dim l As List(Of ElementEinstellung) = Nothing
+        Dim hatEinstellung_listeNeu() As Boolean = Nothing
+
         For i As Integer = 0 To mySubElements.Count - 1
-            Dim lsub As List(Of ElementEinstellung) = mySubElements(i).getEinstellungen(sender)
+            Dim lsub As List(Of ElementEinstellung) = mySubElements(i).getEinstellungen(sender, mode)
             For j As Integer = lsub.Count - 1 To 0 Step -1
                 If lsub(j).Name.get_ID() = EINSTELLUNG_POS Then
                     lsub.RemoveAt(j)
@@ -163,25 +165,42 @@ Public Class ElementGruppe
             If l Is Nothing Then
                 l = lsub
             Else
+                If mode = ElementEinstellung.combineModus.AlleEinstellungenAnzeigen Then
+                    ReDim hatEinstellung_listeNeu(lsub.Count - 1)
+                End If
                 Dim hatEinstellungInBeiden As Boolean = False
                 For k As Integer = l.Count - 1 To 0 Step -1
                     hatEinstellungInBeiden = False
                     For j As Integer = 0 To lsub.Count - 1
                         If l(k).Name.get_ID() = lsub(j).Name.get_ID() AndAlso l(k).GetType().ToString() = lsub(j).GetType().ToString() Then
                             hatEinstellungInBeiden = True
-                            l(k).CombineValues(lsub(j))
+                            l(k).CombineValues(lsub(j), mode)
+                            If mode = ElementEinstellung.combineModus.AlleEinstellungenAnzeigen Then
+                                hatEinstellung_listeNeu(j) = True
+                            End If
                             Exit For
                         End If
                     Next
-                    If Not hatEinstellungInBeiden Then
+                    If Not hatEinstellungInBeiden AndAlso mode <> ElementEinstellung.combineModus.AlleEinstellungenAnzeigen Then
                         l.RemoveAt(k)
                     ElseIf TypeOf l(k) Is Einstellung_Multi AndAlso DirectCast(l(k), Einstellung_Multi).getListe().Count = 0 Then
                         l.RemoveAt(k) 'Leere Liste löschen!
                     End If
                 Next
+                If mode = ElementEinstellung.combineModus.AlleEinstellungenAnzeigen Then
+                    For j As Integer = 0 To lsub.Count - 1
+                        If Not hatEinstellung_listeNeu(j) Then
+                            l.Add(lsub(j))
+                        End If
+                    Next
+                End If
             End If
         Next
-        l.AddRange(MyBase.getEinstellungen(sender))
+        If l Is Nothing Then
+            l = MyBase.getEinstellungen(sender, mode)
+        Else
+            l.AddRange(MyBase.getEinstellungen(sender, mode))
+        End If
         Return l
     End Function
 

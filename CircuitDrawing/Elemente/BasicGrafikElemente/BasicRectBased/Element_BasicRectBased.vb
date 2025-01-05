@@ -17,10 +17,10 @@
         Return New SelectionRect(New Rectangle(position, s))
     End Function
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Dim l As New List(Of ElementEinstellung)
-        l.Add(New Einstellung_Pos(My.Resources.Strings.Einstellung_Größe, New Point(s.Width, s.Height), My.Resources.Strings.Breite & ":", My.Resources.Strings.Höhe & ":"))
-        l.AddRange(MyBase.getEinstellungen(sender))
+        l.Add(New Einstellung_Pos(ElementEinstellung.SortierTyp.Size, My.Resources.Strings.Einstellung_Größe, New Point(s.Width, s.Height), My.Resources.Strings.Breite & ":", My.Resources.Strings.Höhe & ":"))
+        l.AddRange(MyBase.getEinstellungen(sender, mode))
         addEinstellungenStrokeFill(sender, l)
         Return l
     End Function

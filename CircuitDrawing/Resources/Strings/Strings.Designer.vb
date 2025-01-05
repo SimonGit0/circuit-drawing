@@ -236,6 +236,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Abstand Pfeil ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Einstellung_AbstandPfeil() As String
+            Get
+                Return ResourceManager.GetString("Einstellung_AbstandPfeil", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Quer: ähnelt.
         '''</summary>
         Friend Shared ReadOnly Property Einstellung_AbstandQuer() As String
@@ -385,6 +394,24 @@ Namespace My.Resources
         Friend Shared ReadOnly Property Einstellung_KrümmungRundheit() As String
             Get
                 Return ResourceManager.GetString("Einstellung_KrümmungRundheit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Länge (parallel) ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Einstellung_LaengePfeil_p() As String
+            Get
+                Return ResourceManager.GetString("Einstellung_LaengePfeil_p", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Länge (senkrecht) ähnelt.
+        '''</summary>
+        Friend Shared ReadOnly Property Einstellung_LaengePfeil_s() As String
+            Get
+                Return ResourceManager.GetString("Einstellung_LaengePfeil_s", resourceCulture)
             End Get
         End Property
         

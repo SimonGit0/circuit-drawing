@@ -189,10 +189,10 @@ Public Class Blackbox
         Return True
     End Function
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Dim l As New List(Of ElementEinstellung)()
         beschriftung.addEinstellungen(l)
-        l.AddRange(MyBase.getEinstellungen(sender))
+        l.AddRange(MyBase.getEinstellungen(sender, mode))
         Return l
     End Function
 

@@ -186,6 +186,7 @@ Public Class Form_Vektorgrafik
         FRM_Einstellungen = New WR_Einstellungsform()
         FRM_Einstellungen.setEinstellungen(Nothing)
         AddHandler FRM_Einstellungen.EinstellungenÜbernehmen, AddressOf FRM_EinstellungenÜbernehemen
+        AddHandler FRM_Einstellungen.EinstellungenShowStyleChanged, AddressOf FRM_EinstellungenShowStyleChanged
 
         FRM_Markierungseinstellungen = New WR_MarkierungsArt()
         FRM_Markierungseinstellungen.Select_Wires = Vektor_Picturebox1.Select_Wires
@@ -240,7 +241,7 @@ Public Class Form_Vektorgrafik
         Dim c As Content = myWindowRendererConfig.getContent(WR_NAME_Einstellungen)
         If c.Visible Then
             If Vektor_Picturebox1.has_selection() Then
-                Dim einstellungen As List(Of ElementEinstellung) = Vektor_Picturebox1.getEinstellungenOfSelectedElements()
+                Dim einstellungen As List(Of ElementEinstellung) = Vektor_Picturebox1.getEinstellungenOfSelectedElements(FRM_Einstellungen.getCombineMode())
                 If einstellungen.Count > 0 Then
                     FRM_Einstellungen.setEinstellungen(einstellungen)
                 Else
@@ -256,6 +257,9 @@ Public Class Form_Vektorgrafik
         If liste IsNot Nothing Then
             Vektor_Picturebox1.setEinstellungenSelected(liste)
         End If
+    End Sub
+    Private Sub FRM_EinstellungenShowStyleChanged(sender As Object, e As EventArgs)
+        FRM_lade_Einstellungen()
     End Sub
 #End Region
 
@@ -895,7 +899,7 @@ Public Class Form_Vektorgrafik
 
     Private Sub showEinstellungen()
         If Vektor_Picturebox1.has_selection() Then
-            Dim einstellungen As List(Of ElementEinstellung) = Vektor_Picturebox1.getEinstellungenOfSelectedElements()
+            Dim einstellungen As List(Of ElementEinstellung) = Vektor_Picturebox1.getEinstellungenOfSelectedElements(ElementEinstellung.combineModus.AlleEinstellungenAnzeigen)
             If einstellungen.Count > 0 Then
                 Dim frm As New FRM_ElementEinstellungen()
                 frm.init(einstellungen)

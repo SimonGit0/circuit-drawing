@@ -25,6 +25,7 @@ Partial Class WR_Einstellungsform
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(WR_Einstellungsform))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.cmbShowStyle = New CircuitDrawing.JoSiCombobox()
         Me.SuspendLayout()
         '
         'Label1
@@ -38,10 +39,28 @@ Partial Class WR_Einstellungsform
         Me.Button1.Name = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'cmbShowStyle
+        '
+        resources.ApplyResources(Me.cmbShowStyle, "cmbShowStyle")
+        Me.cmbShowStyle.BackColor = System.Drawing.Color.White
+        Me.cmbShowStyle.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.cmbShowStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbShowStyle.EndEllipses = False
+        Me.cmbShowStyle.FärbenStärke = 0
+        Me.cmbShowStyle.FärbenStärkeSelected = 0
+        Me.cmbShowStyle.ForeColor = System.Drawing.Color.Black
+        Me.cmbShowStyle.FormattingEnabled = True
+        Me.cmbShowStyle.Items.AddRange(New Object() {resources.GetString("cmbShowStyle.Items"), resources.GetString("cmbShowStyle.Items1")})
+        Me.cmbShowStyle.Name = "cmbShowStyle"
+        Me.cmbShowStyle.renderColor = System.Drawing.Color.Black
+        Me.cmbShowStyle.RenderColorSelected = System.Drawing.Color.Black
+        Me.cmbShowStyle.Various = False
+        '
         'WR_Einstellungsform
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmbShowStyle)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Name = "WR_Einstellungsform"
@@ -51,4 +70,5 @@ Partial Class WR_Einstellungsform
 
     Friend WithEvents Label1 As Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents cmbShowStyle As JoSiCombobox
 End Class

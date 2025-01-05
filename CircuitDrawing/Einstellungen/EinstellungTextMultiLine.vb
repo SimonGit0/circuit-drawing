@@ -9,11 +9,11 @@
     Private _txt As TextBox
 
     Public Sub New(name As String, text As String)
-        MyBase.New(New Multi_Lang_String(name, Nothing))
+        MyBase.New(SortierTyp.ElementEinstellung_Textfeld_Text, New Multi_Lang_String(name, Nothing))
         Me.neuerText = text
     End Sub
 
-    Public Overrides Sub CombineValues(e2 As ElementEinstellung)
+    Public Overrides Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
         Dim e As EinstellungTextMultiLine = DirectCast(e2, EinstellungTextMultiLine)
         If e.neuerText <> Me.neuerText Then
             variousText = True

@@ -70,10 +70,10 @@ Public Class Element_RoundRect
         Return MyBase.isEqualExceptSelection(e2)
     End Function
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Dim l As New List(Of ElementEinstellung)()
-        l.Add(New Einstellung_Int(EINSTELLUNG_RUNDES_RECHTECK, My.Resources.Strings.Einstellung_Rundes_Rechteck_Radius, radius))
-        l.AddRange(MyBase.getEinstellungen(sender))
+        l.Add(New Einstellung_Int(ElementEinstellung.SortierTyp.ElementEinstellung_Speziell, EINSTELLUNG_RUNDES_RECHTECK, My.Resources.Strings.Einstellung_Rundes_Rechteck_Radius, radius))
+        l.AddRange(MyBase.getEinstellungen(sender, mode))
         Return l
     End Function
 

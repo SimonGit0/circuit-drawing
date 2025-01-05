@@ -152,19 +152,19 @@ Public Class SnapableImpedanceArrow
         Return res
     End Function
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Dim l As New List(Of ElementEinstellung)
         Dim e1 As New Einstellung_Multi("Parameter", False)
 
-        e1.add(New Einstellung_TemplateParameter_Int(New TemplateParameter_Int(New Multi_Lang_String("Abstand Pfeil", Nothing), New Intervall(0, Integer.MaxValue, 1, False, True, Intervall.OutOfRangeMode.ClipToBounds), DEFAULT_ABSTAND_PFEIL, ""), abstandPfeil))
-        e1.add(New Einstellung_TemplateParameter_Int(New TemplateParameter_Int(New Multi_Lang_String("Länge (parallel)", Nothing), New Intervall(0, Integer.MaxValue, 1, False, True, Intervall.OutOfRangeMode.ClipToBounds), DEFAULT_ABSTAND_PFEIL, ""), längePfeilX))
-        e1.add(New Einstellung_TemplateParameter_Int(New TemplateParameter_Int(New Multi_Lang_String("Länge (senkrecht)", Nothing), New Intervall(0, Integer.MaxValue, 1, False, True, Intervall.OutOfRangeMode.ClipToBounds), DEFAULT_ABSTAND_PFEIL, ""), längePfeilY))
+        e1.add(New Einstellung_TemplateParameter_Int(New TemplateParameter_Int(New Multi_Lang_String(My.Resources.Strings.Einstellung_AbstandPfeil, Nothing), New Intervall(0, Integer.MaxValue, 1, False, True, Intervall.OutOfRangeMode.ClipToBounds), DEFAULT_ABSTAND_PFEIL, ""), abstandPfeil))
+        e1.add(New Einstellung_TemplateParameter_Int(New TemplateParameter_Int(New Multi_Lang_String(My.Resources.Strings.Einstellung_LaengePfeil_p, Nothing), New Intervall(0, Integer.MaxValue, 1, False, True, Intervall.OutOfRangeMode.ClipToBounds), DEFAULT_ABSTAND_PFEIL, ""), längePfeilX))
+        e1.add(New Einstellung_TemplateParameter_Int(New TemplateParameter_Int(New Multi_Lang_String(My.Resources.Strings.Einstellung_LaengePfeil_s, Nothing), New Intervall(0, Integer.MaxValue, 1, False, True, Intervall.OutOfRangeMode.ClipToBounds), DEFAULT_ABSTAND_PFEIL, ""), längePfeilY))
+        e1.add(New Einstellung_TemplateParameter_Arrow(New TemplateParameter_Arrow(New Multi_Lang_String(Element.EINSTELLUNG_SINGLEPFEILSPITZE, Nothing), New Intervall(0, Integer.MaxValue, 1, True, True, Intervall.OutOfRangeMode.ClipToBounds), 1), pfeilspitze))
 
         l.Add(e1)
-        l.AddRange(MyBase.getEinstellungen(sender))
+        l.AddRange(MyBase.getEinstellungen(sender, mode))
         beschriftung.addEinstellungen(l)
         l.Add(New Einstellung_Fontstyle(Element.EINSTELLUNG_FONTSTYLE, Me.fontstyle, sender.myFonts))
-        l.Add(New Einstellung_SinglePfeilspitze(Element.EINSTELLUNG_SINGLEPFEILSPITZE, pfeilspitze))
         l.Add(New Einstellung_Linienstil(Element.EINSTELLUNG_LINESTYLE, linestyle, sender.myLineStyles))
         Return l
     End Function
@@ -174,39 +174,39 @@ Public Class SnapableImpedanceArrow
         For Each e As ElementEinstellung In einstellungen
             If TypeOf e Is Einstellung_Linienstil AndAlso e.Name.get_ID() = Element.EINSTELLUNG_LINESTYLE Then
                 Me.linestyle = DirectCast(e, Einstellung_Linienstil).getNewLinienstil(Me.linestyle, sender.myLineStyles, changed, False)
-            ElseIf TypeOf e Is Einstellung_SinglePfeilspitze AndAlso e.Name.get_ID() = Element.EINSTELLUNG_SINGLEPFEILSPITZE Then
-                With DirectCast(e, Einstellung_SinglePfeilspitze)
-                    If .Changed Then
-                        Me.pfeilspitze.pfeilArt = .pfeil.pfeilArt
-                        changed = True
-                    End If
-                    If .changedSize Then
-                        Me.pfeilspitze.pfeilSize = .pfeil.pfeilSize
-                        changed = True
-                    End If
-                End With
             ElseIf TypeOf e Is Einstellung_Fontstyle AndAlso e.Name.get_ID() = Element.EINSTELLUNG_FONTSTYLE Then
                 Me.fontstyle = DirectCast(e, Einstellung_Fontstyle).getNewFontstyle(Me.fontstyle, sender.myFonts, changed, False)
             ElseIf TypeOf e Is Einstellung_Multi AndAlso e.Name.get_ID() = "Parameter" Then
                 For Each e1 As Einstellung_TemplateParam In DirectCast(e, Einstellung_Multi).getListe()
-                    If TypeOf e1 Is Einstellung_TemplateParameter_Int AndAlso e1.Name.get_ID() = "Abstand Pfeil" Then
+                    If TypeOf e1 Is Einstellung_TemplateParameter_Int AndAlso e1.Name.get_ID() = My.Resources.Strings.Einstellung_AbstandPfeil Then
                         With DirectCast(e1, Einstellung_TemplateParameter_Int)
                             If .myNr <> Me.abstandPfeil Then
                                 Me.abstandPfeil = .myNr
                                 changed = True
                             End If
                         End With
-                    ElseIf TypeOf e1 Is Einstellung_TemplateParameter_Int AndAlso e1.Name.get_ID() = "Länge (parallel)" Then
+                    ElseIf TypeOf e1 Is Einstellung_TemplateParameter_Int AndAlso e1.Name.get_ID() = My.Resources.Strings.Einstellung_LaengePfeil_p Then
                         With DirectCast(e1, Einstellung_TemplateParameter_Int)
                             If .myNr <> Me.längePfeilX Then
                                 Me.längePfeilX = .myNr
                                 changed = True
                             End If
                         End With
-                    ElseIf TypeOf e1 Is Einstellung_TemplateParameter_Int AndAlso e1.Name.get_ID() = "Länge (senkrecht)" Then
+                    ElseIf TypeOf e1 Is Einstellung_TemplateParameter_Int AndAlso e1.Name.get_ID() = My.Resources.Strings.Einstellung_LaengePfeil_s Then
                         With DirectCast(e1, Einstellung_TemplateParameter_Int)
                             If .myNr <> Me.längePfeilY Then
                                 Me.längePfeilY = .myNr
+                                changed = True
+                            End If
+                        End With
+                    ElseIf TypeOf e1 Is Einstellung_TemplateParameter_Arrow AndAlso e1.Name.get_ID() = Element.EINSTELLUNG_SINGLEPFEILSPITZE Then
+                        With DirectCast(e1, Einstellung_TemplateParameter_Arrow)
+                            If .nrChanged Then
+                                Me.pfeilspitze.pfeilArt = .myNr.pfeilArt
+                                changed = True
+                            End If
+                            If .sizeChanged Then
+                                Me.pfeilspitze.pfeilSize = .myNr.pfeilSize
                                 changed = True
                             End If
                         End With

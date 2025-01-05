@@ -16,7 +16,7 @@ Public MustInherit Class SnapableElement
         Me.getSnappoint(0).lastSelectionRect = Mathe.moveInverted(bBox, Me.getSnappoint(0).getMitteInt())
     End Sub
 
-    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox) As List(Of ElementEinstellung)
+    Public Overrides Function getEinstellungen(sender As Vektor_Picturebox, mode As ElementEinstellung.combineModus) As List(Of ElementEinstellung)
         Return New List(Of ElementEinstellung)
     End Function
 

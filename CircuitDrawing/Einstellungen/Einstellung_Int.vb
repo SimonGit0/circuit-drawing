@@ -10,13 +10,13 @@
     Private nichtAufUIEingabenReagieren As Boolean = False
     Public myTxt As TextBox
 
-    Public Sub New(name As String, name_lbl As String, value As Integer)
-        MyBase.New(New Multi_Lang_String(name, Nothing))
+    Public Sub New(sortID As SortierTyp, name As String, name_lbl As String, value As Integer)
+        MyBase.New(sortID, New Multi_Lang_String(name, Nothing))
         Me.name_lbl = name_lbl
         Me.value = value
     End Sub
 
-    Public Overrides Sub CombineValues(e2 As ElementEinstellung)
+    Public Overrides Sub CombineValues(e2 As ElementEinstellung, mode As combineModus)
         Dim e As Einstellung_Int = DirectCast(e2, Einstellung_Int)
         If e.value <> Me.value Then
             various = True
