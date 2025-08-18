@@ -7,15 +7,6 @@ Public Class Settings
 
     Private Shared mySettings As Settings
 
-    Private Const CadenceDetektTechnologie_NAME As String = "cadence_detect_technology"
-    Public CadenceDetektTechnologie As String = ""
-
-    Private Const CadenceDetekt_Terminal_Namespace_NAME As String = "cadence_detect_terminal_namespace"
-    Public CadenceDetekt_Terminal_Namespace As String = "Basic"
-
-    Private Const CadenceDetekt_Terminal_Name_NAME As String = "cadence_detect_terminal_name"
-    Public CadenceDetekt_Terminal_Name As String = "Terminal"
-
     Private Const Pfade_Bib_NAME As String = "path_sym"
     Public Pfade_Bib() As String = {"ET"}
 
@@ -139,12 +130,6 @@ Public Class Settings
         If node.HasChildNodes Then
             For i As Integer = 0 To node.ChildNodes.Count - 1
                 Select Case node.ChildNodes(i).Name.ToLower
-                    Case CadenceDetektTechnologie_NAME
-                        readValue(node.ChildNodes(i), CadenceDetektTechnologie)
-                    Case CadenceDetekt_Terminal_Namespace_NAME
-                        readValue(node.ChildNodes(i), CadenceDetekt_Terminal_Namespace)
-                    Case CadenceDetekt_Terminal_Name_NAME
-                        readValue(node.ChildNodes(i), CadenceDetekt_Terminal_Name)
                     Case Skill_Detect_removeDummys_NAME
                         readValue(node.ChildNodes(i), Skill_Detect_removeDummys)
                     Case Skill_Detect_removeFloatingElements_NAME
@@ -368,10 +353,6 @@ Public Class Settings
 
     Private Sub speicherSettings(xmlwriter As XmlTextWriter)
         speicherValue(xmlwriter, Sprache_NAME, sprache)
-
-        speicherValue(xmlwriter, CadenceDetektTechnologie_NAME, CadenceDetektTechnologie)
-        speicherValue(xmlwriter, CadenceDetekt_Terminal_Namespace_NAME, CadenceDetekt_Terminal_Namespace)
-        speicherValue(xmlwriter, CadenceDetekt_Terminal_Name_NAME, CadenceDetekt_Terminal_Name)
 
         speicherValue(xmlwriter, Skill_Detect_removeFloatingElements_NAME, Skill_Detect_removeFloatingElements)
         speicherValue(xmlwriter, Skill_Detect_removeFloatingWires_NAME, Skill_Detect_removeFloatingWires)
