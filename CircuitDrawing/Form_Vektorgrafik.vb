@@ -140,6 +140,7 @@ Public Class Form_Vektorgrafik
             EineEbeneNachVorneToolStripMenuItem.ShortcutKeyDisplayString = .keyEbeneNachVorne.getMenuString()
 
             AlsEMFKopierenToolStripMenuItem.ShortcutKeyDisplayString = .keyCopyEMFToClipboard.getMenuString()
+            AlsPNGKopierenToolStripMenuItem.ShortcutKeyDisplayString = .keyCopyPNGToClipboard.getMenuString()
         End With
     End Sub
 #End Region
@@ -508,8 +509,25 @@ Public Class Form_Vektorgrafik
         CopyEMFToClipboard()
     End Sub
 
+    Private Sub AlsPNGKopierenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlsPNGKopierenToolStripMenuItem.Click
+        CopyPNGToClipboard()
+    End Sub
+
+
+
     Private Sub CopyEMFToClipboard()
         Vektor_Picturebox1.copyEMFToClipboard()
+    End Sub
+
+    Private Sub CopyPNGToClipboard()
+        Dim bbox As Size = Vektor_Picturebox1.getBoundingBoxWithMarginExport().Size
+        Dim size_selector As New FRM_ImgSizeSelection(bbox, 0.1)
+        If size_selector.ShowDialog = DialogResult.OK Then
+            Dim exportSize As Size = New Size(size_selector.W, size_selector.H)
+            Dim format As Imaging.ImageFormat = Imaging.ImageFormat.Png
+            Dim transparent As Boolean = size_selector.transparent
+            Vektor_Picturebox1.copyPNGToClipboard(format, transparent, exportSize)
+        End If
     End Sub
 
     Private Sub AlsBildPNGJPEGToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AlsBildPNGJPEGToolStripMenuItem.Click
@@ -1094,6 +1112,8 @@ Public Class Form_Vektorgrafik
                     GegenDenUhrzeigersinnDrehenToolStripMenuItem_Click(Nothing, EventArgs.Empty)
                 ElseIf k.keyCopyEMFToClipboard.isDown(e) Then
                     CopyEMFToClipboard()
+                ElseIf k.keyCopyPNGToClipboard.isDown(e) Then
+                    CopyPNGToClipboard()
                 Else
                     Dim hatAbgearbeitet As Boolean = False
                     For i As Integer = 0 To Settings.getSettings().KeysSelectInstance.Count - 1
