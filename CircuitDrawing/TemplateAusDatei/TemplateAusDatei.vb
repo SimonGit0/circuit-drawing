@@ -2574,7 +2574,7 @@ Public Class TemplateAusDatei
         End If
         writer.WriteLine("text(" & DefaultName & ")")
         If MitNummer = False Then
-            writer.Write("nonumber()")
+            writer.WriteLine("nonumber()")
         End If
         writer.WriteLine("namespace(" & alternateNamespace & ")")
         writer.WriteLine("name(" & _name & ")")
