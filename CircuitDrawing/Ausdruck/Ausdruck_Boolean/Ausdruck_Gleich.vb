@@ -26,7 +26,7 @@ Public Class Ausdruck_Gleich
             If DirectCast(links, Ausdruck_Variable).istGleich(DirectCast(rechts, Ausdruck_Variable)) Then
                 Return New Ausdruck_Boolean_Konstante(Not ungleich)
             Else
-                Return New Ausdruck_Boolean_Konstante(ungleich)
+                Return Me 'wenn nicht exakt gleich (z.b. a=b), dann kann man nichts vereinfachen, sondern muss warten welchen wert die variablen zur laufzeit annehmen
             End If
         End If
         Return Me

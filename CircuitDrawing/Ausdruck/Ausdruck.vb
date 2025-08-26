@@ -562,6 +562,11 @@ Public MustInherit Class Ausdruck
                 Else
                     Throw New Exception("Der Parameter bei 'toIntHex(""string"")' muss ein String sein.")
                 End If
+            Case "tostr"
+                If operanden.Count <> 1 Then
+                    Throw New Exception("Falsche Anzahl der Parameter bei 'toStr(ausdruck)'")
+                End If
+                Return New Ausdruck_ToString(operanden(0))
             Case "sqrt"
                 If operanden.Count = 1 Then
                     If TypeOf operanden(0) Is Ausdruck_Int Then

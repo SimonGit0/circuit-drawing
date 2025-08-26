@@ -205,6 +205,7 @@
     <Compile Include="Ausdruck\Ausdruck_String\AusdruckString_Variable.vb" />
     <Compile Include="Ausdruck\Ausdruck_String\Ausdruck_StringCat.vb" />
     <Compile Include="Ausdruck\Ausdruck_String\Ausdruck_Substring.vb" />
+    <Compile Include="Ausdruck\Ausdruck_String\Ausdruck_ToString.vb" />
     <Compile Include="AutoGen\AutoGenDate.vb" />
     <Compile Include="BauelementeBibliothek\Bibliothek_Lokal\LokaleBibliothek.vb" />
     <Compile Include="Elemente\CircuitElemente\ElementLinestyle.vb" />

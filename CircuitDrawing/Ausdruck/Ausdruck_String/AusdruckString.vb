@@ -23,6 +23,9 @@ Public MustInherit Class AusdruckString
         ElseIf TypeOf str Is Ausdruck_StringCat Then
             writer.Write(4)
             DirectCast(str, Ausdruck_StringCat).save(writer)
+        ElseIf TypeOf str Is Ausdruck_ToString Then
+            writer.Write(5)
+            DirectCast(str, Ausdruck_ToString).save(writer)
         Else
             Throw New NotImplementedException("Fehler P0003: Kann diesen Ausdruck nicht speichern")
         End If
@@ -39,6 +42,8 @@ Public MustInherit Class AusdruckString
                 Return Ausdruck_Substring.load(reader, version)
             Case 4 'Ausdruck_StringCat
                 Return Ausdruck_StringCat.load(reader, version)
+            Case 5 'Ausdruck_toString
+                Return Ausdruck_ToString.load(reader, version)
             Case Else
                 Throw New NotImplementedException("Fehler L0003: Kann diesen Ausdruck nicht laden")
         End Select
@@ -53,6 +58,8 @@ Public MustInherit Class AusdruckString
             Return DirectCast(ausdruck, Ausdruck_Substring).exportiere(writer)
         ElseIf TypeOf ausdruck Is Ausdruck_StringCat Then
             Return DirectCast(ausdruck, Ausdruck_StringCat).exportiere(writer)
+        ElseIf TypeOf ausdruck Is Ausdruck_ToString Then
+            Return DirectCast(ausdruck, Ausdruck_ToString).exportiere(writer)
         Else
             Throw New NotImplementedException("Export für diesen Ausdruck nicht implementiert")
         End If
