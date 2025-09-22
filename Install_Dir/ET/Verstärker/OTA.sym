@@ -1,4 +1,5 @@
-﻿param ["Ausgang",en="Output"]={"Single Ended" "Fully Differential" "Fully Differential flipped output"}
+﻿param ["Ausgang",en="Output"]={"Single Ended" ["Fully Differential",en="Differential",de="Differential"] ["Fully Differential flipped output",en="Differential flipped Output",de="Differential vertauschter Ausgang"] ["Differential without text",en="Differential without Text",de="Differential ohne Text"]}
+param ["Eingang",en="Input"]={["Fully Differential",en="Differential",de="Differential"] ["Differential without text",en="Differential without Text",de="Differential ohne Text"] "Single Ended"}
 param ["Größe",en="Size"] = {["Groß",en="Large"] ["Klein",en="Small"] ["Benutzerdefiniert",en="Custom"]}
 param_int ["Höhe 1",en="Height 1"] = 600 from (0, 100000]
 param_int ["Höhe 2",en="Height 2"] = 350 from (0, 100000]
@@ -42,13 +43,19 @@ polyfill(0, -rY, 0, rY, breite, rY2, breite, -rY2)
 fill_forecolor()
 poly(0, -rY, 0, rY, breite, rY2, breite, -rY2)
 
-%Minus
-line(50, rYPin, 50+pmGroesse, rYPin)
-%Plus
-line(50, -rYPin, 50+pmGroesse, -rYPin)
-line(50+pmGroesse/2, -rYPin+pmGroesse/2, 50+pmGroesse/2, -rYPin-pmGroesse/2)
-snapOnlyLeft(0, -rYPin)
-snapOnlyLeft(0, rYPin)
+if get("Eingang")="Fully Differential":
+  %Minus
+  line(50, rYPin, 50+pmGroesse, rYPin)
+  %Plus
+  line(50, -rYPin, 50+pmGroesse, -rYPin)
+  line(50+pmGroesse/2, -rYPin+pmGroesse/2, 50+pmGroesse/2, -rYPin-pmGroesse/2)
+end
+if get("Eingang")="Single Ended":
+  snapOnlyLeft(0,0)
+else
+  snapOnlyLeft(0, -rYPin)
+  snapOnlyLeft(0, rYPin)
+end
 select(0, -rY, breite, 2*rY)
 
 if get("Ausgang")="Fully Differential":
